@@ -1,5 +1,5 @@
 <?php 
-/*
+
     session_start();
     error_reporting(0);
 
@@ -7,12 +7,12 @@
 
     if( $validar == null || $validar = ''){
 
-    header("Location: ../../LogIn.php");
+    header("Location: ../../../LogIn.php");
     die();
     
     }
 
-*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="../../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Proveedor</title>
+    <title>Medicamento</title>
 </head>
 
 <body>
@@ -76,50 +76,107 @@
                     <h5 class="card-header">Registro de Medicamento</h5>
                     <div class="card-body">
                         <h5 class="card-title">Formulario</h5>
-                        <form class="needs-validation" method="post" action="../Forms/Proveedor.php" novalidate>
+                        <form class="needs-validation" method="post" action="../Forms/Medicina.php" novalidate>
                             <div class="form-group">
                                 <label for="validationCustom01">Nombre</label>
-                                <input type="number" class="form-control" id="validationCustom01" name="NIT" required>
+                                <input type="text" class="form-control" id="validationCustom01" name="Nombre" required>
                                 <div class="invalid-feedback">
                                     Por favor digite el nombre original del empaque.
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="validationCustom01">Formato</label>
-                                <select name="Formato" class="form-control" id="validationCustom01" required>
+                                <label for="validationCustom02">Formato</label>
+                                <select name="Formato" class="form-control" id="validationCustom02" required>
                                     <option value="">Seleccionar...</option>
-                                    <option value="Libre">Libre</option>
-                                    <option value="Reservada">Reservada</option>
+                                    <option value="Capsulas">Capsulas</option>
+                                    <option value="Jarabes">Jarabes</option>
+                                    <option value="Comprimidos">Comprimidos</option>
+                                    <option value="Grajeas">Grajeas</option>
+                                    <option value="Suspensiones">Suspensiones</option>
+                                    <option value="Polvos">Polvos</option>
                                 </select>
                                 <div class="invalid-feedback">
-                                    Por favor digite el estado de la cita.
+                                    Por favor digite el formato del medicamento.
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="validationCustom03">Direccion</label>
-                                <input type="text" class="form-control" id="validationCustom03" name="Direccion"
+                                <label for="validationCustom03">Cantidad</label>
+                                <input type="number" class="form-control" id="validationCustom03" name="Cantidad" min=1
+                                    max=200 required>
+                                <div class="invalid-feedback">
+                                    Por favor digite la cantidad de empaques del medicamento, la cantidad minima es de 1
+                                    y la maxima es de 100.
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="validationCustom04">Estado</label>
+                                <select name="Estado" class="form-control" id="validationCustom02" disabled>
+                                    <option value="Disponible">Disponible</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="validationCustom05">Fecha de Vencimiento</label>
+                                <input type="date" class="form-control" id="validationCustom05" name="FechaVencimiento"
                                     required>
                                 <div class="invalid-feedback">
-                                    Por favor digite la direccion donde se encuentra el proveedor.
+                                    Por favor digite la fecha de vencimiento.
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="validationCustom04">Correo</label>
-                                <input type="email" class="form-control" id="validationCustom04" name="Correo" required>
+                                <label for="validationCustom02">Categoria</label>
+                                <select name="Categoria" class="form-control" id="validationCustom02" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Analgesico">Analgesico</option>
+                                    <option value="Anestesico">Anestesico</option>
+                                    <option value="Ansiolitico">Ansiolitico</option>
+                                    <option value="Antibiotico">Antibiotico</option>
+                                    <option value="Anticolinergico">Anticolinergico</option>
+                                    <option value="Anticonceptivo">Anticonceptivo</option>
+                                    <option value="Anticonvulsico">Anticonvulsico</option>
+                                    <option value="Antidepresivo">Antidepresivo</option>
+                                    <option value="Antihelmintico">Antihelmintico</option>
+                                    <option value="Antineoplastico">Antineoplastico</option>
+                                    <option value="Antiparkinsoniano">Antiparkinsoniano</option>
+                                    <option value="Antimicotico">Antimicotico</option>
+                                    <option value="Antipiretico">Antipiretico</option>
+                                    <option value="Antipsicotico">Antipsicotico</option>
+                                    <option value="Antidoto">Antidoto</option>
+                                    <option value="Broncodilatador">Broncodilatador</option>
+                                    <option value="Cardiotonico">Cardiotonico</option>
+                                    <option value="Citostatico">Citostatico</option>
+                                    <option value="Hipnotico">Hipnotico</option>
+                                    <option value="Hormonoterapico">Hormonoterapico</option>
+                                    <option value="Quimioterapico">Quimioterapico</option>
+                                    <option value="Relajante Muscular">Relajante Muscular</option>
+                                </select>
                                 <div class="invalid-feedback">
-                                    Por favor digite la direccion de correo electronico.
+                                    Por favor digite la categoria del medicamento.
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="validationCustom05">Numero de Telefono</label>
-                                <input type="number" class="form-control" id="validationCustom05" name="Telefono"
-                                    required>
+                                <label for="validationCustom04">Proveedor</label>
+                                <select name="Proveedor" class="form-control" id="validationCustom04">
+                                    <option value="">Ninguno</option>
+                                    <?php 
+                include ("../../../../Configuration/Connection.php");
+
+                $sql = $conexion->query("SELECT * FROM suppliers ORDER BY nameSU ASC");
+                while ($resultado = $sql->fetch_assoc()) {
+
+                echo "<option value='".$resultado['idSupplier']."'>".$resultado
+                ['nameSU']."</option>";
+
+                }
+                ?>
+                                </select>
                                 <div class="invalid-feedback">
-                                    Por favor digite el numero telefonico.
+                                    Por favor digite el proveedor el medicamento.
                                 </div>
                             </div>
                             <hr>

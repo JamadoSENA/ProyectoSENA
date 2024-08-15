@@ -157,7 +157,7 @@
                                 </select>
                             </div>
                             <hr>
-                            <a href="../DoctorCitas.php" type="button" class="btn btn-secondary">Regresar</a>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
                         </form>
                     </div>
                 </div>
