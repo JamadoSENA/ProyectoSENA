@@ -38,8 +38,8 @@ CREATE TABLE schedulings (
     FOREIGN KEY (fkIdDoctor) REFERENCES users(idUser) ON DELETE CASCADE
 );
 
--- Creación de la tabla diagnosis
-CREATE TABLE diagnosis (
+-- Creación de la tabla diagnoses
+CREATE TABLE diagnoses (
     idDiagnosis INT PRIMARY KEY AUTO_INCREMENT,
     dateHour TIMESTAMP NOT NULL,
     mainReason VARCHAR (2000) NOT NULL,    
@@ -51,6 +51,15 @@ CREATE TABLE diagnosis (
     aditionalObservations VARCHAR (2000) NOT NULL,
     fkIdScheduling INT NOT NULL,
     FOREIGN KEY (fkIdScheduling) REFERENCES schedulings(idScheduling) ON DELETE CASCADE
+);
+
+-- Creación de la tabla suppliers
+CREATE TABLE suppliers (
+    idSupplier INT PRIMARY KEY,
+    nameSU VARCHAR(100) NOT NULL,
+    addressSU VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phoneNumber VARCHAR(20) NOT NULL
 );
 
 -- Creación de la tabla medicines
@@ -71,8 +80,7 @@ CREATE TABLE recipes (
     idRecipe INT PRIMARY KEY AUTO_INCREMENT,
     dateHour TIMESTAMP NOT NULL,
     routeAdministration VARCHAR(500) NOT NULL,
-    durationDay VARCHAR(50) NOT NULL,
-    durationMonth VARCHAR(50) NULL,
+    duration VARCHAR(50) NOT NULL,
     frequency VARCHAR(50) NOT NULL,
     amount INT NOT NULL,
     stateR VARCHAR(50) NOT NULL,
@@ -83,13 +91,4 @@ CREATE TABLE recipes (
     REFERENCES medicines (idMedicine) ON DELETE CASCADE,
     FOREIGN KEY (fkIdDiagnosis)
     REFERENCES diagnosis (idDiagnosis) ON DELETE CASCADE
-);
-
--- Creación de la tabla suppliers
-CREATE TABLE suppliers (
-    idSupplier INT PRIMARY KEY,
-    nameSU VARCHAR(100) NOT NULL,
-    addressSU VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phoneNumber VARCHAR(20) NOT NULL
 );
