@@ -173,7 +173,7 @@
                             <div class="form-group">
                                 <label for="patient">Proveedor</label>
                                 <input type="text" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['nameSU']?>" disabled>
+                                    value="<?php echo $row['nombreProveedor']?>" disabled>
                             </div>
                             <hr>
                             <button type="submit" class="btn btn-primary">Actualizar</button>

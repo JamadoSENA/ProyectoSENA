@@ -146,7 +146,7 @@
                             <div class="form-group">
                                 <label for="validationCustom07">Proveedor</label>
                                 <input type="text" class="form-control" id="supplier"
-                                    value="<?php echo $row['nameSU']?>" disabled>
+                                    value="<?php echo $row['nameSupplier']?>" disabled>
                             </div>
                             <hr>
                             <a href="../InventorMedicinas.php" type="button" class="btn btn-secondary">Regresar</a>

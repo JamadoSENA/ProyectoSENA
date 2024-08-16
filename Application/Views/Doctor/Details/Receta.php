@@ -186,7 +186,7 @@
                                     value="<?php echo $row['idDiagnosis']?>" disabled>
                             </div>
                             <hr>
-                            <a href="../DoctorDiagnosticos.php" type="button" class="btn btn-secondary">Regresar</a>
+                            <a href="../DoctorRecetas.php" type="button" class="btn btn-secondary">Regresar</a>
                         </form>
                     </div>
                 </div>
