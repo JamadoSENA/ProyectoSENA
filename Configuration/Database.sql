@@ -90,5 +90,5 @@ CREATE TABLE recipes (
     FOREIGN KEY (fkIdMedicine)
     REFERENCES medicines (idMedicine) ON DELETE CASCADE,
     FOREIGN KEY (fkIdDiagnosis)
-    REFERENCES diagnosis (idDiagnosis) ON DELETE CASCADE
+    REFERENCES diagnoses (idDiagnosis) ON DELETE CASCADE
 );
