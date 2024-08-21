@@ -45,7 +45,8 @@ if( $validar == null || $validar = ''){
                         </li>
                         <li alt="Mis Citas">
                             <a href="PatientMyCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Mis
                                     citas</span> </a>
                         </li>
                         <li>
@@ -92,6 +93,15 @@ if( $validar == null || $validar = ''){
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+            
+            require("../../../Configuration/Connection.php");
+            
+            $sql = $conexion->query("SELECT * from recipes");
+
+            while ($resultado = $sql->fetch_assoc()){
+            
+            ?>
                                     <tr>
                                         <td scope="row" style="text-align: center;"></td>
                                         <td scope="row" style="text-align: center;"></td>
@@ -99,18 +109,24 @@ if( $validar == null || $validar = ''){
                                         <td scope="row" style="text-align: center;"></td>
                                         <td scope="row" style="text-align: center;"></td>
                                         <td scope="row">
-                                        <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                            class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                            <path
-                                              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                          </svg>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                          <li><a href="Details/Receta.php?idRecipe=<?php echo $resultado['idRecipe']?>" class="dropdown-item">Detalles</a></li>
-                                        </ul>
+                                            <button class="btn" type="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-three-dots-vertical"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                                </svg>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="Details/Receta.php?idRecipe=<?php echo $resultado['idRecipe']?>"
+                                                        class="dropdown-item">Detalles</a></li>
+                                            </ul>
                                         </td>
                                     </tr>
+                                    <?php
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
@@ -158,13 +174,13 @@ if( $validar == null || $validar = ''){
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.colVis.min.js"></script>
     <script type="text/javascript">
-        new DataTable('#tablaRecetas', {
-            layout: {
-                topStart: {
-                    buttons: ['excel', 'pdf']
-                }
+    new DataTable('#tablaRecetas', {
+        layout: {
+            topStart: {
+                buttons: ['excel', 'pdf']
             }
-        });
+        }
+    });
     </script>
 </body>
 

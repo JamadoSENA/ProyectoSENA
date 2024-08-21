@@ -103,14 +103,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                    require("../../../Configuration/Connection.php");
+
+                                    $sql = $conexion->query("
+                                    SELECT medicines.*, suppliers.nameSU 
+                                    FROM medicines 
+                                    JOIN suppliers ON medicines.fkIdSupplier = suppliers.idSupplier
+                                    ");
+
+                                    while ($resultado = $sql->fetch_assoc()){
+
+                    
+                                    ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idMedicine']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameM']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['expirationDate']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['category']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['formatM']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateM']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameSU']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -129,6 +142,9 @@
                                             </ul>
                                         </td>
                                     </tr>
+                                    <?php 
+                                } 
+                                ?>
                                 </tbody>
                             </table>
                         </div>

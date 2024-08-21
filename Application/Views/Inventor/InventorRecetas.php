@@ -89,11 +89,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+            
+            require("../../../Configuration/Connection.php");
+            
+            $sql = $conexion->query("SELECT recipes.*, medicines.nameM 
+                                    FROM recipes 
+                                    JOIN medicines ON recipes.fkIdMedicine = medicines.idMedicine");
+
+            while ($resultado = $sql->fetch_assoc()){
+             
+            ?>
+
                                     <tr>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idRecipe']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateR']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['amount']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameM']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -112,6 +124,9 @@
                                             </ul>
                                         </td>
                                     </tr>
+                                    <?php
+            }
+            ?>
                                 </tbody>
                             </table>
                         </div>

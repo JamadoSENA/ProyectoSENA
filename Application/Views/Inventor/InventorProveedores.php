@@ -101,12 +101,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+            
+            require("../../../Configuration/Connection.php");
+            
+            $sql = $conexion->query("SELECT * from suppliers");
+
+            while ($resultado = $sql->fetch_assoc()){
+            
+            ?>
+                                
                                     <tr>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idSupplier']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameSU']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['addressSU']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['email']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['phone']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -125,6 +135,9 @@
                                             </ul>
                                         </td>
                                     </tr>
+                                    <?php
+            }
+            ?>
                                 </tbody>
                             </table>
                         </div>

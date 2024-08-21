@@ -103,13 +103,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                    require("../../../Configuration/Connection.php");
+
+                                    // Realiza una consulta más compleja uniendo múltiples tablas
+                                    $sql = $conexion->query("
+                                        SELECT 
+                                            recipes.idRecipe, 
+                                            medicines.nameM, 
+                                            recipes.amount, 
+                                            recipes.dateHour AS fechaEmision, 
+                                            CONCAT(patients.nameP, ' ', patients.lastnameP) AS nombrePaciente, 
+                                            diagnoses.idDiagnosis 
+                                        FROM 
+                                            recipes 
+                                        JOIN medicines ON recipes.fkIdMedicine = medicines.idMedicine
+                                        JOIN schedulings ON recipes.fkIdDiagnosis = schedulings.idScheduling
+                                        JOIN patients ON schedulings.fkIdPatient = patients.idPatient
+                                        JOIN diagnoses ON schedulings.idScheduling = diagnoses.fkIdScheduling
+                                    ");
+                                    
+                                    while ($resultado = $sql->fetch_assoc()) {
+                                    ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idRecipe']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nameM']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['amount']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['fechaEmision']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nombrePaciente']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idDiagnosis']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -126,6 +148,10 @@
                                             </ul>
                                         </td>
                                     </tr>
+                                    <?php
+
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

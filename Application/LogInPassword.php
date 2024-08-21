@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesion</title>
+    <title>Recuperar Contraseña</title>
     <link rel="shortcut icon" href="Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <form action="../Configuration/Functions.php" method="POST">
-                        <h1>Iniciar Sesion</h1>
+                        <h1>Recuperar Contraseña</h1>
                         <div class="divider d-flex align-items-center my-4">
                         </div>
 
@@ -51,35 +51,12 @@
                                 required />
                         </div>
 
-                        <!-- Password input -->
-                        <div class="form-outline mb-3">
-                            <label class="form-label" for="form3Example4">Contraseña</label>
-                            <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                name="contrasenia" required />
-                            <input type="hidden" name="accion" value="acceso_user">
-                            <div class="form-check mt-2">
-                                <input class="form-check-input" type="checkbox" id="showPassword"
-                                    onclick="togglePassword()">
-                                <label class="form-check-label" for="showPassword">Mostrar contraseña</label>
-                            </div>
-                            <hr>
-                            <a href="LogInPassword.php"><ins>¿Haz Olvidado tu contraseña?</ins></a>
-                        </div>
-                        <script>
-                        function togglePassword() {
-                            var passwordField = document.getElementById("form3Example4");
-                            if (passwordField.type === "password") {
-                                passwordField.type = "text";
-                            } else {
-                                passwordField.type = "password";
-                            }
-                        }
-                        </script>
+                
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" class="btn btn-success btn-lg"
-                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar Sesion</button>
-                            <a type="button" href="Register.php" class="btn btn-secondary btn-lg"
-                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Registrarse</a>
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Restablecer</button>
+                            <a type="button" href="LogIn.php" class="btn btn-secondary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Regresar</a>
                         </div>
 
                     </form>

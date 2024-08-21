@@ -101,11 +101,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                     require("../../../Configuration/Connection.php");
+            
+                                     $sql = $conexion->query("  SELECT 
+                                                                 diagnoses.idDiagnosis, 
+                                                                 diagnoses.dateHour AS fechaEmision, 
+                                                                 CONCAT(patients.nameP, ' ', patients.lastnameP) AS nombrePaciente, 
+                                                                 schedulings.idScheduling 
+                                                             FROM 
+                                                                 diagnoses
+                                                             JOIN schedulings ON diagnoses.fkIdScheduling = schedulings.idScheduling
+                                                             JOIN patients ON schedulings.fkIdPatient = patients.idPatient");
+                         
+                                     while ($resultado = $sql->fetch_assoc()){
+                                      
+                                     ?>
+
+
                                     <tr>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idDiagnosis']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['fechaEmision']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nombrePaciente']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idScheduling']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -124,6 +142,9 @@
                                             </ul>
                                         </td>
                                     </tr>
+                                    <?php
+                                     }
+                                     ?>
                                 </tbody>
                             </table>
                         </div>
