@@ -27,7 +27,6 @@ if( $validar == null || $validar = ''){
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -75,48 +74,65 @@ if( $validar == null || $validar = ''){
             <div class="col py-5">
                 <div class="card">
                     <div class="card-header">
-                        Asignacion de Recetas
+                        Mis Citas Programadas
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Tabla Recetas</h5>
+                        <h5 class="card-title">Tabla Citas</h5>
                         <div class="table-responsive">
-                            <table table id="tablaRecetas" class="table table-striped" style="width:100%">
+                            <table table id="tablaCitas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Estado</th>
-                                        <th scope="col">Via de Administracion</th>
-                                        <th scope="col">Frecuencia</th>
-                                        <th scope="col">Medicamento</th>
+                                        <th scope="col">Fecha Inicio</th>
+                                        <th scope="col">Fecha Fin</th>
+                                        <th scope="col">Doctor</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+            
+            require("../../../Configuration/Connection.php");
+            
+            $sql = $conexion->query("SELECT * from schedulings");
+
+            while ($resultado = $sql->fetch_assoc()){
+            
+            ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idScheduling']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourStart']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourEnd']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['fkIdDoctor']?></td>
                                         <td scope="row">
-                                        <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                            class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                            <path
-                                              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                          </svg>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                          <li><a href="Details/Receta.php?idRecipe=<?php echo $resultado['idRecipe']?>" class="dropdown-item">Detalles</a></li>
-                                        </ul>
+                                            <button class="btn" type="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-three-dots-vertical"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                                </svg>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="Update/Cita.php?idScheduling=<?php echo $resultado['idScheduling']?>"
+                                                        class="dropdown-item">Agendar</a></li>
+                                                <li><a href="Details/Cita.php?idScheduling=<?php echo $resultado['idScheduling']?>"
+                                                        class="dropdown-item">Detalles</a></li>
+                                            </ul>
                                         </td>
                                     </tr>
+                                    <?php
+            }
+            ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="card-footer text-muted">
-                        Esta tabla muestra las recetas disponibles.
+                        Esta tabla muestra las citas disponibles.
                     </div>
                 </div>
             </div>
@@ -158,13 +174,13 @@ if( $validar == null || $validar = ''){
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.colVis.min.js"></script>
     <script type="text/javascript">
-        new DataTable('#tablaRecetas', {
-            layout: {
-                topStart: {
-                    buttons: ['excel', 'pdf']
-                }
+    new DataTable('#tablaCitas', {
+        layout: {
+            topStart: {
+                buttons: ['excel', 'pdf', 'colvis']
             }
-        });
+        }
+    });
     </script>
 </body>
 

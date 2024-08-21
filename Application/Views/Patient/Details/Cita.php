@@ -32,18 +32,23 @@
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <hr>
-                    <img src="../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto" height="75" />
+                    <img src="../../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto" height="75" />
                     </a>
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li alt="Citas Disponibles">
+                            <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Citas Disponibles</span> </a>
+                        </li>
                         <li alt="Mis Citas">
-                            <a href="PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                            <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
                                     citas</span> </a>
                         </li>
                         <li>
-                            <a href="PatientRecetas.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../PatientRecetas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-capsule" alt="Recetas"></i> <span class="ms-1 d-none d-sm-inline">Mis
                                     recetas</span> </a>
                         </li>
@@ -107,24 +112,24 @@
 
                             $idScheduling = $_GET['idScheduling'];
 
+                            // Consulta SQL corregida
                             $sql = "SELECT u.nameU, u.idUser
-                            FROM users u
-                            WHERE fkIdRol = 2
-                            INNER JOIN schedulings s ON u.idUser = s.fkIdDoctor
-                            WHERE s.idScheduling = $idScheduling";
+                                    FROM users u
+                                    INNER JOIN schedulings s ON u.idUser = s.fkIdDoctor
+                                    WHERE u.fkIdRole = 2 AND s.idScheduling = $idScheduling";
 
                             $resultado = $conexion->query($sql);
 
-                            if ($resultado->num_rows > 0) {
-                            $row = $resultado->fetch_assoc();
-                            $nombreDoctor = $row['nameU'];
+                            $nombreDoctor = ''; // Inicializar la variable por si no se encuentra el doctor
+                            if ($resultado && $resultado->num_rows > 0) {
+                                $row = $resultado->fetch_assoc();
+                                $nombreDoctor = $row['nameU'];
                             }
-                            
                             ?>
                             <div class="form-group">
                                 <label for="doctor">Doctor</label>
                                 <input type="text" class="form-control" id="doctor"
-                                    value="<?php echo $row['nombreDoctor']?>" disabled>
+                                    value="<?php echo htmlspecialchars($nombreDoctor); ?>" disabled>
                             </div>
                             <hr>
                             <a href="../PatientCitas.php" type="button" class="btn btn-secondary">Regresar</a>

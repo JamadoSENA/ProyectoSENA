@@ -37,15 +37,20 @@ if( $validar == null || $validar = ''){
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
-                        <li>
-                            <a href="PatientCitas.php" class="nav-link px-0 text-white align-middle">
-                                <i class="fs-4 bi-calendar"></i> <span class="ms-1 d-none d-sm-inline">Mis citas</span>
-                            </a>
+                        <li alt="Citas Disponibles">
+                            <a href="PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Citas Disponibles</span> </a>
+                        </li>
+                        <li alt="Mis Citas">
+                            <a href="PatientMyCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                    citas</span> </a>
                         </li>
                         <li>
-                            <a href="PatientPrescripciones.php" class="nav-link px-0 text-white align-middle">
-                                <i class="fs-4 bi-capsule"></i> <span class="ms-1 d-none d-sm-inline">Mis recetas</span>
-                            </a>
+                            <a href="PatientRecetas.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-capsule" alt="Recetas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                    recetas</span> </a>
                         </li>
                     </ul>
                     <hr>

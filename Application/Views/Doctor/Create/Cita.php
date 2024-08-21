@@ -82,7 +82,7 @@
                                 <label for="validationCustom01">Estado</label>
                                 <select name="Estado" class="form-control" id="validationCustom01" required>
                                     <option value="">Seleccionar...</option>
-                                    <option value="Libre">Libre</option>
+                                    <option value="No Reservada">No Reservada</option>
                                     <option value="Reservada">Reservada</option>
                                 </select>
                                 <div class="invalid-feedback">

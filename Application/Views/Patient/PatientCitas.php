@@ -27,7 +27,6 @@ if( $validar == null || $validar = ''){
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -38,9 +37,14 @@ if( $validar == null || $validar = ''){
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
-                        <li alt="Mis Citas">
+                        <li alt="Citas Disponibles">
                             <a href="PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Citas Disponibles</span> </a>
+                        </li>
+                        <li alt="Mis Citas">
+                            <a href="PatientMyCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
                                     citas</span> </a>
                         </li>
                         <li>
@@ -87,12 +91,21 @@ if( $validar == null || $validar = ''){
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+            
+            require("../../../Configuration/Connection.php");
+            
+            $sql = $conexion->query("SELECT * FROM schedulings WHERE stateS = 'No Reservada'");
+
+            while ($resultado = $sql->fetch_assoc()){
+            
+            ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idScheduling']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourStart']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourEnd']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['fkIdDoctor']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -111,6 +124,9 @@ if( $validar == null || $validar = ''){
                                             </ul>
                                         </td>
                                     </tr>
+                                    <?php
+            }
+            ?>
                                 </tbody>
                             </table>
                         </div>
@@ -161,7 +177,7 @@ if( $validar == null || $validar = ''){
     new DataTable('#tablaCitas', {
         layout: {
             topStart: {
-                buttons: ['excel', 'pdf']
+                buttons: ['excel', 'pdf', 'colvis']
             }
         }
     });

@@ -38,9 +38,14 @@
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li alt="Citas Disponibles">
+                            <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Citas Disponibles</span> </a>
+                        </li>
                         <li alt="Mis Citas">
                             <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
                                     citas</span> </a>
                         </li>
                         <li>
@@ -54,7 +59,7 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Doctor</span>
+                            <span class="d-none d-sm-inline mx-1">Paciente</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="#">Perfil</a></li>
@@ -79,12 +84,11 @@
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
                         
-                        ?>
-                        <h5>ID Cita</h5>
-                        <input type="number" class="form-control" value="<?php echo $row['idScheduling'] ?>" disabled>
-                        <hr>
+                        ?> 
                         <h5 class="card-title">Detalles</h5>
+                        <hr>
                         <form class="needs-validation" method="post" action="../Forms/CitaUpdate.php" novalidate>
+                        <input type="hidden" class="form-control" name="idScheduling" value="<?php echo $row['idScheduling'] ?>">
                             <div class="form-group">
                                 <label for="validationCustom01">Estado</label>
                                 <select name="Estado" class="form-control" id="validationCustom01" required>
@@ -113,24 +117,24 @@
 
                             $idScheduling = $_GET['idScheduling'];
 
+                            // Consulta SQL corregida
                             $sql = "SELECT u.nameU, u.idUser
-                            FROM users u
-                            WHERE fkIdRol = 2
-                            INNER JOIN schedulings s ON u.idUser = s.fkIdDoctor
-                            WHERE s.idScheduling = $idScheduling";
+                                    FROM users u
+                                    INNER JOIN schedulings s ON u.idUser = s.fkIdDoctor
+                                    WHERE u.fkIdRole = 2 AND s.idScheduling = $idScheduling";
 
                             $resultado = $conexion->query($sql);
 
-                            if ($resultado->num_rows > 0) {
-                            $row = $resultado->fetch_assoc();
-                            $nombreDoctor = $row['nameU'];
+                            $nombreDoctor = ''; // Inicializar la variable por si no se encuentra el doctor
+                            if ($resultado && $resultado->num_rows > 0) {
+                                $row = $resultado->fetch_assoc();
+                                $nombreDoctor = $row['nameU'];
                             }
-                            
                             ?>
                             <div class="form-group">
                                 <label for="doctor">Doctor</label>
                                 <input type="text" class="form-control" id="doctor"
-                                    value="<?php echo $row['nombreDoctor']?>" disabled>
+                                    value="<?php echo htmlspecialchars($nombreDoctor); ?>" disabled>
                             </div>
                             <hr>
                             <button type="submit" class="btn btn-primary">Actualizar</button>
