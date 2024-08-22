@@ -44,7 +44,8 @@ if( $validar == null || $validar = ''){
                         </li>
                         <li alt="Mis Citas">
                             <a href="PatientMyCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Mis
                                     citas</span> </a>
                         </li>
                         <li>
@@ -106,14 +107,19 @@ if( $validar == null || $validar = ''){
     JOIN users ON schedulings.fkIdDoctor = users.idUser");
 
             while ($resultado = $sql->fetch_assoc()){
-             
+                
             ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idScheduling']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourStart']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourEnd']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nombreDoctor']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['idScheduling']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['dateHourStart']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['dateHourEnd']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['nombreDoctor']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
