@@ -1,5 +1,7 @@
 insert into roles values (1, "Paciente");
+
 insert into roles values (2, "Doctor");
+
 insert into roles values (3, "Inventarista");
 
 CALL INSERTARPROVEEDOR(

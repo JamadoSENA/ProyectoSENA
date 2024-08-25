@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,6 +12,7 @@
     
     }
 
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,69 +75,69 @@
                 <div class="card">
                     <h5 class="card-header">Informacion de Receta</h5>
                     <div class="card-body">
-                        <?php
+                        <?php /*
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM recipes WHERE idRecipe=".$_GET['idRecipe'];
                         $resultado = $conexion->query($sql);
-                        $row = $resultado->fetch_assoc();
+                        $row = $resultado->fetch_assoc(); */
                         
                         ?>
                         <h5>ID Receta</h5>
-                        <input type="number" class="form-control" value="<?php echo $row['idRecipe'] ?>" disabled>
+                        <input type="number" class="form-control" value="<?php /*echo $row['idRecipe']*/ ?>" disabled>
                         <hr>
                         <h5 class="card-title">Detalles</h5>
                         <form class="needs-validation" method="post" action="../Forms/RecetaUpdate.php">
                             <div class="form-group">
                                 <label for="dateHour">Fecha de emision</label>
                                 <input type="text" class="form-control" id="dateHour"
-                                    value="<?php echo $row['dateHour']?>" disabled>
+                                    value="<?php /*echo $row['dateHour']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="routeAdministration">Via de Administracion</label>
                                 <input type="text" class="form-control" id="routeAdministration"
-                                    value="<?php echo $row['routeAdministration']?>" disabled>
+                                    value="<?php /*echo $row['routeAdministration']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="durationDay">Duracion en dias</label>
                                 <input type="text" class="form-control" id="durationDay"
-                                    value="<?php echo $row['durationDay']?>" disabled>
+                                    value="<?php /*echo $row['durationDay']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="durationMonth">Duracion en meses</label>
                                 <input type="text" class="form-control" id="durationMonth"
-                                    value="<?php echo $row['durationMonth']?>" disabled>
+                                    value="<?php /*echo $row['durationMonth']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="frequency">Frecuencia en horas</label>
                                 <input type="text" class="form-control" id="frequency"
-                                    value="<?php echo $row['frequency']?>" disabled>
+                                    value="<?php /*echo $row['frequency']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="amount">Cantidad de empaque(s)</label>
-                                <input type="text" class="form-control" id="amount" value="<?php echo $row['amount']?>"
+                                <input type="text" class="form-control" id="amount" value="<?php /*echo $row['amount']*/?>"
                                     disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <input type="text" class="form-control" id="state" value="<?php echo $row['stateR']?>"
+                                <input type="text" class="form-control" id="state" value="<?php /*echo $row['stateR']*/?>"
                                     disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="specialInstructions">Instrucciones Especiales</label>
                                 <input type="text" class="form-control" id="specialInstructions"
-                                    value="<?php echo $row['specialInstructions']?>" disabled>
+                                    value="<?php /*echo $row['specialInstructions']*/?>" disabled>
                             </div>
                             <br>
-                            <?php 
+                            <?php /*
                             require("../../../../Configuration/Connection.php");
 
                             $idRecipe = $_GET['idRecipe'];
@@ -152,15 +153,15 @@
                             $row = $resultado->fetch_assoc();
                             $nameM = $row['nameM'];
                             }
-                            
+                            */
                             ?>
                             <div class="form-group">
                                 <label for="medicine">Medicamento</label>
-                                <input type="text" class="form-control" id="medicine" value="<?php echo $row['nameM']?>"
+                                <input type="text" class="form-control" id="medicine" value="<?php /*echo $row['nameM']*/?>"
                                     disabled>
                             </div>
                             <br>
-                            <?php 
+                            <?php /*
                             require("../../../../Configuration/Connection.php");
 
                             $idRecipe = $_GET['idRecipe'];
@@ -176,12 +177,12 @@
                             $row = $resultado->fetch_assoc();
                             $idDiagnosis = $row['idDiagnosis'];
                             }
-                            
+                            */
                             ?>
                             <div class="form-group">
                                 <label for="diagnosis">ID Diagnostico</label>
                                 <input type="number" class="form-control" id="diagnosis"
-                                    value="<?php echo $row['idDiagnosis']?>" disabled>
+                                    value="<?php /*echo $row['idDiagnosis']*/?>" disabled>
                             </div>
                             <hr>
                             <a href="../PatientRecetas.php" type="button" class="btn btn-secondary">Regresar</a>

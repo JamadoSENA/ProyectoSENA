@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,57 +75,58 @@
                 <div class="card">
                     <h5 class="card-header">Informacion de Medicamento</h5>
                     <div class="card-body">
-                        <?php
+                        <?php /*
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM medicines WHERE idMedicine=".$_GET['idMedicine'];
                         $resultado = $conexion->query($sql);
-                        $row = $resultado->fetch_assoc();
+                        $row = $resultado->fetch_assoc(); */
                         
                         ?>
-                        <h5>ID Medicamento</h5>
-                        <input type="number" class="form-control" value="<?php echo $row['idMedicine'] ?>" disabled>
-                        <hr>
+
                         <h5 class="card-title">Detalles</h5>
                         <form>
+                            <h5>ID Medicamento</h5>
+                            <input type="number" class="form-control" value="<?php /*echo $row['idMedicine']*/ ?>" disabled>
+                            <hr>
                             <div class="form-group">
                                 <label for="validationCustom01">Nombre</label>
                                 <input type="text" class="form-control" id="validationCustom01"
-                                    value="<?php echo $row['nameM']?>" disabled>
+                                    value="<?php /*echo $row['nameM']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom02">Formato</label>
                                 <input type="text" class="form-control" id="validationCustom02"
-                                    value="<?php echo $row['formatM']?>" disabled>
+                                    value="<?php /*echo $row['formatM']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom03">Cantidad</label>
                                 <input type="number" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['stock']?>" disabled>
+                                    value="<?php /*echo $row['stock']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom04">Estado</label>
                                 <input type="text" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['stateM']?>" disabled>
+                                    value="<?php /*echo $row['stateM']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom05">Fecha de Vencimiento</label>
                                 <input type="date" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['expirationDate']?>" disabled>
+                                    value="<?php /*echo $row['expirationDate']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom06">Categoria</label>
                                 <input type="number" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['category']?>" disabled>
+                                    value="<?php /*echo $row['category']*/?>" disabled>
                             </div>
                             <br>
-                            <?php 
+                            <?php  /*
                             require("../../../../Configuration/Connection.php");
 
                             $idMedicine = $_GET['idMedicine'];
@@ -140,13 +141,13 @@
                             if ($resultado->num_rows > 0) {
                             $row = $resultado->fetch_assoc();
                             $nameSupplier = $row['nameSU'];
-                            }
+                            } */
                             
                             ?>
                             <div class="form-group">
                                 <label for="validationCustom07">Proveedor</label>
                                 <input type="text" class="form-control" id="supplier"
-                                    value="<?php echo $row['nameSupplier']?>" disabled>
+                                    value="<?php /*echo $row['nameSupplier']*/?>" disabled>
                             </div>
                             <hr>
                             <a href="../InventorMedicinas.php" type="button" class="btn btn-secondary">Regresar</a>

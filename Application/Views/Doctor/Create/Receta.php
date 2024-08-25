@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,17 +78,17 @@
                     <div class="card-body">
                         <h5 class="card-title">Formulario</h5>
                         <?php
-                        
+                        /*
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM diagnosis WHERE idDiagnosis=".$_GET['idDiagnosis'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        
+                        */
                         ?>
                         <form class="needs-validation" method="post" action="../Forms/DiagnosticoReceta.php" novalidate>
                             <input type="hidden" class="form-control" name="idDiagnosis"
-                                value="<?php echo $row['idDiagnosis'] ?>">
+                                value="<?php /* echo $row['idDiagnosis']*/ ?>">
                             <div class="form-group">
                                 <label for="validationCustom01">Via de Administracion</label>
                                 <select name="viaAdministracion" class="form-control" id="validationCustom01" required>
@@ -167,7 +167,7 @@
                                 <label for="validationCustom08">Medicamento</label>
                                 <select name="fkIdMedicine" class="form-control" id="patient" required>
                                     <option value="">Seleccionar</option>
-                                    <?php 
+                                    <?php /*
                 include ("../../../../Configuration/Connection.php");
 
                 $sql = $conexion->query("SELECT * FROM medicines ORDER BY stock ASC");
@@ -176,7 +176,7 @@
                 echo "<option value='".$resultado['idMedicine']."'>".$resultado
                 ['nameM']."</option>";
 
-                }
+                } */
                 ?>
                                 </select>
                                 <div class="invalid-feedback">
@@ -187,7 +187,7 @@
                                 <label for="validationCustom08">Diagnostico</label>
                                 <select name="fkIdScheduling" class="form-control" id="patient" required>
                                     <option value="">Ninguna</option>
-                                    <?php 
+                                    <?php /*
                 include ("../../../../Configuration/Connection.php");
 
                 $sql = $conexion->query("SELECT * FROM diagnosis ORDER BY dateHour DESC");
@@ -196,7 +196,7 @@
                 echo "<option value='".$resultado['idDiagnosis']."'>".$resultado
                 ['dateHour']."</option>";
 
-                }
+                } */
                 ?>
                                 </select>
                                 <div class="invalid-feedback">

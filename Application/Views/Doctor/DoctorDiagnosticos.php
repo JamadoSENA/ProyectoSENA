@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -7,12 +7,12 @@
 
     if( $validar == null || $validar = ''){
 
-    header("Location: ../../LogIn.php");
+    header("Location: ../../../LogIn.php");
     die();
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,7 +101,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
+                                    <?php /*
                                      require("../../../Configuration/Connection.php");
             
                                      $sql = $conexion->query("  SELECT 
@@ -115,15 +115,15 @@
                                                              JOIN patients ON schedulings.fkIdPatient = patients.idPatient");
                          
                                      while ($resultado = $sql->fetch_assoc()){
-                                      
+                                      */
                                      ?>
 
 
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idDiagnosis']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['fechaEmision']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nombrePaciente']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idScheduling']?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['idDiagnosis']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['fechaEmision']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['nombrePaciente']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['idScheduling']*/?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -142,8 +142,8 @@
                                             </ul>
                                         </td>
                                     </tr>
-                                    <?php
-                                     }
+                                    <?php /*
+                                     } */
                                      ?>
                                 </tbody>
                             </table>

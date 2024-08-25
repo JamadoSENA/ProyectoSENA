@@ -1,5 +1,5 @@
 <?php 
-
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +110,7 @@
                                 <label for="validationCustom04">Paciente</label>
                                 <select name="Paciente" class="form-control" id="validationCustom04">
                                     <option value="">Ninguno</option>
-                                    <?php 
+                                    <?php /*
                 include ("../../../../Configuration/Connection.php");
 
                 $sql = $conexion->query("SELECT * FROM users WHERE fkIdRole=1 ORDER BY nameU ASC");
@@ -119,7 +119,7 @@
                 echo "<option value='".$resultado['idUser']."'>".$resultado
                 ['nameU']."</option>";
 
-                }
+                } */
                 ?>
                                 </select>
                             </div>

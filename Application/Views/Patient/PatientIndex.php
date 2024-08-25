@@ -1,18 +1,18 @@
-<?php 
+<?php
+/*
+    session_start();
+    error_reporting(0);
 
-session_start();
-error_reporting(0);
+    $validar = $_SESSION['correo'];
 
-$validar = $_SESSION['correo'];
+    if( $validar == null || $validar = ''){
 
-if( $validar == null || $validar = ''){
+    header("Location: ../../../LogIn.php");
+    die();
+    
+    }
 
-  header("Location: ../../LogIn.php");
-  die();
-  
-}
-
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +44,8 @@ if( $validar == null || $validar = ''){
                         </li>
                         <li alt="Mis Citas">
                             <a href="PatientMyCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Mis
                                     citas</span> </a>
                         </li>
                         <li>
@@ -88,13 +89,7 @@ if( $validar == null || $validar = ''){
                             equipo de soporte que está disponible para ayudarte en todo momento. Tu bienestar es nuestra
                             prioridad, y estamos aquí para ofrecerte una experiencia cómoda y eficiente en la gestión de
                             tus consultas médicas.</p>
-                            <div class="card text-bg-success mb-3" style="max-width: 18rem;">
-  <div class="card-header">Header</div>
-  <div class="card-body">
-    <h5 class="card-title">Success card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>    
+                        
                         <a href="PatientCitas.php" class="btn btn-primary">¡Agendar!</a>
                     </div>
                     <div class="card-footer text-body-secondary">

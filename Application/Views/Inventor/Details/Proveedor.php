@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,43 +75,44 @@
                 <div class="card">
                     <h5 class="card-header">Informacion de Proveedor</h5>
                     <div class="card-body">
-                        <?php
+                        <?php /*
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM suppliers WHERE idSupplier=".$_GET['idSupplier'];
                         $resultado = $conexion->query($sql);
-                        $row = $resultado->fetch_assoc();
+                        $row = $resultado->fetch_assoc(); */
                         
                         ?>
-                        <h5>NIT</h5>
-                        <input type="number" class="form-control" value="<?php echo $row['idSupplier'] ?>" disabled>
-                        <hr>
                         <h5 class="card-title">Detalles</h5>
                         <form>
+                            <h5>NIT</h5>
+                            <input type="number" class="form-control" value="<?php /*echo $row['idSupplier']*/ ?>"
+                                disabled>
+                            <hr>
                             <div class="form-group">
                                 <label for="validationCustom01">Nombre</label>
                                 <input type="text" class="form-control" id="validationCustom01"
-                                    value="<?php echo $row['nameSU']?>" disabled>
+                                    value="<?php /*echo $row['nameSU']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom02">Direccion</label>
                                 <input type="text" class="form-control" id="validationCustom02"
-                                    value="<?php echo $row['addressSU']?>" disabled>
+                                    value="<?php /*echo $row['addressSU']*/?>" disabled>
                             </div>
                             <hr>
                             <h5>Contacto</h5>
                             <div class="form-group">
                                 <label for="validationCustom03">Email</label>
                                 <input type="text" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['email']?>" disabled>
+                                    value="<?php /*echo $row['email']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom04">Numero Telefonico</label>
                                 <input type="text" class="form-control" id="validationCustom04"
-                                    value="<?php echo $row['phoneNumber']?>" disabled>
+                                    value="<?php /*echo $row['phoneNumber']*/?>" disabled>
                             </div>
                             <hr>
                             <a href="../InventorProveedores.php" type="button" class="btn btn-secondary">Regresar</a>

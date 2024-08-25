@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,18 +77,18 @@
                     <h5 class="card-header">Asignacion de Diagnostico</h5>
                     <div class="card-body">
                         <h5 class="card-title">Formulario</h5>
-                        <?php
+                        <?php /*
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        
+                        */
                         ?>
                         <form class="needs-validation" method="post" action="../Forms/CitaDiagnostico.php" novalidate>
                             <input type="hidden" class="form-control" name="idScheduling"
-                                value="<?php echo $row['idScheduling'] ?>">
+                                value="<?php /* echo $row['idScheduling'] */ ?>">
                             <div class="form-group">
                                 <label for="validationCustom01">Queja Principal</label>
                                 <input type="text" class="form-control" name="queja" id="validationCustom01" required>
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                             <input type="hidden" class="form-control" name="fkIdScheduling"
-                                value="<?php echo $row['idScheduling'] ?>">
+                                value="<?php /* echo $row['idScheduling'] */ ?>">
                             <hr>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>

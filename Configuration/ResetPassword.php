@@ -10,8 +10,6 @@ $message = "";
 
 if (isset($_POST['correo'])) {
   $to = $_POST['correo'];
-
-  // Generate a random password reset token (improve security with stronger methods)
   $token = md5(uniqid(rand(), true));
 
   // Replace with your database logic to store the token for the user's email

@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,24 +76,26 @@
                 <div class="card">
                     <h5 class="card-header">Actualizacion de Cita</h5>
                     <div class="card-body">
-                        <?php
+                        <?php /*
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        
+                        */
                         ?>
-                        <h5>ID Cita</h5>
-                        <input type="number" class="form-control" value="<?php echo $row['idScheduling'] ?>" disabled>
-                        <hr>
+
                         <h5 class="card-title">Detalles</h5>
                         <form class="needs-validation" method="post" action="../Forms/CitaUpdate.php" novalidate>
+                            <h5>ID Cita</h5>
+                            <input type="number" class="form-control" value="<?php /*echo $row['idScheduling']*/ ?>"
+                                disabled>
+                            <hr>
                             <div class="form-group">
                                 <label for="validationCustom01">Estado</label>
                                 <select name="Estado" class="form-control" id="validationCustom01" required>
-                                    <option value="<?php echo $row['stateS']?>"><?php echo $row['stateS']?></option>
+                                    <option value="<?php /*echo $row['stateS']*/ ?>"><?php /*echo $row['stateS']*/ ?></option>
                                     <option value="Libre">Libre</option>
                                     <option value="Reservada">Reservada</option>
                                 </select>
@@ -105,7 +107,7 @@
                             <div class="form-group">
                                 <label for="validationCustom02">Fecha Inicio</label>
                                 <input type="datetime-local" class="form-control" id="validationCustom02"
-                                    value="<?php echo $row['dateHourStart']?>" name="Inicio" required>
+                                    value="<?php /*echo $row['dateHourStart']*/?>" name="Inicio" required>
                                 <div class="invalid-feedback">
                                     Por favor digite la fecha de inicio de la cita.
                                 </div>
@@ -114,13 +116,13 @@
                             <div class="form-group">
                                 <label for="validationCustom03">Fecha Fin</label>
                                 <input type="datetime-local" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['dateHourEnd']?>" name="Fin" required>
+                                    value="<?php /*echo $row['dateHourEnd']*/?>" name="Fin" required>
                                 <div class="invalid-feedback">
                                     Por favor digite fecha fin de la cita.
                                 </div>
                             </div>
                             <br>
-                            <?php 
+                            <?php /*
                             require("../../../../Configuration/Connection.php");
 
                             $idScheduling = $_GET['idScheduling'];
@@ -137,13 +139,13 @@
                             $row = $resultado->fetch_assoc();
                             $nombrePaciente = $row['nameU'];
                             }
-                            
+                            */
                             ?>
                             <div class="form-group">
                                 <label for="patient">Paciente</label>
                                 <select name="Paciente" class="form-control" id="validationCustom04">
-                                    <option value="<?php echo $row['nameU']?>"><?php echo $row['nameU']?></option>
-                                    <?php 
+                                    <option value="<?php /*echo $row['nameU']*/ ?>"><?php /*echo $row['nameU']*/ ?></option>
+                                    <?php /*
                 include ("../../../../Configuration/Connection.php");
 
                 $sql = $conexion->query("SELECT * FROM users WHERE fkIdRole=1 ORDER BY nameU ASC");
@@ -152,7 +154,7 @@
                 echo "<option value='".$resultado['idUser']."'>".$resultado
                 ['nameU']."</option>";
 
-                }
+                } */
                 ?>
                                 </select>
                             </div>

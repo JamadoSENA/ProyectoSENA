@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,7 +156,7 @@
                                 <label for="validationCustom08">Medicamento</label>
                                 <select name="fkIdMedicine" class="form-control" id="patient" required>
                                     <option value="">Seleccionar</option>
-                                    <?php 
+                                    <?php /*
                 include ("../../../../Configuration/Connection.php");
 
                 $sql = $conexion->query("SELECT * FROM medicines ORDER BY stock ASC");
@@ -165,7 +165,7 @@
                 echo "<option value='".$resultado['idMedicine']."'>".$resultado
                 ['nameM']."</option>";
 
-                }
+                } */
                 ?>
                                 </select>
                                 <div class="invalid-feedback">

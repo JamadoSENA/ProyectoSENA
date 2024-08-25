@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -7,12 +7,12 @@
 
     if( $validar == null || $validar = ''){
 
-    header("Location: ../../LogIn.php");
+    header("Location: ../../../LogIn.php");
     die();
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +89,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
+                                <?php /*
             
             require("../../../Configuration/Connection.php");
             
@@ -97,15 +97,15 @@
                                     FROM recipes 
                                     JOIN medicines ON recipes.fkIdMedicine = medicines.idMedicine");
 
-            while ($resultado = $sql->fetch_assoc()){
+            while ($resultado = $sql->fetch_assoc()){ */
              
             ?>
 
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idRecipe']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateR']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['amount']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameM']?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['idRecipe']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['stateR']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['amount']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['nameM']*/?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -124,8 +124,8 @@
                                             </ul>
                                         </td>
                                     </tr>
-                                    <?php
-            }
+                                    <?php /*
+            } */
             ?>
                                 </tbody>
                             </table>

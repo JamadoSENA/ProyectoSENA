@@ -1,18 +1,18 @@
-<?php 
+<?php
+/*
+    session_start();
+    error_reporting(0);
 
-session_start();
-error_reporting(0);
+    $validar = $_SESSION['correo'];
 
-$validar = $_SESSION['correo'];
+    if( $validar == null || $validar = ''){
 
-if( $validar == null || $validar = ''){
+    header("Location: ../../../LogIn.php");
+    die();
+    
+    }
 
-  header("Location: ../../LogIn.php");
-  die();
-  
-}
-
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +92,7 @@ if( $validar == null || $validar = ''){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
+                                    <?php /*
             
             require("../../../Configuration/Connection.php");
             
@@ -107,19 +107,19 @@ if( $validar == null || $validar = ''){
     JOIN users ON schedulings.fkIdDoctor = users.idUser");
 
             while ($resultado = $sql->fetch_assoc()){
-                
+                */
             ?>
                                     <tr>
                                         <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado ['idScheduling']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?>
+                                            <?php /*echo $resultado ['idScheduling']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['stateS']*/?>
                                         </td>
                                         <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado ['dateHourStart']?></td>
+                                            <?php /*echo $resultado ['dateHourStart']*/?></td>
                                         <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado ['dateHourEnd']?></td>
+                                            <?php /*echo $resultado ['dateHourEnd']*/?></td>
                                         <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado ['nombreDoctor']?></td>
+                                            <?php /*echo $resultado ['nombreDoctor']*/?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -138,8 +138,8 @@ if( $validar == null || $validar = ''){
                                             </ul>
                                         </td>
                                     </tr>
-                                    <?php
-            }
+                                    <?php /*
+            } */
             ?>
                                 </tbody>
                             </table>

@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,18 +77,18 @@
                     <h5 class="card-header">Actualizacion de Cita</h5>
                     <div class="card-body">
                         <?php
-                        
+                        /*
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        
+                        */
                         ?> 
                         <h5 class="card-title">Detalles</h5>
                         <hr>
                         <form class="needs-validation" method="post" action="../Forms/CitaUpdate.php" novalidate>
-                        <input type="hidden" class="form-control" name="idScheduling" value="<?php echo $row['idScheduling'] ?>">
+                        <input type="hidden" class="form-control" name="idScheduling" value="<?php /*echo $row['idScheduling']*/ ?>">
                             <div class="form-group">
                                 <label for="validationCustom01">Estado</label>
                                 <select name="Estado" class="form-control" id="validationCustom01" required>
@@ -103,16 +103,16 @@
                             <div class="form-group">
                                 <label for="validationCustom02">Fecha Inicio</label>
                                 <input type="datetime-local" class="form-control" id="validationCustom02"
-                                    value="<?php echo $row['dateHourStart']?>" disabled>
+                                    value="<?php /*echo $row['dateHourStart']*/?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom03">Fecha Fin</label>
                                 <input type="datetime-local" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['dateHourEnd']?>" disabled>
+                                    value="<?php /*echo $row['dateHourEnd']*/?>" disabled>
                             </div>
                             <br>
-                            <?php 
+                            <?php /*
                             require("../../../../Configuration/Connection.php");
 
                             $idScheduling = $_GET['idScheduling'];
@@ -129,12 +129,12 @@
                             if ($resultado && $resultado->num_rows > 0) {
                                 $row = $resultado->fetch_assoc();
                                 $nombreDoctor = $row['nameU'];
-                            }
+                            } */
                             ?>
                             <div class="form-group">
                                 <label for="doctor">Doctor</label>
                                 <input type="text" class="form-control" id="doctor"
-                                    value="<?php echo htmlspecialchars($nombreDoctor); ?>" disabled>
+                                    value="<?php /*echo htmlspecialchars($nombreDoctor);*/ ?>" disabled>
                             </div>
                             <hr>
                             <button type="submit" class="btn btn-primary">Actualizar</button>

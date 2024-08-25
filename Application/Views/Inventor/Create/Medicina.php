@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,6 +12,7 @@
     
     }
 
+*/
 
 ?>
 <!DOCTYPE html>
@@ -163,7 +164,7 @@
                                 <label for="validationCustom04">Proveedor</label>
                                 <select name="Proveedor" class="form-control" id="validationCustom04">
                                     <option value="">Ninguno</option>
-                                    <?php 
+                                    <?php /*
                 include ("../../../../Configuration/Connection.php");
 
                 $sql = $conexion->query("SELECT * FROM suppliers ORDER BY nameSU ASC");
@@ -172,7 +173,7 @@
                 echo "<option value='".$resultado['idSupplier']."'>".$resultado
                 ['nameSU']."</option>";
 
-                }
+                } */
                 ?>
                                 </select>
                                 <div class="invalid-feedback">

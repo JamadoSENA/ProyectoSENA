@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,24 +75,25 @@
                 <div class="card">
                     <h5 class="card-header">Informacion de Proveedor</h5>
                     <div class="card-body">
-                        <?php
+                        <?php /*
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM suppliers WHERE idSupplier=".$_GET['idSupplier'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        
+                        */
                         ?>
-                        <h5>NIT</h5>
-                        <input type="number" class="form-control" value="<?php echo $row['idSupplier'] ?>" disabled>
-                        <hr>
                         <h5 class="card-title">Detalles</h5>
                         <form class="needs-validation" method="post" action="../Forms/ProveedorUpdate.php">
+                            <h5>NIT</h5>
+                            <input type="number" class="form-control" value="<?php /*echo $row['idSupplier']*/ ?>"
+                                disabled>
+                            <hr>
                             <div class="form-group">
                                 <label for="validationCustom01">Nombre</label>
                                 <input type="text" class="form-control" id="validationCustom01"
-                                    value="<?php echo $row['nameSU']?>" name="Nombre" required>
+                                    value="<?php /*echo $row['nameSU']*/?>" name="Nombre" required>
                                 <div class="invalid-feedback">
                                     Por favor digite el nombre del proveedor.
                                 </div>
@@ -101,7 +102,7 @@
                             <div class="form-group">
                                 <label for="validationCustom02">Direccion</label>
                                 <input type="text" class="form-control" id="validationCustom02"
-                                    value="<?php echo $row['addressSU']?>" name="Direccion" required>
+                                    value="<?php /*echo $row['addressSU']*/?>" name="Direccion" required>
                                 <div class="invalid-feedback">
                                     Por favor digite la direccion del proveedor.
                                 </div>
@@ -111,7 +112,7 @@
                             <div class="form-group">
                                 <label for="validationCustom03">Email</label>
                                 <input type="text" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['email']?>" name="Email" required>
+                                    value="<?php /*echo $row['email']*/?>" name="Email" required>
                                 <div class="invalid-feedback">
                                     Por favor digite el correo electronico del proveedor.
                                 </div>
@@ -120,7 +121,7 @@
                             <div class="form-group">
                                 <label for="validationCustom04">Numero Telefonico</label>
                                 <input type="text" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['phoneNumber']?>" name="Telefono" required>
+                                    value="<?php /*echo $row['phoneNumber']*/?>" name="Telefono" required>
                                 <div class="invalid-feedback">
                                     Por favor digite el nombre del proveedor.
                                 </div>

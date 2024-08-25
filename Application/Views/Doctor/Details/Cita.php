@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,38 +77,38 @@
                     <h5 class="card-header">Informacion de Cita</h5>
                     <div class="card-body">
                         <?php
-                        
+                        /*
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        
+                        */
                         ?>
                         <h5>ID Cita</h5>
-                        <input type="number" class="form-control" value="<?php echo $row['idScheduling'] ?>" disabled>
+                        <input type="number" class="form-control" value="<?php /* echo $row['idScheduling']*/ ?>" disabled>
                         <hr>
                         <h5 class="card-title">Detalles</h5>
                         <form>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Estado</label>
                                 <input type="text" class="form-control" id="startDate"
-                                    value="<?php echo $row['stateS']?>" disabled>
+                                    value="<?php /*echo $row['stateS']*/ ?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="startDate">Fecha Inicio</label>
                                 <input type="datetime-local" class="form-control" id="startDate"
-                                    value="<?php echo $row['dateHourStart']?>" disabled>
+                                    value="<?php /*echo $row['dateHourStart']*/ ?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="endDate">Fecha Fin</label>
                                 <input type="datetime-local" class="form-control" id="endDate"
-                                    value="<?php echo $row['dateHourEnd']?>" disabled>
+                                    value="<?php /*echo $row['dateHourEnd']?*/ ?>" disabled>
                             </div>
                             <br>
-                            <?php 
+                            <?php /*
                             require("../../../../Configuration/Connection.php");
 
                             $idScheduling = $_GET['idScheduling'];
@@ -125,12 +125,12 @@
                             $row = $resultado->fetch_assoc();
                             $nombrePaciente = $row['nameU'];
                             }
-                            
+                            */
                             ?>
                             <div class="form-group">
                                 <label for="patient">Paciente</label>
                                 <input type="text" class="form-control" id="patient"
-                                    value="<?php echo $row['nombrePaciente']?>" disabled>
+                                    value="<?php /*echo $row['nombrePaciente']*/ ?>" disabled>
                             </div>
                             <hr>
                             <a href="../DoctorAgenda.php" type="button" class="btn btn-secondary">Regresar</a>

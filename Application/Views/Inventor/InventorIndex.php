@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -7,12 +7,12 @@
 
     if( $validar == null || $validar = ''){
 
-    header("Location: ../../LogIn.php");
+    header("Location: ../../../LogIn.php");
     die();
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">

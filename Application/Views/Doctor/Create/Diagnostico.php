@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+/*
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,7 @@
     
     }
 
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,7 +144,7 @@
                             <label for="validationCustom08">Cita</label>
                             <select name="fkIdScheduling" class="form-control" id="patient" required>
                                 <option value="">Ninguna</option>
-                                <?php 
+                                <?php /*
                 include ("../../../../Configuration/Connection.php");
 
                 $sql = $conexion->query("SELECT * FROM schedulings ORDER BY dateHour DESC");
@@ -153,7 +153,7 @@
                 echo "<option value='".$resultado['idScheduling']."'>".$resultado
                 ['dateHour']."</option>";
 
-                }
+                } */
                 ?>
                             </select>
                             <div class="invalid-feedback">
