@@ -39,17 +39,17 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li>
-                            <a href="DoctorCitas.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../DoctorCitas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-calendar"></i> <span class="ms-1 d-none d-sm-inline">Citas</span>
                             </a>
                         </li>
                         <li>
-                            <a href="DoctorDiagnosticos.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../DoctorDiagnosticos.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-prescription"></i> <span
                                     class="ms-1 d-none d-sm-inline">Diagnosticos</span> </a>
                         </li>
                         <li>
-                            <a href="DoctorRecetas.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../DoctorRecetas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Recetas</span>
                             </a>
                         </li>
@@ -62,7 +62,7 @@
                             <span class="d-none d-sm-inline mx-1">Doctor</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

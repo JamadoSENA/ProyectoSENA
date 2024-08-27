@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="../../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Proveedor</title>
+    <title>Mi Perfil</title>
 </head>
 
 <body>
@@ -61,7 +61,7 @@
                             <span class="d-none d-sm-inline mx-1">Inventarista</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -73,54 +73,96 @@
             </div>
             <div class="col py-3">
                 <div class="card">
-                    <h5 class="card-header">Registro de Proveedor</h5>
+                    <h5 class="card-header">Información de Perfil</h5>
                     <div class="card-body">
-                        <h5 class="card-title">Formulario</h5>
-                        <form class="needs-validation" method="post" action="../Forms/Proveedor.php" novalidate>
-                            <div class="form-group">
-                                <label for="validationCustom01">NIT</label>
-                                <input type="number" class="form-control" id="validationCustom01" name="NIT" required>
-                                <div class="invalid-feedback">
-                                    Por favor digite el codigo NIT.
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="validationCustom02">Nombre Comercial</label>
-                                <input type="text" class="form-control" id="validationCustom02" name="Nombre" required>
-                                <div class="invalid-feedback">
-                                    Por favor digite el nombre de comercio.
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="validationCustom03">Direccion</label>
-                                <input type="text" class="form-control" id="validationCustom03" name="Direccion"
-                                    required>
-                                <div class="invalid-feedback">
-                                    Por favor digite la direccion donde se encuentra el proveedor.
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="validationCustom04">Correo</label>
-                                <input type="email" class="form-control" id="validationCustom04" name="Correo" required>
-                                <div class="invalid-feedback">
-                                    Por favor digite la direccion de correo electronico.
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="validationCustom05">Numero de Telefono</label>
-                                <input type="number" class="form-control" id="validationCustom05" name="Telefono"
-                                    required>
-                                <div class="invalid-feedback">
-                                    Por favor digite el numero telefonico.
+                        <form class="needs-validation" method="post" action="../Forms/PerfilUpdate.php" novalidate>
+                            <h5>Numero de Documento</h5>
+                            <input type="number" class="form-control" value="<?php /*echo $row['idUser']*/ ?>" disabled>
+                            <hr>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="validationCustom01">Nombre</label>
+                                            <input type="text" class="form-control"
+                                                value="<?php /*echo $row['nameU']*/ ?>" disabled>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom02">Apellido</label>
+                                            <input type="text" class="form-control"
+                                                value="<?php /*echo $row['lastname']*/ ?>" disabled>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom03">Fecha de Nacimiento</label>
+                                            <input type="date" class="form-control"
+                                                value="<?php /*echo $row['birthdate']*/ ?>" disabled>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom04">Edad</label>
+                                            <input type="number" class="form-control"
+                                                value="<?php /*echo $row['age']*/ ?>" disabled>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom05">Genero</label>
+                                            <input type="text" class="form-control"
+                                                value="<?php /*echo $row['gender']*/ ?>" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="validationCustom09">Correo Electronico</label>
+                                            <input type="email" class="form-control"
+                                                value="<?php /*echo $row['email']*/ ?>" name="Email" required>
+                                            <div class="invalid-feedback">
+                                                Por favor digite su direccion de correo.
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom06">Numero Telefonico</label>
+                                            <input type="number" class="form-control"
+                                                value="<?php /*echo $row['phoneNumber']*/ ?>" name="NumeroTelefono"
+                                                required>
+                                            <div class="invalid-feedback">
+                                                Por favor digite su numero telefonico.
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom07">Profesión</label>
+                                            <input type="text" class="form-control"
+                                                value="<?php /*echo $row['profession']*/ ?>" name="Profesion" required>
+                                            <div class="invalid-feedback">
+                                                Por favor digite la profesion que desempeña.
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom08">Dirección de Residencia</label>
+                                            <input type="text" class="form-control"
+                                                value="<?php /*echo $row['address']*/ ?>" name="Direccion" required>
+                                            <div class="invalid-feedback">
+                                                Por favor digite la direccion de residencia.
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom10">Contraseña</label>
+                                            <input type="text" class="form-control"
+                                                value="<?php /*echo $row['password']*/ ?>" disabled>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <a href="../DoctorIndex.php" class="btn btn-secondary">Regresar</a>
                         </form>
+
                     </div>
                 </div>
             </div>

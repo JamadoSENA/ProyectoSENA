@@ -39,17 +39,17 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li>
-                            <a href="InventorMedicinas.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../InventorMedicinas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-capsule"></i> <span class="ms-1 d-none d-sm-inline">Medicinas</span>
                             </a>
                         </li>
                         <li>
-                            <a href="InventorProveedores.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../InventorProveedores.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-person-circle"></i> <span
                                     class="ms-1 d-none d-sm-inline">Proveedores</span> </a>
                         </li>
                         <li>
-                            <a href="InventorRecetas.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../InventorRecetas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Recetas</span> </a>
                         </li>
                     </ul>
@@ -61,11 +61,11 @@
                             <span class="d-none d-sm-inline mx-1">Inventarista</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>

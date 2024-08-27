@@ -61,7 +61,7 @@
                             <span class="d-none d-sm-inline mx-1">Doctor</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -120,10 +120,14 @@
 
 
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['idDiagnosis']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['fechaEmision']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['nombrePaciente']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['idScheduling']*/?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php /*echo $resultado['idDiagnosis']*/?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php /*echo $resultado['fechaEmision']*/?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php /*echo $resultado['nombrePaciente']*/?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php /*echo $resultado['idScheduling']*/?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
