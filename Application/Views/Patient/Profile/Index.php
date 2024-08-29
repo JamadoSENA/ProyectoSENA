@@ -1,18 +1,38 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
-    header("Location: ../../../LogIn.php");
+if ($validar == null || $validar == '') {
+    header("Location: ../../../../LogIn.php");
     die();
-    
-    }
+}
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+$user_birthdate = $user_info['birthdate'];
+$user_age = $user_info['age'];
+$user_gender = $user_info['gender'];
+$user_phoneNumber = $user_info['phoneNumber'];
+$user_profession = $user_info['profession'];
+$user_addressU = $user_info['addressU'];
+$user_email = $user_info['email'];
+$user_passwordU = $user_info['passwordU'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +80,7 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Paciente</span>
+                            <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
@@ -79,7 +99,7 @@
                     <div class="card-body">
                         <form class="needs-validation" method="post" action="../Forms/PerfilUpdate.php" novalidate>
                             <h5>Numero de Documento</h5>
-                            <input type="number" class="form-control" value="<?php /*echo $row['idUser']*/ ?>" disabled>
+                            <input type="hidden" name="idUser" value="<?php echo $user_id; ?>">
                             <hr>
                             <div class="container-fluid">
                                 <div class="row">
@@ -87,38 +107,38 @@
                                         <div class="form-group">
                                             <label for="validationCustom01">Nombre</label>
                                             <input type="text" class="form-control"
-                                                value="<?php /*echo $row['nameU']*/ ?>" disabled>
+                                                value="<?php echo $user_name; ?>" disabled>
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label for="validationCustom02">Apellido</label>
                                             <input type="text" class="form-control"
-                                                value="<?php /*echo $row['lastname']*/ ?>" disabled>
+                                                value="<?php echo $user_lastname; ?>" disabled>
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label for="validationCustom03">Fecha de Nacimiento</label>
                                             <input type="date" class="form-control"
-                                                value="<?php /*echo $row['birthdate']*/ ?>" disabled>
+                                                value="<?php echo $user_birthdate; ?>" disabled>
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label for="validationCustom04">Edad</label>
                                             <input type="number" class="form-control"
-                                                value="<?php /*echo $row['age']*/ ?>" disabled>
+                                                value="<?php echo $user_age; ?>" disabled>
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label for="validationCustom05">Genero</label>
                                             <input type="text" class="form-control"
-                                                value="<?php /*echo $row['gender']*/ ?>" disabled>
+                                                value="<?php echo $user_gender; ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="validationCustom09">Correo Electronico</label>
                                             <input type="email" class="form-control"
-                                                value="<?php /*echo $row['email']*/ ?>" name="Email" required>
+                                                value="<?php echo $user_email; ?>" name="Email" required>
                                             <div class="invalid-feedback">
                                                 Por favor digite su direccion de correo.
                                             </div>
@@ -127,7 +147,7 @@
                                         <div class="form-group">
                                             <label for="validationCustom06">Numero Telefonico</label>
                                             <input type="number" class="form-control"
-                                                value="<?php /*echo $row['phoneNumber']*/ ?>" name="NumeroTelefono"
+                                                value="<?php echo $user_phoneNumber; ?>" name="NumeroTelefono"
                                                 required>
                                             <div class="invalid-feedback">
                                                 Por favor digite su numero telefonico.
@@ -137,7 +157,7 @@
                                         <div class="form-group">
                                             <label for="validationCustom07">Profesión</label>
                                             <input type="text" class="form-control"
-                                                value="<?php /*echo $row['profession']*/ ?>" name="Profesion" required>
+                                                value="<?php echo $user_profession; ?>" name="Profesion" required>
                                             <div class="invalid-feedback">
                                                 Por favor digite la profesion que desempeña.
                                             </div>
@@ -146,7 +166,7 @@
                                         <div class="form-group">
                                             <label for="validationCustom08">Dirección de Residencia</label>
                                             <input type="text" class="form-control"
-                                                value="<?php /*echo $row['address']*/ ?>" name="Direccion" required>
+                                                value="<?php echo $user_addressU; ?>" name="Direccion" required>
                                             <div class="invalid-feedback">
                                                 Por favor digite la direccion de residencia.
                                             </div>
@@ -155,14 +175,14 @@
                                         <div class="form-group">
                                             <label for="validationCustom10">Contraseña</label>
                                             <input type="text" class="form-control"
-                                                value="<?php /*echo $row['password']*/ ?>" disabled>
+                                                value="<?php echo $user_passwordU; ?>" disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr>
                             <button type="submit" class="btn btn-primary">Actualizar</button>
-                            <a href="../DoctorIndex.php" class="btn btn-secondary">Regresar</a>
+                            <a href="../PatientIndex.php" class="btn btn-secondary">Regresar</a>
                         </form>
 
                     </div>

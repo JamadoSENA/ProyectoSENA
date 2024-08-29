@@ -1,18 +1,33 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+session_start();
+error_reporting(0);
 
-    if( $validar == null || $validar = ''){
+$validar = $_SESSION['correo'];
 
-    header("Location: ../../../LogIn.php");
-    die();
-    
-    }
+if( $validar == null || $validar = ''){
 
-*/
+header("Location: ../../../LogIn.php");
+die();
+
+}
+
+
+// Obtener el nombre del usuario desde la base de datos
+require("../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT nameU, lastname FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +38,7 @@
     <link rel="shortcut icon" href="../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Paciente</title>
+    <title>Citas Disponibles</title>
 </head>
 
 <body>
@@ -58,7 +73,7 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Paciente</span>
+                            <span class="d-none d-sm-inline mx-1"><?php /*echo $row['nameU']*/ ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -82,30 +97,38 @@
                             <table table id="tablaCitas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Fecha Inicio</th>
-                                        <th scope="col">Fecha Fin</th>
-                                        <th scope="col">Doctor</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;">Estado</th>
+                                        <th scope="col" style="text-align: center;">Fecha Inicio</th>
+                                        <th scope="col" style="text-align: center;">Fecha Fin</th>
+                                        <th scope="col" style="text-align: center;">Doctor</th>
+                                        <th scope="col" style="text-align: center;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php /*
+                                    <?php 
             
-            require("../../../Configuration/Connection.php");
-            
-            $sql = $conexion->query("SELECT * FROM schedulings WHERE stateS = 'No Reservada'");
+                                    require("../../../Configuration/Connection.php");
 
-            while ($resultado = $sql->fetch_assoc()){ */
+                                    // Consulta modificada para incluir el nombre del doctor
+                                    $sql = $conexion->query("
+                                        SELECT s.idScheduling, s.stateS, s.dateHourStart, s.dateHourEnd, 
+                                        CONCAT(d.nameU, ' ', d.lastname) AS doctorName
+                                        FROM schedulings s
+                                        JOIN users d ON s.fkIdDoctor = d.idUser
+                                        WHERE s.stateS = 'No Reservada'
+                                        AND s.dateHourStart > NOW()
+                                    ");
+
+                                    while ($resultado = $sql->fetch_assoc()){
             
             ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['idScheduling']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['stateS']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['dateHourStart']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['dateHourEnd']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['fkIdDoctor']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idScheduling']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourStart']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourEnd']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['doctorName']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -124,8 +147,8 @@
                                             </ul>
                                         </td>
                                     </tr>
-                                    <?php /*
-            } */
+                                    <?php 
+            } 
             ?>
                                 </tbody>
                             </table>
@@ -177,7 +200,7 @@
     new DataTable('#tablaCitas', {
         layout: {
             topStart: {
-                buttons: ['excel', 'pdf', 'colvis']
+                buttons: ['excel', 'pdf']
             }
         }
     });

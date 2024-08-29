@@ -59,7 +59,7 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Paciente</span>
+                            <span class="d-none d-sm-inline mx-1"><?php /*echo $row['nameU']*/ ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
@@ -93,7 +93,7 @@
                                 <label for="validationCustom01">Estado</label>
                                 <select name="Estado" class="form-control" id="validationCustom01" required>
                                     <option value="Reservada">Reservar</option>
-                                    <option value="No Reservar">No Reservar</option>
+                                    <option value="No Reservada">No Reservar</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Por favor digite el estado de la cita.

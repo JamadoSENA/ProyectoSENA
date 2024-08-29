@@ -1,18 +1,29 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
+if ($validar == null || $validar == '') {
     header("Location: ../../../LogIn.php");
     die();
-    
-    }
+}
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT nameU, lastname FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +70,7 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Paciente</span>
+                            <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -72,15 +83,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col py-5">
+            <div class="col py-3">
                 <div class="card text-center">
                     <div class="card-header">
                         ¡Bienvenido!
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Estimado Paciente: </h5>
-                        <p class="card-text">Tenes la oportunidad de gestionar tus citas médicas de manera sencilla y
-                            rápida. Para comenzar, dirígete a la sección "Mis Citas", donde podrás consultar la
+                        <h5 class="card-title">Estimado/a <?php echo $user_name . ' ' . $user_lastname; ?>: </h5>
+                        <p class="card-text" style="text-align:justify;">Tenes la oportunidad de gestionar tus citas
+                            médicas de manera sencilla y
+                            rápida. Para comenzar, dirígete a la sección "Citas Disponibles", donde podrás consultar la
                             disponibilidad de nuestros profesionales médicos, seleccionar el horario que mejor se adapte
                             a tus necesidades y programar tus consultas de forma directa desde nuestra plataforma.
                             Además, en esta área podrás revisar tus citas agendadas, modificar o cancelar cualquier cita
@@ -89,8 +101,41 @@
                             equipo de soporte que está disponible para ayudarte en todo momento. Tu bienestar es nuestra
                             prioridad, y estamos aquí para ofrecerte una experiencia cómoda y eficiente en la gestión de
                             tus consultas médicas.</p>
-                        
-                        <a href="PatientCitas.php" class="btn btn-primary">¡Agendar!</a>
+                        <div class="container text-space-center">
+                            <div class="row align-items-center">
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Citas Disponibles</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Agenda</h5>
+                                            <p class="card-text">Organiza tus citas con tu médico de preferencia.</p>
+                                            <a href="PatientCitas.php" class="btn btn-secondary">¡Agendar!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Mis Citas</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Mi Agenda</h5>
+                                            <p class="card-text">Consulta y organiza tu tiempo a tu gusto.</p>
+                                            <a href="PatientMyCitas.php" class="btn btn-secondary">¡Consultar!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Mis Recetas</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Mis Medicinas</h5>
+                                            <p class="card-text">Accede a tus recetas y mejora tu salud.</p>
+                                            <a href="PatientRecetas.php" class="btn btn-secondary">¡Consultar!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="card-footer text-body-secondary">
                         MediStock © 2024. Todos los derechos reservados.

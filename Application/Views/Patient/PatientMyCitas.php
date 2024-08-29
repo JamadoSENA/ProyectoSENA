@@ -1,5 +1,5 @@
 <?php
-/*
+
     session_start();
     error_reporting(0);
 
@@ -12,7 +12,22 @@
     
     }
 
-*/
+
+// Obtener el nombre del usuario desde la base de datos
+require("../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT nameU, lastname FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +38,7 @@
     <link rel="shortcut icon" href="../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Paciente</title>
+    <title>Mis Citas</title>
 </head>
 
 <body>
@@ -59,7 +74,7 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Paciente</span>
+                            <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -191,7 +206,7 @@
     new DataTable('#tablaCitas', {
         layout: {
             topStart: {
-                buttons: ['excel', 'pdf', 'colvis']
+                buttons: ['excel', 'pdf']
             }
         }
     });
