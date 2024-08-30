@@ -1,5 +1,4 @@
 <?php 
-
 require '../../../../Configuration/Connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,10 +18,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssssi", $correo, $telefono, $profesion, $direccion, $id);
 
     if ($stmt->execute()) {
-        header("Location: ../PatientIndex.php");
+        echo "<script>
+                Swal.fire({
+                    title: '¡Buen trabajo!',
+                    text: 'La información se actualizó correctamente.',
+                    icon: 'success'
+                }).then(function() {
+                    window.location = '../PatientIndex.php'; // Redirige después de cerrar el Swal
+                });
+        </script>";
         exit();
     } else {
-        echo "Error: " . $stmt->error;
+        echo "<script>
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al actualizar la información: " . $stmt->error . "',
+                    icon: 'error'
+                });
+        </script>";
     }
     
     $stmt->close();

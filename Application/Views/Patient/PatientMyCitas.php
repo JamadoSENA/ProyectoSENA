@@ -1,17 +1,14 @@
 <?php
+session_start();
+error_reporting(0);
 
-    session_start();
-    error_reporting(0);
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    $validar = $_SESSION['correo'];
-
-    if( $validar == null || $validar = ''){
-
+if ($validar == null || $validar == '') {
     header("Location: ../../../LogIn.php");
     die();
-    
-    }
-
+} 
 
 // Obtener el nombre del usuario desde la base de datos
 require("../../../Configuration/Connection.php");
@@ -22,11 +19,10 @@ $user_data = $sql_user->fetch_assoc();
 $user_id = $user_data['idUser'];
 
 // Obtener el nombre del usuario
-$sql_name = $conexion->query("SELECT nameU, lastname FROM users WHERE idUser = $user_id");
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
 $user_info = $sql_name->fetch_assoc();
 $user_name = $user_info['nameU'];
 $user_lastname = $user_info['lastname'];
-
 
 ?>
 <!DOCTYPE html>
@@ -98,43 +94,43 @@ $user_lastname = $user_info['lastname'];
                             <table table id="tablaCitas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Fecha Inicio</th>
-                                        <th scope="col">Fecha Fin</th>
-                                        <th scope="col">Doctor</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;">Estado</th>
+                                        <th scope="col" style="text-align: center;">Fecha Inicio</th>
+                                        <th scope="col" style="text-align: center;">Fecha Fin</th>
+                                        <th scope="col" style="text-align: center;">Doctor</th>
+                                        <th scope="col" style="text-align: center;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php /*
-            
-            require("../../../Configuration/Connection.php");
-            
-            $sql = $conexion->query("  SELECT 
-        schedulings.idScheduling, 
-        schedulings.stateS, 
-        schedulings.dateHourStart, 
-        schedulings.dateHourEnd, 
-        CONCAT(users.nameU, ' ', users.lastnameU) AS nombreDoctor
-    FROM 
-        schedulings 
-    JOIN users ON schedulings.fkIdDoctor = users.idUser");
+                                    <?php 
+                                    require("../../../Configuration/Connection.php");
 
-            while ($resultado = $sql->fetch_assoc()){
-                */
+                                    // Consulta modificada para incluir el nombre del doctor y filtrar por el ID del paciente
+                                    $sql = $conexion->query("
+                                        SELECT s.idScheduling, s.stateS, s.dateHourStart, s.dateHourEnd, 
+                                        CONCAT(d.nameU, ' ', d.lastname) AS doctorName
+                                        FROM schedulings s
+                                        JOIN users d ON s.fkIdDoctor = d.idUser
+                                        WHERE s.fkIdPatient = $user_id
+                                        AND s.stateS = 'Reservada'
+                                        AND s.dateHourStart > NOW()
+                                    ");
+
+                                    while ($resultado = $sql->fetch_assoc()){
+            
             ?>
                                     <tr>
                                         <td scope="row" style="text-align: center;">
-                                            <?php /*echo $resultado ['idScheduling']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['stateS']*/?>
+                                            <?php echo $resultado ['idScheduling']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?>
                                         </td>
                                         <td scope="row" style="text-align: center;">
-                                            <?php /*echo $resultado ['dateHourStart']*/?></td>
+                                            <?php echo $resultado ['dateHourStart']?></td>
                                         <td scope="row" style="text-align: center;">
-                                            <?php /*echo $resultado ['dateHourEnd']*/?></td>
+                                            <?php echo $resultado ['dateHourEnd']?></td>
                                         <td scope="row" style="text-align: center;">
-                                            <?php /*echo $resultado ['nombreDoctor']*/?></td>
+                                            <?php echo $resultado ['doctorName']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -147,14 +143,14 @@ $user_lastname = $user_info['lastname'];
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li><a href="Update/Cita.php?idScheduling=<?php echo $resultado['idScheduling']?>"
-                                                        class="dropdown-item">Agendar</a></li>
+                                                        class="dropdown-item">Cancelar</a></li>
                                                 <li><a href="Details/Cita.php?idScheduling=<?php echo $resultado['idScheduling']?>"
                                                         class="dropdown-item">Detalles</a></li>
                                             </ul>
                                         </td>
                                     </tr>
-                                    <?php /*
-            } */
+                                    <?php 
+            } 
             ?>
                                 </tbody>
                             </table>

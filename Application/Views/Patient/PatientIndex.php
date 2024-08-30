@@ -8,7 +8,7 @@ $validar = $_SESSION['correo'];
 if ($validar == null || $validar == '') {
     header("Location: ../../../LogIn.php");
     die();
-}
+} 
 
 // Obtener el nombre del usuario desde la base de datos
 require("../../../Configuration/Connection.php");
@@ -19,7 +19,7 @@ $user_data = $sql_user->fetch_assoc();
 $user_id = $user_data['idUser'];
 
 // Obtener el nombre del usuario
-$sql_name = $conexion->query("SELECT nameU, lastname FROM users WHERE idUser = $user_id");
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
 $user_info = $sql_name->fetch_assoc();
 $user_name = $user_info['nameU'];
 $user_lastname = $user_info['lastname'];

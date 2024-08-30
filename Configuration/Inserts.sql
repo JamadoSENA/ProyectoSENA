@@ -1,8 +1,6 @@
-insert into roles values (1, "Paciente");
-
-insert into roles values (2, "Doctor");
-
-insert into roles values (3, "Inventarista");
+INSERT INTO roles VALUES (1, "Paciente");
+INSERT INTO roles VALUES (2, "Doctor");
+INSERT INTO roles VALUES (3, "Inventarista");
 
 CALL INSERTARPROVEEDOR(
     900123456, 
@@ -175,41 +173,42 @@ CALL INSERTARUSUARIO(
 );
 
 CALL INSERTARCITA(
-    'Confirmada', 
-    '2024-08-25 09:00:00', 
-    '2024-08-25 10:00:00', 
+    'No Reservada', 
+    '2024-09-25 09:00:00', 
+    '2024-09-25 10:00:00', 
     123456789, 
     987654321
 );
 
 CALL INSERTARCITA(
-    'Pendiente', 
-    '2024-08-26 14:00:00', 
-    '2024-08-26 15:00:00', 
+    'Reservada', 
+    '2024-08-31 14:00:00', 
+    '2024-08-31 15:00:00', 
     112233445, 
     55667788
 );
 
 CALL INSERTARCITA(
-    'Cancelada', 
-    '2024-08-27 11:00:00', 
-    '2024-08-27 12:00:00', 
+    'No Reservada', 
+    '2024-08-31 11:00:00', 
+    '2024-08-31 12:00:00', 
     55667788, 
     123456789
 );
 
 CALL INSERTARCITA(
-    'Confirmada', 
-    '2024-08-28 16:00:00', 
-    '2024-08-28 17:00:00', 
-    987654321, 
-    112233445
+    'No Reservada', 
+    '2024-08-30 19:00:00', 
+    '2024-08-30 21:00:00', 
+    987654321,
+	55667788
+    
 );
 
 CALL INSERTARCITA(
-    'Confirmada', 
-    '2024-08-29 10:00:00', 
-    '2024-08-29 11:00:00', 
+    'Reservada', 
+    '2024-08-29 17:00:00', 
+    '2024-08-29 18:00:00', 
     123456789, 
     55667788
 );

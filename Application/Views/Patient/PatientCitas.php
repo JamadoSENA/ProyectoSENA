@@ -1,17 +1,14 @@
 <?php
-
 session_start();
 error_reporting(0);
 
+// Verificar si el usuario está autenticado
 $validar = $_SESSION['correo'];
 
-if( $validar == null || $validar = ''){
-
-header("Location: ../../../LogIn.php");
-die();
-
-}
-
+if ($validar == null || $validar == '') {
+    header("Location: ../../../LogIn.php");
+    die();
+} 
 
 // Obtener el nombre del usuario desde la base de datos
 require("../../../Configuration/Connection.php");
@@ -22,11 +19,10 @@ $user_data = $sql_user->fetch_assoc();
 $user_id = $user_data['idUser'];
 
 // Obtener el nombre del usuario
-$sql_name = $conexion->query("SELECT nameU, lastname FROM users WHERE idUser = $user_id");
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
 $user_info = $sql_name->fetch_assoc();
 $user_name = $user_info['nameU'];
 $user_lastname = $user_info['lastname'];
-
 
 ?>
 <!DOCTYPE html>
@@ -73,7 +69,7 @@ $user_lastname = $user_info['lastname'];
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1"><?php /*echo $row['nameU']*/ ?></span>
+                            <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>

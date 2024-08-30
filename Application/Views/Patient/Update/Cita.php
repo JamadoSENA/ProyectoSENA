@@ -1,18 +1,29 @@
-<?php
-/*
-    session_start();
-    error_reporting(0);
+<?php 
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
-    header("Location: ../../../LogIn.php");
+if ($validar == null || $validar == '') {
+    header("Location: ../../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +70,7 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1"><?php /*echo $row['nameU']*/ ?></span>
+                            <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
@@ -77,23 +88,22 @@
                     <h5 class="card-header">Actualizacion de Cita</h5>
                     <div class="card-body">
                         <?php
-                        /*
+                        
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        */
+                        
                         ?> 
                         <h5 class="card-title">Detalles</h5>
                         <hr>
                         <form class="needs-validation" method="post" action="../Forms/CitaUpdate.php" novalidate>
-                        <input type="hidden" class="form-control" name="idScheduling" value="<?php /*echo $row['idScheduling']*/ ?>">
+                        <input type="hidden" class="form-control" name="idScheduling" value="<?php echo $row['idScheduling'] ?>">
                             <div class="form-group">
                                 <label for="validationCustom01">Estado</label>
                                 <select name="Estado" class="form-control" id="validationCustom01" required>
                                     <option value="Reservada">Reservar</option>
-                                    <option value="No Reservada">No Reservar</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Por favor digite el estado de la cita.
@@ -103,41 +113,54 @@
                             <div class="form-group">
                                 <label for="validationCustom02">Fecha Inicio</label>
                                 <input type="datetime-local" class="form-control" id="validationCustom02"
-                                    value="<?php /*echo $row['dateHourStart']*/?>" disabled>
+                                    value="<?php echo $row['dateHourStart']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom03">Fecha Fin</label>
                                 <input type="datetime-local" class="form-control" id="validationCustom03"
-                                    value="<?php /*echo $row['dateHourEnd']*/?>" disabled>
+                                    value="<?php echo $row['dateHourEnd']?>" disabled>
                             </div>
                             <br>
-                            <?php /*
-                            require("../../../../Configuration/Connection.php");
+                            <?php 
+                                require("../../../../Configuration/Connection.php");
 
-                            $idScheduling = $_GET['idScheduling'];
+                                $idScheduling = $_GET['idScheduling'];
 
-                            // Consulta SQL corregida
-                            $sql = "SELECT u.nameU, u.idUser
-                                    FROM users u
-                                    INNER JOIN schedulings s ON u.idUser = s.fkIdDoctor
-                                    WHERE u.fkIdRole = 2 AND s.idScheduling = $idScheduling";
+                                // Es importante utilizar declaraciones preparadas para evitar inyecciones SQL
+                                $sql = "SELECT u.nameU, u.lastname
+                                        FROM users u
+                                        INNER JOIN schedulings s ON u.idUser = s.fkIdDoctor
+                                        WHERE u.fkIdRole = 2 AND s.idScheduling = ?";
 
-                            $resultado = $conexion->query($sql);
+                                if ($stmt = $conexion->prepare($sql)) {
+                                    $stmt->bind_param("i", $idScheduling);
+                                    $stmt->execute();
+                                    $resultado = $stmt->get_result();
 
-                            $nombreDoctor = ''; // Inicializar la variable por si no se encuentra el doctor
-                            if ($resultado && $resultado->num_rows > 0) {
-                                $row = $resultado->fetch_assoc();
-                                $nombreDoctor = $row['nameU'];
-                            } */
-                            ?>
+                                    $doctor_name = ''; // Inicializar la variable por si no se encuentra el doctor
+                                    $doctor_lastname = ''; // Inicializar la variable por si no se encuentra el doctor
+
+                                    if ($resultado && $resultado->num_rows > 0) {
+                                        $row = $resultado->fetch_assoc();
+                                        $doctor_name = $row['nameU'];
+                                        $doctor_lastname = $row['lastname'];
+                                    } 
+
+                                    $stmt->close();
+                                }
+
+                                $conexion->close();
+                                ?>
                             <div class="form-group">
                                 <label for="doctor">Doctor</label>
                                 <input type="text" class="form-control" id="doctor"
-                                    value="<?php /*echo htmlspecialchars($nombreDoctor);*/ ?>" disabled>
+                                    value="<?php echo $doctor_name . ' ' . $doctor_lastname; ?>" disabled>
                             </div>
+                            <input type="hidden" class="form-control" name="idPatient" value="<?php echo $user_id; ?>">
                             <hr>
                             <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <a href="../PatientIndex.php" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
                 </div>
