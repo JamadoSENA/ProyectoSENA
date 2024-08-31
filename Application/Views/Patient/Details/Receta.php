@@ -33,6 +33,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
     <link rel="shortcut icon" href="../../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Línea añadida para los íconos -->
     <title>Receta</title>
 </head>
 
@@ -43,40 +44,40 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <hr>
                     <img src="../../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto" height="75" />
-                    </a>
                     <br>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                        id="menu">
-                        <li alt="Citas Disponibles">
-                            <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">
-                                    Citas Disponibles</span> </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li>
+                            <a href="../PatientIndex.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-house-door-fill"></i> <span class="ms-1 d-none d-sm-inline">Inicio</span> 
+                            </a>
                         </li>
-                        <li alt="Mis Citas">
-                            <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
-                                    citas</span> </a>
+                        <li>
+                            <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-calendar"></i> <span class="ms-1 d-none d-sm-inline">Citas Disponibles</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-calendar-check"></i> <span class="ms-1 d-none d-sm-inline">Mis citas</span>
+                            </a>
                         </li>
                         <li>
                             <a href="../PatientRecetas.php" class="nav-link px-0 text-white align-middle">
-                                <i class="fs-4 bi-capsule" alt="Recetas"></i> <span class="ms-1 d-none d-sm-inline">Mis
-                                    recetas</span> </a>
+                                <i class="fs-4 bi-capsule"></i> <span class="ms-1 d-none d-sm-inline">Mis recetas</span>
+                            </a>
                         </li>
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1"><?php /*echo $row['nameU']*/ ?></span>
+                            <i class="fs-4 bi-person"></i>
+                            <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
-                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a></li>
                         </ul>
                     </div>
                 </div>
@@ -85,114 +86,89 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                 <div class="card">
                     <h5 class="card-header">Informacion de Receta</h5>
                     <div class="card-body">
-                        <?php /*
-                        
+                        <?php 
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM recipes WHERE idRecipe=".$_GET['idRecipe'];
                         $resultado = $conexion->query($sql);
-                        $row = $resultado->fetch_assoc(); */
-                        
+                        $row = $resultado->fetch_assoc(); 
                         ?>
-                        <h5>ID Receta</h5>
-                        <input type="number" class="form-control" value="<?php /*echo $row['idRecipe']*/ ?>" disabled>
-                        <hr>
                         <h5 class="card-title">Detalles</h5>
-                        <form class="needs-validation" method="post" action="../Forms/RecetaUpdate.php">
+                        <hr>
+                        <form>
+                            <h5>ID Receta</h5>
+                            <input type="number" class="form-control" value="<?php echo $row['idRecipe'] ?>" disabled>
+                            <hr>
                             <div class="form-group">
-                                <label for="dateHour">Fecha de emision</label>
-                                <input type="text" class="form-control" id="dateHour"
-                                    value="<?php /*echo $row['dateHour']*/?>" disabled>
+                                <label for="dateHour">Fecha de emisión</label>
+                                <input type="text" class="form-control" id="dateHour" value="<?php echo $row['dateHour']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="routeAdministration">Via de Administracion</label>
-                                <input type="text" class="form-control" id="routeAdministration"
-                                    value="<?php /*echo $row['routeAdministration']*/?>" disabled>
+                                <label for="routeAdministration">Vía de Administración</label>
+                                <input type="text" class="form-control" id="routeAdministration" value="<?php echo $row['routeAdministration']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="durationDay">Duracion en dias</label>
-                                <input type="text" class="form-control" id="durationDay"
-                                    value="<?php /*echo $row['durationDay']*/?>" disabled>
+                                <label for="duration">Duración por Dias</label>
+                                <input type="text" class="form-control" id="duration" value="<?php echo $row['durationDays']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="durationMonth">Duracion en meses</label>
-                                <input type="text" class="form-control" id="durationMonth"
-                                    value="<?php /*echo $row['durationMonth']*/?>" disabled>
+                                <label for="duration">Duración por Meses</label>
+                                <input type="text" class="form-control" id="duration" value="<?php echo $row['durationMonths']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="frequency">Frecuencia en horas</label>
-                                <input type="text" class="form-control" id="frequency"
-                                    value="<?php /*echo $row['frequency']*/?>" disabled>
+                                <label for="frequency">Frecuencia</label>
+                                <input type="text" class="form-control" id="frequency" value="<?php echo $row['frequency']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="amount">Cantidad de empaque(s)</label>
-                                <input type="text" class="form-control" id="amount" value="<?php /*echo $row['amount']*/?>"
-                                    disabled>
+                                <input type="text" class="form-control" id="amount" value="<?php echo $row['amount']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <input type="text" class="form-control" id="state" value="<?php /*echo $row['stateR']*/?>"
-                                    disabled>
+                                <input type="text" class="form-control" id="state" value="<?php echo $row['stateR']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="specialInstructions">Instrucciones Especiales</label>
-                                <input type="text" class="form-control" id="specialInstructions"
-                                    value="<?php /*echo $row['specialInstructions']*/?>" disabled>
+                                <input type="text" class="form-control" id="specialInstructions" value="<?php echo $row['specialInstructions']?>" disabled>
                             </div>
                             <br>
-                            <?php /*
-                            require("../../../../Configuration/Connection.php");
-
+                            <?php 
+                            // Corregir la consulta para obtener el nombre del medicamento
                             $idRecipe = $_GET['idRecipe'];
 
-                            $sql = "SELECT m.idMedicine
+                            $sql = "SELECT m.nameM
                             FROM medicines m
                             INNER JOIN recipes r ON m.idMedicine = r.fkIdMedicine
                             WHERE r.idRecipe = $idRecipe";
 
                             $resultado = $conexion->query($sql);
-
-                            if ($resultado->num_rows > 0) {
-                            $row = $resultado->fetch_assoc();
-                            $nameM = $row['nameM'];
-                            }
-                            */
+                            $row_medicine = $resultado->fetch_assoc();
                             ?>
                             <div class="form-group">
                                 <label for="medicine">Medicamento</label>
-                                <input type="text" class="form-control" id="medicine" value="<?php /*echo $row['nameM']*/?>"
-                                    disabled>
+                                <input type="text" class="form-control" id="medicine" value="<?php echo $row_medicine['nameM']?>" disabled>
                             </div>
                             <br>
-                            <?php /*
-                            require("../../../../Configuration/Connection.php");
-
-                            $idRecipe = $_GET['idRecipe'];
-
+                            <?php 
+                            // Corregir la consulta para obtener el ID del diagnóstico
                             $sql = "SELECT d.idDiagnosis
-                            FROM diagnosis d
+                            FROM diagnoses d
                             INNER JOIN recipes r ON d.idDiagnosis = r.fkIdDiagnosis
                             WHERE r.idRecipe = $idRecipe";
 
                             $resultado = $conexion->query($sql);
-
-                            if ($resultado->num_rows > 0) {
-                            $row = $resultado->fetch_assoc();
-                            $idDiagnosis = $row['idDiagnosis'];
-                            }
-                            */
+                            $row_diagnosis = $resultado->fetch_assoc();
                             ?>
                             <div class="form-group">
-                                <label for="diagnosis">ID Diagnostico</label>
-                                <input type="number" class="form-control" id="diagnosis"
-                                    value="<?php /*echo $row['idDiagnosis']*/?>" disabled>
+                                <label for="diagnosis">ID Diagnóstico</label>
+                                <input type="number" class="form-control" id="diagnosis" value="<?php echo $row_diagnosis['idDiagnosis']?>" disabled>
                             </div>
                             <hr>
                             <a href="../PatientRecetas.php" type="button" class="btn btn-secondary">Regresar</a>
@@ -202,54 +178,8 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
             </div>
         </div>
     </div>
-    <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-    </script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.bootstrap5.css">
-
-    <!-- DataTables Buttons CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.1/css/buttons.bootstrap5.css">
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-    <!-- DataTables -->
-    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.bootstrap5.js"></script>
-
-    <!-- DataTables Buttons -->
-    <script src="https://cdn.datatables.net/buttons/3.1.1/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.bootstrap5.js"></script>
-
-    <!-- JSZip (required for export buttons) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGz1qzWZ9UAX5p4Rp6MLPgaoJ6Ygo9iIYk5K5t+XKz7Ur" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-OnKx8xC7glK9BbYhKrC4pHnMZdfL8cb0UCI3Nj0ZXlEGvOnB44y2QLl9F/0p0W5p" crossorigin="anonymous"></script>
 </body>
 
 </html>

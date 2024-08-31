@@ -44,10 +44,14 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                     <hr>
                     <img src="../../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto"
                         height="75" />
-                    </a>
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li alt="Inicio">
+                            <a href="../PatientIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Inicio</span> </a>
+                        </li>
                         <li alt="Citas Disponibles">
                             <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
                                 <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">
@@ -85,68 +89,77 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
             </div>
             <div class="col py-3">
                 <div class="card">
-                    <h5 class="card-header">Informacion de Cita</h5>
+                    <h5 class="card-header">Información de Cita</h5>
                     <div class="card-body">
-                        <?php /*
-                        
+                        <?php 
                         include ('../../../../Configuration/Connection.php');
                         
-                        $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
-                        $resultado = $conexion->query($sql);
-                        $row = $resultado->fetch_assoc();
-                        */
+                        // Asegúrate de que idScheduling esté siendo pasado como parámetro
+                        $idScheduling = isset($_GET['idScheduling']) ? intval($_GET['idScheduling']) : 0;
+                        
+                        if($idScheduling > 0) {
+                            $sql = "SELECT * FROM schedulings WHERE idScheduling=$idScheduling";
+                            $resultado = $conexion->query($sql);
+                            $row = $resultado->fetch_assoc();
+
+                            if ($row) {
+                                // Consulta SQL corregida para obtener el nombre del doctor
+                                $sql_doctor = "SELECT u.nameU, u.idUser
+                                                FROM users u
+                                                INNER JOIN schedulings s ON u.idUser = s.fkIdDoctor
+                                                WHERE u.fkIdRole = 2 AND s.idScheduling = $idScheduling";
+                                
+                                $resultado_doctor = $conexion->query($sql_doctor);
+                                $nombreDoctor = ''; // Inicializar la variable por si no se encuentra el doctor
+
+                                if ($resultado_doctor && $resultado_doctor->num_rows > 0) {
+                                    $row_doctor = $resultado_doctor->fetch_assoc();
+                                    $nombreDoctor = $row_doctor['nameU'];
+                                } else {
+                                    $nombreDoctor = "Doctor no asignado";
+                                }
                         ?>
                         <h5 class="card-title">Detalles</h5>
                         <form>
+                            <hr>
                             <h5>ID Cita</h5>
-                            <input type="number" class="form-control" value="<?php /*echo $row['idScheduling']*/ ?>"
+                            <input type="number" class="form-control" value="<?php echo $row['idScheduling'] ?>"
                                 disabled>
                             <hr>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Estado</label>
                                 <input type="text" class="form-control" id="startDate"
-                                    value="<?php /*echo $row['stateS']*/?>" disabled>
+                                    value="<?php echo $row['stateS']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="startDate">Fecha Inicio</label>
                                 <input type="datetime-local" class="form-control" id="startDate"
-                                    value="<?php /*echo $row['dateHourStart']*/?>" disabled>
+                                    value="<?php echo $row['dateHourStart']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="endDate">Fecha Fin</label>
                                 <input type="datetime-local" class="form-control" id="endDate"
-                                    value="<?php /*echo $row['dateHourEnd']*/?>" disabled>
+                                    value="<?php echo $row['dateHourEnd']?>" disabled>
                             </div>
                             <br>
-                            <?php /*
-                            require("../../../../Configuration/Connection.php");
-
-                            $idScheduling = $_GET['idScheduling'];
-
-                            // Consulta SQL corregida
-                            $sql = "SELECT u.nameU, u.idUser
-                                    FROM users u
-                                    INNER JOIN schedulings s ON u.idUser = s.fkIdDoctor
-                                    WHERE u.fkIdRole = 2 AND s.idScheduling = $idScheduling";
-
-                            $resultado = $conexion->query($sql);
-
-                            $nombreDoctor = ''; // Inicializar la variable por si no se encuentra el doctor
-                            if ($resultado && $resultado->num_rows > 0) {
-                                $row = $resultado->fetch_assoc();
-                                $nombreDoctor = $row['nameU'];
-                            } */
-                            ?>
                             <div class="form-group">
                                 <label for="doctor">Doctor</label>
                                 <input type="text" class="form-control" id="doctor"
-                                    value="<?php /*echo htmlspecialchars($nombreDoctor);*/ ?>" disabled>
+                                    value="<?php echo htmlspecialchars($nombreDoctor); ?>" disabled>
                             </div>
                             <hr>
                             <a href="../PatientCitas.php" type="button" class="btn btn-secondary">Regresar</a>
                         </form>
+                        <?php 
+                            } else {
+                                echo "<p>No se encontraron detalles para la cita seleccionada.</p>";
+                            }
+                        } else {
+                            echo "<p>ID de cita no válido.</p>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

@@ -1,18 +1,29 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
+if ($validar == null || $validar == '') {
     header("Location: ../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +49,11 @@
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li alt="Inicio">
+                            <a href="PatientIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Inicio</span> </a>
+                        </li>
                         <li alt="Citas Disponibles">
                             <a href="PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
                                 <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">
@@ -60,7 +76,8 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1"><?php /*echo $row['nameU']*/ ?></span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -84,49 +101,50 @@
                             <table table id="tablaRecetas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Via de Administracion</th>
-                                        <th scope="col">Frecuencia</th>
-                                        <th scope="col">Medicamento</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;">Estado</th>
+                                        <th scope="col" style="text-align: center;">Via de Administracion</th>
+                                        <th scope="col" style="text-align: center;">Frecuencia</th>
+                                        <th scope="col" style="text-align: center;">Medicamento</th>
+                                        <th scope="col" style="text-align: center;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php /*
-            
-            require("../../../Configuration/Connection.php");
-            
-            $sql = $conexion->query("SELECT * from recipes");
+                                <?php
+                                    require("../../../Configuration/Connection.php");
 
-            while ($resultado = $sql->fetch_assoc()){ */
-            
-            ?>
+                                    // Consulta SQL con JOINs y filtro por paciente
+                                    $sql = $conexion->query("
+                                        SELECT r.idRecipe, r.stateR, r.routeAdministration, r.frequency, m.nameM 
+                                        FROM recipes r
+                                        INNER JOIN medicines m ON r.fkIdMedicine = m.idMedicine
+                                        INNER JOIN diagnoses d ON r.fkIdDiagnosis = d.idDiagnosis
+                                        INNER JOIN schedulings s ON d.fkIdScheduling = s.idScheduling
+                                        WHERE s.fkIdPatient = '$user_id'
+                                    ");
+
+                                    while ($resultado = $sql->fetch_assoc()) {
+                                    ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
-                                        <td scope="row" style="text-align: center;"></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idRecipe'] ?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['stateR'] ?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['routeAdministration'] ?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['frequency'] ?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nameM'] ?></td>
                                         <td scope="row">
-                                            <button class="btn" type="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-three-dots-vertical"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                            <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                                                 </svg>
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a href="Details/Receta.php?idRecipe=<?php echo $resultado['idRecipe']?>"
-                                                        class="dropdown-item">Detalles</a></li>
+                                                <li><a href="Details/Receta.php?idRecipe=<?php echo $resultado['idRecipe']?>" class="dropdown-item">Detalles</a></li>
                                             </ul>
                                         </td>
                                     </tr>
-                                    <?php /*
-                                } */
-                                ?>
+                                    <?php 
+                                    } 
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

@@ -49,6 +49,11 @@ $user_lastname = $user_info['lastname'];
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li alt="Inicio">
+                            <a href="../PatientIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Inicio</span> </a>
+                        </li>
                         <li alt="Citas Disponibles">
                             <a href="../PatientCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
                                 <i class="fs-4 bi-calendar" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">
@@ -104,6 +109,7 @@ $user_lastname = $user_info['lastname'];
                                 <label for="validationCustom01">Estado</label>
                                 <select name="Estado" class="form-control" id="validationCustom01" required>
                                     <option value="Reservada">Reservar</option>
+                                    <option value="No Reservada">Cancelar</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Por favor digite el estado de la cita.
@@ -160,7 +166,7 @@ $user_lastname = $user_info['lastname'];
                             <input type="hidden" class="form-control" name="idPatient" value="<?php echo $user_id; ?>">
                             <hr>
                             <button type="submit" class="btn btn-primary">Actualizar</button>
-                            <a href="../PatientIndex.php" class="btn btn-secondary">Cancelar</a>
+                            <a href="../PatientCitas.php" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
                 </div>

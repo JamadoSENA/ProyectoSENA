@@ -97,7 +97,8 @@ END//
 
 CREATE PROCEDURE INSERTARRECETA (
     IN viaAdministracion VARCHAR(500),
-    IN duracion VARCHAR(50),
+    IN duracionDias VARCHAR(50),
+    IN duracionMeses VARCHAR(50),
     IN frecuencia VARCHAR (50),
     IN cantidad INT(11),
     IN estado VARCHAR(50),
@@ -106,9 +107,9 @@ CREATE PROCEDURE INSERTARRECETA (
     IN diagnostico INT)
 BEGIN
 
-    INSERT INTO recipes (routeAdministration, duration, frequency, stateR, specialInstructions, 
+    INSERT INTO recipes (routeAdministration, durationDays, durationMonths, frequency, stateR, specialInstructions, 
     fkIdMedicine, fkIdDiagnosis)
-    VALUES (viaAdministracion, duracion, frecuencia, cantidad, estado, instrucciones, medicina,
+    VALUES (viaAdministracion, duracionDias, duracionMeses, frecuencia, cantidad, estado, instrucciones, medicina,
     diagnostico);
 
 COMMIT;

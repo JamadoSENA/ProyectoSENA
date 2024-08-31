@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $contrasenia = $_POST["Contrasenia"];
     $rol = $_POST["Rol"];
 
-    // Consulta para verificar si el usuario ya existe
-    $consulta_usuario = $conexion->prepare("SELECT idUser FROM users WHERE idUser = ?");
-    $consulta_usuario->bind_param("i", $cedula);
+    // Consulta para verificar si la cédula, número de teléfono o correo ya existen
+    $consulta_usuario = $conexion->prepare("SELECT idUser FROM users WHERE idUser = ? OR phoneNumber = ? OR email = ?");
+    $consulta_usuario->bind_param("iss", $cedula, $telefono, $correo);
     $consulta_usuario->execute();
     $resultado = $consulta_usuario->get_result();
 

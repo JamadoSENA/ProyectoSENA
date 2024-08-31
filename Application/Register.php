@@ -70,7 +70,7 @@
                                             class="form-control input-lg" placeholder="Fecha de Nacimiento" tabindex="5"
                                             required />
                                         <div class="invalid-feedback">
-                                            Por favor, digite su fecha de nacimiento.
+                                            Por favor, digite correctamente su fecha de nacimiento.
                                         </div>
                                     </div>
                                 </div>
@@ -140,9 +140,9 @@
                                     <label for="validationCustom04" class="form-label">Genero</label>
                                     <select class="form-select" name="Genero" required>
                                         <option value="">Elegir...</option>
-                                        <option value="M">Masculino</option>
-                                        <option value="F">Femenino</option>
-                                        <option value="O">Otro</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                        <option value="Otro">Otro</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Por favor, seleccione al genero al que pertenece.
