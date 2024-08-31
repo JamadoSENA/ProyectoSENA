@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($resultado->num_rows > 0) {
         header("location:ErrorPages/ErrorOne.php"); // El usuario ya existe
+        exit();
     } else {
         // Preparar la consulta de inserción
         $insert_usuario = $conexion->prepare("CALL INSERTARUSUARIO(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -36,9 +37,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Ejecutar la consulta de inserción
         if ($insert_usuario->execute()) {
-            header("location:LogIn.php");
+            // Enviar encabezado de tipo de contenido como HTML
+            header("Content-Type: text/html; charset=UTF-8");
+
+            echo "<!DOCTYPE html>
+            <html lang='es'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Registro Exitoso</title>
+                <link rel='shortcut icon' href='Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
+            </head>
+            <body>
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+                <script>
+                    Swal.fire({
+                        title: '¡Excelente!',
+                        text: 'La información se guardo correctamente.',
+                        icon: 'success'
+                    }).then(function() {
+                        window.location = 'LogIn.php'; // Redirige después de cerrar el Swal
+                    });
+                </script>
+            </body>
+            </html>";
+            exit();
         } else {
             header("location:ErrorPages/ErrorZero.php"); // Error al crear el usuario
+            exit();
         }
 
         // Cerrar la consulta de inserción

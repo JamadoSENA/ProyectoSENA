@@ -10,11 +10,11 @@ CREATE TABLE roles (
 
 -- Creación de la tabla users
 CREATE TABLE users (
-    idUser INT PRIMARY KEY,
+    idUser INT (20) PRIMARY KEY,
     documentType VARCHAR(20) NOT NULL,
     nameU VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
-    birthdate Varchar (10) NOT NULL,
+    birthdate Varchar (20) NOT NULL,
     age INT NOT NULL,
     gender VARCHAR(10) NOT NULL,
     phoneNumber VARCHAR(20) NOT NULL,
@@ -22,6 +22,7 @@ CREATE TABLE users (
     addressU VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     passwordU VARCHAR(100) NOT NULL,
+    code VARCHAR(10) NULL,
     fkIdRole INT NOT NULL,
     FOREIGN KEY (fkIdRole) REFERENCES roles(idRole) ON DELETE CASCADE
 );
@@ -32,8 +33,8 @@ CREATE TABLE schedulings (
     stateS VARCHAR(50) NOT NULL,
     dateHourStart DATETIME,
     dateHourEnd DATETIME,
-    fkIdPatient INT NULL,
-    fkIdDoctor INT NOT NULL,
+    fkIdPatient INT (20) NULL,
+    fkIdDoctor INT (20) NOT NULL,
     FOREIGN KEY (fkIdPatient) REFERENCES users(idUser) ON DELETE CASCADE,
     FOREIGN KEY (fkIdDoctor) REFERENCES users(idUser) ON DELETE CASCADE
 );

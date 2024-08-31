@@ -39,26 +39,48 @@
                     <img src="Resources/IMG/LogoColorVerde.png" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form action="ResetPassword.php" method="POST">
+                    <form action="CodeVerification.php" method="POST">
                         <h1>Recuperar Contraseña</h1>
                         <div class="divider d-flex align-items-center my-4">
                         </div>
-
-                        <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <label class="form-label" for="form3Example3">Correo Electronico</label>
+                            <label class="form-label" for="form3Example3">Email</label>
                             <input type="email" id="form3Example3" class="form-control form-control-lg" name="correo"
                                 required />
                         </div>
-
-                
+                        <!-- Code input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">Codigo de Verificacion</label>
+                            <input type="text" id="form3Example3" class="form-control form-control-lg" name="codigo"
+                                required />
+                        </div>
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="form3Example4">Contraseña</label>
+                            <input type="password" id="form3Example4" class="form-control form-control-lg"
+                                name="contrasenia" required />
+                            <input type="hidden" name="accion" value="acceso_user">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="showPassword"
+                                    onclick="togglePassword()">
+                                <label class="form-check-label" for="showPassword">Mostrar contraseña</label>
+                            </div>
+                        </div>
+                        <script>
+                        function togglePassword() {
+                            var passwordField = document.getElementById("form3Example4");
+                            if (passwordField.type === "password") {
+                                passwordField.type = "text";
+                            } else {
+                                passwordField.type = "password";
+                            }
+                        }
+                        </script>
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" class="btn btn-success btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Restablecer</button>
                             <a type="button" href="LogIn.php" class="btn btn-secondary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Regresar</a>
                         </div>
-
                     </form>
                 </div>
             </div>

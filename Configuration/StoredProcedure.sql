@@ -1,11 +1,11 @@
 DELIMITER //
 
 CREATE PROCEDURE INSERTARUSUARIO (
-    IN numeroDocumento int (11),
+    IN numeroDocumento int (20),
     IN tipoDocumento VARCHAR (20),
     IN nombre VARCHAR (50),
     IN apellido VARCHAR (50),
-    IN fechaNacimiento VARCHAR (10),
+    IN fechaNacimiento VARCHAR (20),
     IN edad INT,
     IN genero VARCHAR (10),
     IN numeroTelefono VARCHAR (20),
@@ -30,8 +30,8 @@ CREATE PROCEDURE INSERTARCITA (
     IN estado VARCHAR (50),
     IN fechaInicio DATETIME,
     IN fechaFin DATETIME,
-    IN paciente INT (11),
-    IN doctor INT (11))
+    IN paciente INT (20),
+    IN doctor INT (20))
 
 BEGIN
 

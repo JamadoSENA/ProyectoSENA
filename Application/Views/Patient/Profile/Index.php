@@ -8,9 +8,9 @@ $validar = $_SESSION['correo'];
 if ($validar == null || $validar == '') {
     header("Location: ../../../../LogIn.php");
     die();
-}
+} 
 
-// Conexión a la base de datos
+// Obtener el nombre del usuario desde la base de datos
 require("../../../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
@@ -18,10 +18,9 @@ $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'"
 $user_data = $sql_user->fetch_assoc();
 $user_id = $user_data['idUser'];
 
-// Obtener información del usuario
+// Obtener el nombre del usuario
 $sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
 $user_info = $sql_name->fetch_assoc();
-
 $user_name = htmlspecialchars($user_info['nameU']);
 $user_lastname = htmlspecialchars($user_info['lastname']);
 $user_birthdate = htmlspecialchars($user_info['birthdate']);
@@ -29,71 +28,19 @@ $user_age = htmlspecialchars($user_info['age']);
 $user_gender = htmlspecialchars($user_info['gender']);
 $user_phoneNumber = htmlspecialchars($user_info['phoneNumber']);
 $user_profession = htmlspecialchars($user_info['profession']);
-$user_addressU = htmlspecialchars($user_info['addressU']);
+$user_address = htmlspecialchars($user_info['addressU']);
 $user_email = htmlspecialchars($user_info['email']);
-$user_passwordU = htmlspecialchars($user_info['passwordU']);
+$user_password = htmlspecialchars($user_info['passwordU']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Perfil</title>
 </head>
-
-<?php 
-require '../../../../Configuration/Connection.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtener los datos del formulario
-    $id = $_POST['idUser'];
-    $correo = $_POST['Email'];
-    $telefono = $_POST['NumeroTelefono'];
-    $profesion = $_POST['Profesion'];
-    $direccion = $_POST['Direccion'];
-
-    // Usar consultas preparadas para evitar problemas de SQL Injection
-    $stmt = $conexion->prepare("
-        UPDATE users 
-        SET email = ?, phoneNumber = ?, profession = ?, addressU = ?
-        WHERE idUser = ?
-    ");
-    $stmt->bind_param("ssssi", $correo, $telefono, $profesion, $direccion, $id);
-
-    if ($stmt->execute()) {
-        echo "<script>
-                Swal.fire({
-                    title: '¡Buen trabajo!',
-                    text: 'La información se actualizó correctamente.',
-                    icon: 'success'
-                }).then(function() {
-                    window.location = '../PatientIndex.php';
-                });
-        </script>";
-        exit();
-    } else {
-        echo "<script>
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un problema al actualizar la información: " . $stmt->error . "',
-                    icon: 'error'
-                });
-        </script>";
-    }
-    
-    $stmt->close();
-    $conexion->close();
-} else {
-    // Si no se está enviando el formulario, redirigir o manejar el error
-    header("Location: ../PatientIndex.php");
-    exit();
-}
-?>
 
 <body>
     <div class="container-fluid">
@@ -125,16 +72,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
                             <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a></li>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -143,8 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="card">
                     <h5 class="card-header">Información de Perfil</h5>
                     <div class="card-body">
-                        <form class="needs-validation" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" novalidate>
-                            <h5>Numero de Documento</h5>
+                        <form class="needs-validation" method="post" action="../Forms/PerfilUpdate.php" novalidate>
+                            <h5>Actualizacion de Datos</h5>
                             <input type="hidden" name="idUser" value="<?php echo $user_id; ?>">
                             <hr>
                             <div class="container-fluid">
@@ -153,8 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <div class="form-group">
                                             <label for="validationCustom01">Nombre</label>
                                             <input type="text" class="form-control" value="<?php echo $user_name; ?>" disabled>
-                                        </div>
-                                        <br>
+                                        </div>                                        <br>
                                         <div class="form-group">
                                             <label for="validationCustom02">Apellido</label>
                                             <input type="text" class="form-control" value="<?php echo $user_lastname; ?>" disabled>
@@ -202,16 +150,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <br>
                                         <div class="form-group">
                                             <label for="validationCustom08">Dirección</label>
-                                            <input type="text" class="form-control" value="<?php echo $user_addressU; ?>" name="Direccion" required>
+                                            <input type="text" class="form-control" value="<?php echo $user_address; ?>" name="Direccion" required>
                                             <div class="invalid-feedback">
                                                 Por favor, ingrese su dirección.
                                             </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="validationCustom04">Contraseña</label>
+                                            <input type="text" class="form-control" value="<?php echo $user_password; ?>" disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <br>
                             <button class="btn btn-primary" type="submit">Actualizar</button>
+                            <a href="../PatientIndex.php" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
                 </div>
