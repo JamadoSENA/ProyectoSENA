@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: 'No se encontro el correo digitado.',
                         icon: 'error'
                     }).then(function() {
-                        window.location = 'Verification.php'; // Redirige después de cerrar el Swal
+                        window.location = 'LogIn.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     text: 'El correo ingresado no es válido.',
                     icon: 'error'
                 }).then(function() {
-                    window.location = 'Verification.php'; // Redirige después de cerrar el Swal
+                    window.location = 'LogIn.php'; // Redirige después de cerrar el Swal
                 });
             </script>
         </body>

@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: 'No se ha cambiado la contraseña correctamente.',
                         icon: 'error'
                     }).then(function() {
-                        window.location = 'LogInPassword.php'; // Redirige después de cerrar el Swal
+                        window.location = 'LogIn.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: 'El codigo de verificacion es incorrecto.',
                         icon: 'error'
                     }).then(function() {
-                        window.location = 'LogInPassword.php'; // Redirige después de cerrar el Swal
+                        window.location = 'LogIn.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
