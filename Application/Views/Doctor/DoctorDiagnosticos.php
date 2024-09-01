@@ -101,7 +101,7 @@ $user_lastname = $user_info['lastname'];
                         </div>
                         <hr>
                         <div class="table-responsive">
-                            <table id="tablaPrescripciones" class="table table-striped" style="width:100%">
+                            <table id="tablaDiagnosticos" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">ID</th>
@@ -134,7 +134,7 @@ $user_lastname = $user_info['lastname'];
                                         <td class="text-center"><?php echo $resultado['nombrePaciente']; ?></td>
                                         <td class="text-center"><?php echo $resultado['idScheduling']; ?></td>
                                         <td class="text-center">
-                                            <button class="btn" type="button" data-bs-toggle="dropdown"
+                                            <button class="btn" type="button-primary" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-three-dots-vertical"
@@ -170,21 +170,43 @@ $user_lastname = $user_info['lastname'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.bootstrap5.css">
 
-    <!-- DataTables JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+    <!-- DataTables Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.1/css/buttons.bootstrap5.css">
 
-    <script>
-    $(document).ready(function() {
-        $('#tablaPrescripciones').DataTable({
-            responsive: true
-        });
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.bootstrap5.js"></script>
+
+    <!-- DataTables Buttons -->
+    <script src="https://cdn.datatables.net/buttons/3.1.1/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.bootstrap5.js"></script>
+
+    <!-- JSZip (required for export buttons) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- pdfMake (required for PDF export) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <!-- DataTables Buttons Extensions -->
+    <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.colVis.min.js"></script>
+    <script type="text/javascript">
+    new DataTable('#tablaDiagnosticos', {
+        layout: {
+            topStart: {
+                buttons: ['excel', 'pdf']
+            }
+        }
     });
     </script>
 </body>

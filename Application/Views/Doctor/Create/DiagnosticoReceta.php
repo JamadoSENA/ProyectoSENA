@@ -1,18 +1,28 @@
-<?php
-/*
-    session_start();
-    error_reporting(0);
+<?php 
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
-    header("Location: ../../../LogIn.php");
+if ($validar == null || $validar == '') {
+    header("Location: ../../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT nameU, lastname FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = htmlspecialchars($user_info['nameU']);
+$user_lastname = htmlspecialchars($user_info['lastname']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,12 +42,16 @@
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <hr>
-                    <img src="../../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto"
-                        height="75" />
-                    </a>
+                    <img src="../../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" height="75" />
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li>
+                            <a href="../DoctorIndex.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-house-door-fill"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Inicio</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="../DoctorCitas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-calendar"></i> <span class="ms-1 d-none d-sm-inline">Citas</span>
@@ -46,7 +60,8 @@
                         <li>
                             <a href="../DoctorDiagnosticos.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-prescription"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Diagnosticos</span> </a>
+                                    class="ms-1 d-none d-sm-inline">Diagnósticos</span>
+                            </a>
                         </li>
                         <li>
                             <a href="../DoctorRecetas.php" class="nav-link px-0 text-white align-middle">
@@ -58,15 +73,16 @@
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Doctor</span>
+                            <i class="fs-4 bi-person"></i>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesión</a>
                             </li>
                         </ul>
                     </div>
@@ -77,7 +93,18 @@
                     <h5 class="card-header">Asignacion de Receta</h5>
                     <div class="card-body">
                         <h5 class="card-title">Formulario</h5>
-                        <form class="needs-validation" method="post" action="../Forms/Receta.php" novalidate>
+                        <?php 
+                        
+                        include ('../../../../Configuration/Connection.php');
+                        
+                        $sql = "SELECT * FROM diagnoses WHERE idDiagnosis=".$_GET['idDiagnosis'];
+                        $resultado = $conexion->query($sql);
+                        $row = $resultado->fetch_assoc();
+                        
+                        ?>
+                        <form class="needs-validation" method="post" action="../Forms/DiagnosticoReceta.php" novalidate>
+                            <input type="hidden" class="form-control" name="fkIdDiagnosis"
+                                value="<?php echo $row['idDiagnosis'] ?>">
                             <div class="form-group">
                                 <label for="validationCustom01">Via de Administracion</label>
                                 <select name="viaAdministracion" class="form-control" id="validationCustom01" required>
@@ -146,7 +173,7 @@
                             <div class="form-group">
                                 <label for="validationCustom07">Instrucciones Especiales</label>
                                 <input type="text" class="form-control" name="instrucciones" id="validationCustom07"
-                                    required>
+                                    value="165f56e">
                                 <div class="invalid-feedback">
                                     Por favor digita las instrucciones especiales para el consumo del medicamento.
                                 </div>
@@ -156,26 +183,24 @@
                                 <label for="validationCustom08">Medicamento</label>
                                 <select name="fkIdMedicine" class="form-control" id="patient" required>
                                     <option value="">Seleccionar</option>
-                                    <?php /*
-                include ("../../../../Configuration/Connection.php");
+                                    <?php 
+        include ("../../../../Configuration/Connection.php");
 
-                $sql = $conexion->query("SELECT * FROM medicines ORDER BY stock ASC");
-                while ($resultado = $sql->fetch_assoc()) {
-
-                echo "<option value='".$resultado['idMedicine']."'>".$resultado
-                ['nameM']."</option>";
-
-                } */
-                ?>
+        // Consulta que filtra los medicamentos con stock mayor o igual a 1
+        $sql = $conexion->query("SELECT idMedicine, nameM, stock FROM medicines WHERE stock >= 1 ORDER BY nameM ASC");
+        while ($resultado = $sql->fetch_assoc()) {
+            echo "<option value='".$resultado['idMedicine']."'>".$resultado['nameM']." - Disponible: ".$resultado['stock']."</option>";
+        } 
+        ?>
                                 </select>
                                 <div class="invalid-feedback">
                                     Por favor selecciona un medicamento.
                                 </div>
                             </div>
-                            <input type="hidden" class="form-control" name="fkIdDiagnosis"
-                                value="<?php echo $row['idDiagnosis'] ?>">
+
                             <hr>
                             <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="../DoctorRecetas.php" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
                 </div>

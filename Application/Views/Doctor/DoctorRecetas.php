@@ -97,12 +97,6 @@ $user_lastname = $user_info['lastname'];
                             <div class="col-6">
                                 <h5 class="card-title" style="margin-top:8px">Tabla Recetas</h5>
                             </div>
-                            <div class="col-6 text-end">
-                                <a href="Create/Receta.php" class="nav-link px-0 text-dark">
-                                    <i class="fs-4 bi-plus-square"></i> <span class="ms-1 d-none d-sm-inline">Agregar
-                                        Receta</span>
-                                </a>
-                            </div>
                         </div>
                         <hr>
                         <div class="table-responsive">
