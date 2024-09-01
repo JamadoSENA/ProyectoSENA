@@ -29,15 +29,14 @@ END//
 CREATE PROCEDURE INSERTARCITA (
     IN estado VARCHAR (50),
     IN fechaInicio DATETIME,
-    IN fechaFin DATETIME,
     IN paciente INT (20),
     IN doctor INT (20))
 
 BEGIN
 
-    INSERT INTO schedulings (stateS, dateHourStart, dateHourEnd, 
+    INSERT INTO schedulings (stateS, dateHourStart, 
     fkIdPatient, fkIdDoctor)
-    VALUES (estado, fechaInicio, fechaFin, paciente, doctor);
+    VALUES (estado, fechaInicio, paciente, doctor);
     
     COMMIT;
 

@@ -133,15 +133,9 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="startDate">Fecha Inicio</label>
+                                <label for="startDate">Fecha</label>
                                 <input type="datetime-local" class="form-control" id="startDate"
                                     value="<?php echo $row['dateHourStart']?>" disabled>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="endDate">Fecha Fin</label>
-                                <input type="datetime-local" class="form-control" id="endDate"
-                                    value="<?php echo $row['dateHourEnd']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">

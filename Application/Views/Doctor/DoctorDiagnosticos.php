@@ -98,12 +98,6 @@ $user_lastname = $user_info['lastname'];
                             <div class="col-6">
                                 <h5 class="card-title" style="margin-top:8px">Tabla Diagnosticos</h5>
                             </div>
-                            <div class="col-6 text-end">
-                                <a href="Create/Diagnostico.php" class="nav-link px-0 text-dark">
-                                    <i class="fs-4 bi-plus-square"></i> <span class="ms-1 d-none d-sm-inline">Agregar
-                                        Diagnostico</span>
-                                </a>
-                            </div>
                         </div>
                         <hr>
                         <div class="table-responsive">

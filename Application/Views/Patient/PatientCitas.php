@@ -100,8 +100,7 @@ $user_lastname = $user_info['lastname'];
                                     <tr>
                                         <th scope="col" style="text-align: center;">ID</th>
                                         <th scope="col" style="text-align: center;">Estado</th>
-                                        <th scope="col" style="text-align: center;">Fecha Inicio</th>
-                                        <th scope="col" style="text-align: center;">Fecha Fin</th>
+                                        <th scope="col" style="text-align: center;">Fecha</th>
                                         <th scope="col" style="text-align: center;">Doctor</th>
                                         <th scope="col" style="text-align: center;"></th>
                                     </tr>
@@ -113,7 +112,7 @@ $user_lastname = $user_info['lastname'];
 
                                     // Consulta modificada para incluir el nombre del doctor
                                     $sql = $conexion->query("
-                                        SELECT s.idScheduling, s.stateS, s.dateHourStart, s.dateHourEnd, 
+                                        SELECT s.idScheduling, s.stateS, s.dateHourStart, 
                                         CONCAT(d.nameU, ' ', d.lastname) AS doctorName
                                         FROM schedulings s
                                         JOIN users d ON s.fkIdDoctor = d.idUser
@@ -128,7 +127,6 @@ $user_lastname = $user_info['lastname'];
                                         <td scope="row" style="text-align: center;"><?php echo $resultado ['idScheduling']?></td>
                                         <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?></td>
                                         <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourStart']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourEnd']?></td>
                                         <td scope="row" style="text-align: center;"><?php echo $resultado ['doctorName']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"

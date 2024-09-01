@@ -32,7 +32,6 @@ CREATE TABLE schedulings (
     idScheduling INT PRIMARY KEY AUTO_INCREMENT,
     stateS VARCHAR(50) NOT NULL,
     dateHourStart DATETIME,
-    dateHourEnd DATETIME,
     fkIdPatient INT (20) NULL,
     fkIdDoctor INT (20) NOT NULL,
     FOREIGN KEY (fkIdPatient) REFERENCES users(idUser) ON DELETE CASCADE,

@@ -117,16 +117,11 @@ $user_lastname = $user_info['lastname'];
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="validationCustom02">Fecha Inicio</label>
+                                <label for="validationCustom02">Fecha</label>
                                 <input type="datetime-local" class="form-control" id="validationCustom02"
                                     value="<?php echo $row['dateHourStart']?>" disabled>
                             </div>
                             <br>
-                            <div class="form-group">
-                                <label for="validationCustom03">Fecha Fin</label>
-                                <input type="datetime-local" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['dateHourEnd']?>" disabled>
-                            </div>
                             <br>
                             <?php 
                                 require("../../../../Configuration/Connection.php");

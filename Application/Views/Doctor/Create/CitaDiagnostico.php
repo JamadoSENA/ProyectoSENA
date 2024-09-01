@@ -1,18 +1,28 @@
-<?php
-/*
-    session_start();
-    error_reporting(0);
+<?php 
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
-    header("Location: ../../../LogIn.php");
+if ($validar == null || $validar == '') {
+    header("Location: ../../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT nameU, lastname FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = htmlspecialchars($user_info['nameU']);
+$user_lastname = htmlspecialchars($user_info['lastname']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,12 +42,16 @@
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <hr>
-                    <img src="../../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto"
-                        height="75" />
-                    </a>
+                    <img src="../../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" height="75" />
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li>
+                            <a href="../DoctorIndex.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-house-door-fill"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Inicio</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="../DoctorCitas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-calendar"></i> <span class="ms-1 d-none d-sm-inline">Citas</span>
@@ -46,7 +60,8 @@
                         <li>
                             <a href="../DoctorDiagnosticos.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-prescription"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Diagnosticos</span> </a>
+                                    class="ms-1 d-none d-sm-inline">Diagnósticos</span>
+                            </a>
                         </li>
                         <li>
                             <a href="../DoctorRecetas.php" class="nav-link px-0 text-white align-middle">
@@ -58,15 +73,16 @@
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Doctor</span>
+                            <i class="fs-4 bi-person"></i>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesión</a>
                             </li>
                         </ul>
                     </div>
@@ -77,18 +93,18 @@
                     <h5 class="card-header">Asignacion de Diagnostico</h5>
                     <div class="card-body">
                         <h5 class="card-title">Formulario</h5>
-                        <?php /*
+                        <?php 
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        */
+                        
                         ?>
                         <form class="needs-validation" method="post" action="../Forms/CitaDiagnostico.php" novalidate>
-                            <input type="hidden" class="form-control" name="idScheduling"
-                                value="<?php /* echo $row['idScheduling'] */ ?>">
+                            <input type="hidden" class="form-control" name="Cita"
+                                value="<?php  echo $row['idScheduling']  ?>">
                             <div class="form-group">
                                 <label for="validationCustom01">Queja Principal</label>
                                 <input type="text" class="form-control" name="queja" id="validationCustom01" required>
@@ -99,7 +115,8 @@
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom02">Sintomas Principales</label>
-                                <input type="text" class="form-control" name="sintomas" id="validationCustom02" required>
+                                <input type="text" class="form-control" name="sintomas" id="validationCustom02"
+                                    required>
                                 <div class="invalid-feedback">
                                     Por favor digita la descripcion general sobre los sintomas principales.
                                 </div>
@@ -107,7 +124,8 @@
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom03">Antecedentes Personales</label>
-                                <input type="text" class="form-control" name="antecedentesPersonales" id="validationCustom03" required>
+                                <input type="text" class="form-control" name="antecedentesPersonales"
+                                    id="validationCustom03" required>
                                 <div class="invalid-feedback">
                                     Por favor digita la descripcion general sobre los antecedentes personales.
                                 </div>
@@ -116,7 +134,8 @@
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom04">Antecedentes Familiares</label>
-                                <input type="text" class="form-control" name="antecedentesFamiliares" id="validationCustom04" required>
+                                <input type="text" class="form-control" name="antecedentesFamiliares"
+                                    id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Por favor digita la descripcion general sobre los antecedentes familiares.
                                 </div>
@@ -132,7 +151,8 @@
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom06">Examinacion Fisica</label>
-                                <input type="text" class="form-control" name="examinacion" id="validationCustom06" required>
+                                <input type="text" class="form-control" name="examinacion" id="validationCustom06"
+                                    required>
                                 <div class="invalid-feedback">
                                     Por favor digita la descripcion sobre la examinacion fisica.
                                 </div>
@@ -140,15 +160,15 @@
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom07">Observaciones Adicionales</label>
-                                <input type="text" class="form-control" name="observaciones" id="validationCustom07" required>
+                                <input type="text" class="form-control" name="observaciones" id="validationCustom07"
+                                    required>
                                 <div class="invalid-feedback">
                                     Por favor digita las observaciones necesarias.
                                 </div>
                             </div>
-                            <input type="hidden" class="form-control" name="fkIdScheduling"
-                                value="<?php /* echo $row['idScheduling'] */ ?>">
                             <hr>
                             <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="../DoctorCitas.php" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
                 </div>
