@@ -1,18 +1,29 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
+if ($validar == null || $validar == '') {
     header("Location: ../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +34,7 @@
     <link rel="shortcut icon" href="../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Doctor</title>
+    <title>Recetario</title>
 </head>
 
 <body>
@@ -33,10 +44,14 @@
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <hr>
                     <img src="../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto" height="75" />
-                    </a>
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li>
+                            <a href="DoctorIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-house-door-fill"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Inicio</span> </a>
+                        </li>
                         <li>
                             <a href="DoctorCitas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-calendar"></i> <span class="ms-1 d-none d-sm-inline">Citas</span>
@@ -58,7 +73,8 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Doctor</span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -90,49 +106,57 @@
                         </div>
                         <hr>
                         <div class="table-responsive">
-                            <table table id="tablaRecetas" class="table table-striped" style="width:100%">
+                            <table id="tablaRecetas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Medicamento</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Fecha de Emision</th>
-                                        <th scope="col">Paciente</th>
-                                        <th scope="col">ID Diagnostico</th>
+                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;">Medicamento</th>
+                                        <th scope="col" style="text-align: center;">Cantidad</th>
+                                        <th scope="col" style="text-align: center;">Fecha de Emision</th>
+                                        <th scope="col" style="text-align: center;">Paciente</th>
+                                        <th scope="col" style="text-align: center;">ID Diagnostico</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php /*
+                                    <?php 
                                     require("../../../Configuration/Connection.php");
 
-                                    // Realiza una consulta más compleja uniendo múltiples tablas
+                                    // Realiza una consulta más compleja uniendo múltiples tablas, filtrando por el id del doctor autenticado
                                     $sql = $conexion->query("
                                         SELECT 
                                             recipes.idRecipe, 
                                             medicines.nameM, 
                                             recipes.amount, 
                                             recipes.dateHour AS fechaEmision, 
-                                            CONCAT(patients.nameP, ' ', patients.lastnameP) AS nombrePaciente, 
+                                            CONCAT(users.nameU, ' ', users.lastname) AS nombrePaciente, 
                                             diagnoses.idDiagnosis 
                                         FROM 
                                             recipes 
                                         JOIN medicines ON recipes.fkIdMedicine = medicines.idMedicine
                                         JOIN schedulings ON recipes.fkIdDiagnosis = schedulings.idScheduling
-                                        JOIN patients ON schedulings.fkIdPatient = patients.idPatient
+                                        JOIN users ON schedulings.fkIdPatient = users.idUser
                                         JOIN diagnoses ON schedulings.idScheduling = diagnoses.fkIdScheduling
+                                        WHERE 
+                                            schedulings.fkIdDoctor = $user_id
                                     ");
                                     
-                                    while ($resultado = $sql->fetch_assoc()) { */
+                                    while ($resultado = $sql->fetch_assoc()) { 
                                     ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['idRecipe']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['nameM']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['amount']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['fechaEmision']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['nombrePaciente']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado['idDiagnosis']*/?></td>
-                                        <td scope="row">
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado['idRecipe']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nameM']?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado['amount']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado['fechaEmision']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado['nombrePaciente']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado['idDiagnosis']?></td>
+                                        <td scope="row" style="text-align: center;">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -148,9 +172,8 @@
                                             </ul>
                                         </td>
                                     </tr>
-                                    <?php /*
-
-                                    } */
+                                    <?php 
+                                    } 
                                     ?>
                                 </tbody>
                             </table>

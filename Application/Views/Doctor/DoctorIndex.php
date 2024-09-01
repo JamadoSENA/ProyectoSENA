@@ -1,18 +1,29 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
+if ($validar == null || $validar == '') {
     header("Location: ../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +34,7 @@
     <link rel="shortcut icon" href="../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Doctor</title>
+    <title>Inicio</title>
 </head>
 
 <body>
@@ -37,6 +48,11 @@
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li>
+                            <a href="DoctorIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
+                                <i class="fs-4 bi-house-door-fill"></i> <span class="ms-1 d-none d-sm-inline">
+                                    Inicio</span> </a>
+                        </li>
                         <li>
                             <a href="DoctorCitas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-calendar"></i> <span class="ms-1 d-none d-sm-inline">Citas</span>
@@ -58,7 +74,8 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Doctor</span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -77,13 +94,65 @@
                         ¡Bienvenido!
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Estimado Doctor: </h5>
-                        <p class="card-text">Tienes la oportunidad de gestionar tus propias citas y tratamientos
-                            diagnosticados de manera sencilla y rápida.
+                        <h5 class="card-title">Estimado/a <?php echo $user_name . ' ' . $user_lastname; ?>:</h5>
+                        <p class="card-text">
+                            Tienes la oportunidad de gestionar tus propias citas y tratamientos diagnosticados de manera
+                            sencilla y rápida.
                             Aprovecha esta plataforma para organizar tu agenda, seguir el progreso de tus pacientes y
-                            coordinar tratamientos de manera eficiente.</p>
-                        <a href="DoctorAgenda.php" class="btn btn-primary">¡Empezar!</a>
+                            coordinar
+                            tratamientos de manera eficiente.
+                        </p>
+                        <div class="container text-space-center">
+                            <div class="row align-items-center">
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Gestión de Citas</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Agenda Cita</h5>
+                                            <p class="card-text" style="text-align: justify;">
+                                                Organiza tus citas de manera rápida y sencilla.
+                                                Selecciona la fecha y hora que más te convenga y asegura tu espacio.
+                                                Recibe recordatorios automáticos para que no te pierdas ninguna
+                                                consulta.
+                                            </p>
+                                            <a href="DoctorCitas.php" class="btn btn-secondary">¡Agendar!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Registro de Diagnósticos</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Diagnóstico Médico</h5>
+                                            <p class="card-text" style="text-align: justify;">
+                                                Genera diagnósticos y recomendaciones médicas en un solo lugar.
+                                                Mantén un registro detallado de cada consulta y organiza tu tiempo de
+                                                manera efectiva.
+                                                Puedes revisar los tratamientos recomendados en cualquier momento.
+                                            </p>
+                                            <a href="DoctorDiagnosticos.php" class="btn btn-secondary">¡Empezar!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Creación de Recetas</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Recetario</h5>
+                                            <p class="card-text" style="text-align: justify;">
+                                                Accede a las recetas y sigue el plan de medicación al pie de la letra.
+                                                Consulta tus diagnosticos actuales y anteriores, y mantente al tanto
+                                                de tus necesidades profesionales.
+                                                Todo lo que necesitas para mejorar tu entorno laboral, en un solo lugar.
+                                            </p>
+                                            <a href="DoctorRecetas.php" class="btn btn-secondary">¡Recetar!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="card-footer text-body-secondary">
                         MediStock © 2024. Todos los derechos reservados.
                     </div>

@@ -56,11 +56,61 @@ function acceso_user() {
 
     }else if($filas['fkIdRole'] == 2){ //Doctor
 
-        header('Location: ../Application/Views/Doctor/DoctorIndex.php');
+        // Enviar encabezado de tipo de contenido como HTML
+        header("Content-Type: text/html; charset=UTF-8");
+
+        echo "<!DOCTYPE html>
+        <html lang='es'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Inicio de Sesion</title>
+            <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+            <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
+        </head>
+        <body>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+            <script>
+                Swal.fire({
+                    title: '¡Excelente!',
+                    text: 'Has iniciado sesion correctamente.',
+                    icon: 'success'
+                }).then(function() {
+                    window.location = '../Application/Views/Doctor/DoctorIndex.php'; // Redirige después de cerrar el Swal
+                });
+            </script>
+        </body>
+        </html>";
+
 
     }else if($filas['fkIdRole'] == 3){ //Inventor
 
-        header('Location: ../Application/Views/Inventor/InventorIndex.php');
+        // Enviar encabezado de tipo de contenido como HTML
+        header("Content-Type: text/html; charset=UTF-8");
+
+        echo "<!DOCTYPE html>
+        <html lang='es'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Inicio de Sesion</title>
+            <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+            <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
+        </head>
+        <body>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+            <script>
+                Swal.fire({
+                    title: '¡Excelente!',
+                    text: 'Has iniciado sesion correctamente.',
+                    icon: 'success'
+                }).then(function() {
+                    window.location = '../Application/Views/Inventor/InventorIndex.php'; // Redirige después de cerrar el Swal
+                });
+            </script>
+        </body>
+        </html>";
+
 
     }else{
 
