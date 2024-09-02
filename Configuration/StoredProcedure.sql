@@ -106,7 +106,7 @@ CREATE PROCEDURE INSERTARRECETA (
     IN diagnostico INT)
 BEGIN
 
-    INSERT INTO recipes (routeAdministration, durationDays, durationMonths, frequency, stateR, specialInstructions, 
+    INSERT INTO recipes (routeAdministration, durationDays, durationMonths, frequency,  amount, stateR, specialInstructions, 
     fkIdMedicine, fkIdDiagnosis)
     VALUES (viaAdministracion, duracionDias, duracionMeses, frecuencia, cantidad, estado, instrucciones, medicina,
     diagnostico);

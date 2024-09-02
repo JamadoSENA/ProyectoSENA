@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Información de Usuario</h5>
                             <hr>
-                            <form class="row g-3 needs-validation" method="post" action="RegisterUser.php" novalidate>
+                            <form class="row g-3 needs-validation" method="post" action="../Configuration/RegisterUser.php" novalidate>
                                 <div class="col-md-4">
                                     <label for="validationCustom01" class="form-label">No. Documento</label>
                                     <input type="number" name="Cedula" id="document" class="form-control input-lg"

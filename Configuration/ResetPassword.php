@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require '../vendor/autoload.php'; // Asegúrate de ajustar la ruta si no usas Composer
-require '../Configuration/Connection.php'; // Archivo para conectar con la base de datos
+require 'Connection.php'; // Archivo para conectar con la base de datos
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = filter_var($_POST['correo'], FILTER_SANITIZE_EMAIL);
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <meta charset='UTF-8'>
                         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                         <title>Registro Exitoso</title>
-                        <link rel='shortcut icon' href='Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                        <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                         <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
                     </head>
                     <body>
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 text: 'En unos instantes recibiras el codigo en tu correo.',
                                 icon: 'success'
                             }).then(function() {
-                                window.location = 'Verification.php'; // Redirige después de cerrar el Swal
+                                window.location = '../Application/Verification.php'; // Redirige después de cerrar el Swal
                             });
                         </script>
                     </body>
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <meta charset='UTF-8'>
                         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                         <title>Oh oh...Error Inesperado</title>
-                        <link rel='shortcut icon' href='Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                        <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                         <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
                     </head>
                     <body>
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 text: 'Ocurrio un error inesperado al actualizar el codigo de recuperacion.',
                                 icon: 'error'
                             }).then(function() {
-                                window.location = 'Verification.php'; // Redirige después de cerrar el Swal
+                                window.location = '../Application/Verification.php'; // Redirige después de cerrar el Swal
                             });
                         </script>
                     </body>
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>Correo No Encontrado</title>
-                <link rel='shortcut icon' href='Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
             </head>
             <body>
@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: 'No se encontro el correo digitado.',
                         icon: 'error'
                     }).then(function() {
-                        window.location = 'LogIn.php'; // Redirige después de cerrar el Swal
+                        window.location = '../Application/LogIn.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <meta charset='UTF-8'>
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <title>Correo Invalido</title>
-            <link rel='shortcut icon' href='Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+            <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
             <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
         </head>
         <body>
@@ -155,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     text: 'El correo ingresado no es válido.',
                     icon: 'error'
                 }).then(function() {
-                    window.location = 'LogIn.php'; // Redirige después de cerrar el Swal
+                    window.location = '../Application/LogIn.php'; // Redirige después de cerrar el Swal
                 });
             </script>
         </body>

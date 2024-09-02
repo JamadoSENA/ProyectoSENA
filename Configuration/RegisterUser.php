@@ -1,6 +1,6 @@
 <?php
 // Requerir el archivo de conexión
-require '../Configuration/Connection.php';
+require 'Connection.php';
 
 // Verificar si se ha enviado una solicitud POST (para AJAX)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $resultado = $consulta_usuario->get_result();
 
     if ($resultado->num_rows > 0) {
-        header("location:ErrorPages/ErrorOne.php"); // El usuario ya existe
+        header("location:../Application/ErrorPages/ErrorOne.php"); // El usuario ya existe
         exit();
     } else {
         // Preparar la consulta de inserción
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>Registro Exitoso</title>
-                <link rel='shortcut icon' href='Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
             </head>
             <body>
@@ -57,14 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         text: 'La información se guardo correctamente.',
                         icon: 'success'
                     }).then(function() {
-                        window.location = 'LogIn.php'; // Redirige después de cerrar el Swal
+                        window.location = '../Application/LogIn.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
             </html>";
             exit();
         } else {
-            header("location:ErrorPages/ErrorZero.php"); // Error al crear el usuario
+            header("location: ../Application/ErrorPages/ErrorZero.php"); // Error al crear el usuario
             exit();
         }
 
