@@ -18,7 +18,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $resultado = $consulta_proveedor->get_result();
 
     if ($resultado->num_rows > 0) {
-        header("location:ErrorPages/ErrorTwo.php"); // El usuario ya existe
+        header("Content-Type: text/html; charset=UTF-8");
+
+        echo "<!DOCTYPE html>
+        <html lang='es'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Registro Fallido</title>
+            <link rel='shortcut icon' href='../../../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+            <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
+        </head>
+        <body>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+            <script>
+                Swal.fire({
+                    title: '¡Error!',
+                    text: 'El proveedor registrado ya existe.',
+                    icon: 'error'
+                }).then(function() {
+                    window.location = '../InventorProveedores.php'; // Redirige después de cerrar el Swal
+                });
+            </script>
+        </body>
+        </html>";
     } else {
         // Preparar la consulta de inserción
         $insertar_proveedor = $conexion->prepare("CALL INSERTARPROVEEDOR(?, ?, ?, ?, ?)");
@@ -27,7 +50,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Ejecutar la consulta de inserción
         if ($insertar_proveedor->execute()) {
-            header("location:../InventorProveedores.php");
+            header("Content-Type: text/html; charset=UTF-8");
+
+            echo "<!DOCTYPE html>
+            <html lang='es'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Registro Exitoso</title>
+                <link rel='shortcut icon' href='../../../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
+            </head>
+            <body>
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+                <script>
+                    Swal.fire({
+                        title: '¡Excelente!',
+                        text: 'La información se registro correctamente.',
+                        icon: 'success'
+                    }).then(function() {
+                        window.location = '../InventorProveedores.php'; // Redirige después de cerrar el Swal
+                    });
+                </script>
+            </body>
+            </html>";
+                exit();
         } else {
             header("location:ErrorPages/ErrorTwoOne.php"); // Error al crear el usuario
         }

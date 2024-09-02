@@ -1,18 +1,29 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
+if ($validar == null || $validar == '') {
     header("Location: ../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = $user_info['nameU'];
+$user_lastname = $user_info['lastname'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +34,7 @@
     <link rel="shortcut icon" href="../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Inventarista</title>
+    <title>Recetas</title>
 </head>
 
 <body>
@@ -37,6 +48,12 @@
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
+                        <li>
+                            <a href="InventorIndex.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-house-door-fill"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Inicio</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="InventorMedicinas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-capsule"></i> <span class="ms-1 d-none d-sm-inline">Medicinas</span>
@@ -57,7 +74,8 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Inventarista</span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -81,31 +99,35 @@
                             <table table id="tablaRecetas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Medicamento</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;">Estado</th>
+                                        <th scope="col" style="text-align: center;">Cantidad</th>
+                                        <th scope="col" style="text-align: center;">Medicamento</th>
+                                        <th scope="col" style="text-align: center;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php /*
-            
-            require("../../../Configuration/Connection.php");
-            
-            $sql = $conexion->query("SELECT recipes.*, medicines.nameM 
-                                    FROM recipes 
-                                    JOIN medicines ON recipes.fkIdMedicine = medicines.idMedicine");
+                                    <?php 
+                                require("../../../Configuration/Connection.php");
 
-            while ($resultado = $sql->fetch_assoc()){ */
-             
-            ?>
+                                // Modificación de la consulta para filtrar por stateR = 'No Retirado'
+                                $sql = $conexion->query("SELECT recipes.*, medicines.nameM 
+                                                        FROM recipes 
+                                                        JOIN medicines ON recipes.fkIdMedicine = medicines.idMedicine
+                                                        WHERE recipes.stateR = 'No Retirado'");
+
+                                while ($resultado = $sql->fetch_assoc()){ 
+                                ?>
 
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['idRecipe']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['stateR']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['amount']*/?></td>
-                                        <td scope="row" style="text-align: center;"><?php /*echo $resultado ['nameM']*/?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idRecipe'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['stateR'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['amount'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nameM'] ?>
+                                        </td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">
@@ -117,16 +139,16 @@
                                                 </svg>
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a href="Update/Receta.php?idRecipe=<?php echo $resultado['idRecipe']?>"
+                                                <li><a href="Update/Receta.php?idRecipe=<?php echo $resultado['idRecipe'] ?>"
                                                         class="dropdown-item">Actualizar</a></li>
-                                                <li><a href="Details/Receta.php?idRecipe=<?php echo $resultado['idRecipe']?>"
+                                                <li><a href="Details/Receta.php?idRecipe=<?php echo $resultado['idRecipe'] ?>"
                                                         class="dropdown-item">Detalles</a></li>
                                             </ul>
                                         </td>
                                     </tr>
-                                    <?php /*
-            } */
-            ?>
+                                    <?php 
+                                } 
+                                ?>
                                 </tbody>
                             </table>
                         </div>
@@ -137,6 +159,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">

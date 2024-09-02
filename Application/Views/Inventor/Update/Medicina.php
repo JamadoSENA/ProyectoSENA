@@ -1,18 +1,28 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
-    header("Location: ../../../LogIn.php");
+if ($validar == null || $validar == '') {
+    header("Location: ../../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = htmlspecialchars($user_info['nameU']);
+$user_lastname = htmlspecialchars($user_info['lastname']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,17 +49,23 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li>
-                            <a href="InventorMedicinas.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../InventorIndex.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-house-door-fill"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Inicio</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../InventorMedicinas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-capsule"></i> <span class="ms-1 d-none d-sm-inline">Medicinas</span>
                             </a>
                         </li>
                         <li>
-                            <a href="InventorProveedores.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../InventorProveedores.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-person-circle"></i> <span
                                     class="ms-1 d-none d-sm-inline">Proveedores</span> </a>
                         </li>
                         <li>
-                            <a href="InventorRecetas.php" class="nav-link px-0 text-white align-middle">
+                            <a href="../InventorRecetas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Recetas</span> </a>
                         </li>
                     </ul>
@@ -58,14 +74,15 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Inventarista</span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -76,35 +93,34 @@
                     <h5 class="card-header">Informacion de Medicamento</h5>
                     <div class="card-body">
                         <?php
-                        /*
+                        
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM medicines WHERE idMedicine=".$_GET['idMedicine'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        */
+                        
                         ?>
-                        <h5>ID Medicamento</h5>
-                        <input type="number" class="form-control" value="<?php /*echo $row['idMedicine']*/ ?>" disabled>
-                        <hr>
                         <h5 class="card-title">Actualizacion</h5>
-                        <form  class="needs-validation" method="post" action="../Forms/MedicinaUpdate.php">
+                        <form class="needs-validation" method="post" action="../Forms/MedicinaUpdate.php">
+                            <input type="number" class="form-control" name="idMedicine" value="<?php echo $row['idMedicine'] ?>" hidden>
+                            <hr>
                             <div class="form-group">
                                 <label for="validationCustom01">Nombre</label>
                                 <input type="text" class="form-control" id="validationCustom01"
-                                    value="<?php /*echo $row['nameM']*/?>" disabled>
+                                    value="<?php echo $row['nameM']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom02">Formato</label>
                                 <input type="text" class="form-control" id="validationCustom02"
-                                    value="<?php /*echo $row['formatM']*/?>" disabled>
+                                    value="<?php echo $row['formatM']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="cantidad">Cantidad</label>
-                                <input type="number" id="cantidad" class="form-control" value="<?php /*echo $row['stock']*/?>" 
-                                name="Cantidad" min=0 max=100 required>
+                                <input type="number" id="cantidad" class="form-control"
+                                    value="<?php echo $row['stock']?>" name="Cantidad" min=0 max=100 required>
                                 <div class="invalid-feedback">
                                     Por favor digite la cantidad exacta de empaques.
                                 </div>
@@ -112,8 +128,7 @@
                             <br>
                             <div class="form-group">
                                 <label for="estado">Estado</label>
-                                <select name="Estado" class="form-control" id="estado" name="Estado"
-                                    disabled>
+                                <select name="Estado" class="form-control" id="estado" readonly>
                                     <option value="Disponible">Disponible</option>
                                     <option value="No Disponible">No Disponible</option>
                                 </select>
@@ -143,40 +158,44 @@
                             <div class="form-group">
                                 <label for="validationCustom05">Fecha de Vencimiento</label>
                                 <input type="date" class="form-control" id="validationCustom03"
-                                    value="<?php /*echo $row['expirationDate']*/?>" disabled>
+                                    value="<?php echo $row['expirationDate']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom06">Categoria</label>
-                                <input type="number" class="form-control" id="validationCustom03"
-                                    value="<?php /*echo $row['category']*/?>" disabled>
+                                <input type="text" class="form-control" id="validationCustom03"
+                                    value="<?php echo $row['category']?>" disabled>
                             </div>
                             <br>
-                            <?php /*
-                            require("../../../../Configuration/Connection.php");
+                            <?php 
+                                require("../../../../Configuration/Connection.php");
 
-                            $idMedicine = $_GET['idMedicine'];
+                                $idMedicine = $_GET['idMedicine'];
 
-                            $sql = "SELECT s.nameSU, s.idSupplier
-                            FROM suppliers s
-                            INNER JOIN medicines m ON s.idSupplier = m.fkIdMedicine
-                            WHERE s.idSupplier = $idMedicine";
+                                // Consulta para obtener el nombre del proveedor asociado al medicamento
+                                $sql = "SELECT s.nameSU
+                                        FROM suppliers s
+                                        INNER JOIN medicines m ON s.idSupplier = m.fkIdSupplier
+                                        WHERE m.idMedicine = $idMedicine";
 
-                            $resultado = $conexion->query($sql);
+                                $resultado = $conexion->query($sql);
 
-                            if ($resultado->num_rows > 0) {
-                            $row = $resultado->fetch_assoc();
-                            $nombreProveedor = $row['nameSU'];
-                            }
-                            */
-                            ?>
+                                if ($resultado->num_rows > 0) {
+                                    $row = $resultado->fetch_assoc();
+                                    $nombreProveedor = $row['nameSU'];
+                                } else {
+                                    $nombreProveedor = "Proveedor no encontrado";
+                                }
+                                ?>
                             <div class="form-group">
-                                <label for="patient">Proveedor</label>
+                                <label for="supplier">Proveedor</label>
                                 <input type="text" class="form-control" id="validationCustom03"
-                                    value="<?php /*echo $row['nombreProveedor']*/?>" disabled>
+                                    value="<?php echo $nombreProveedor; ?>" disabled>
                             </div>
+
                             <hr>
                             <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <a href="../InventorMedicinas.php" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
                 </div>

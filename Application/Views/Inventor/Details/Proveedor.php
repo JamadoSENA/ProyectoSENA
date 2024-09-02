@@ -1,18 +1,28 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
-    header("Location: ../../../LogIn.php");
+if ($validar == null || $validar == '') {
+    header("Location: ../../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = htmlspecialchars($user_info['nameU']);
+$user_lastname = htmlspecialchars($user_info['lastname']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +49,12 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li>
+                            <a href="../InventorIndex.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-house-door-fill"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Inicio</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="../InventorMedicinas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-capsule"></i> <span class="ms-1 d-none d-sm-inline">Medicinas</span>
                             </a>
@@ -58,14 +74,15 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Inventarista</span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -75,44 +92,44 @@
                 <div class="card">
                     <h5 class="card-header">Informacion de Proveedor</h5>
                     <div class="card-body">
-                        <?php /*
+                        <?php 
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM suppliers WHERE idSupplier=".$_GET['idSupplier'];
                         $resultado = $conexion->query($sql);
-                        $row = $resultado->fetch_assoc(); */
+                        $row = $resultado->fetch_assoc(); 
                         
                         ?>
                         <h5 class="card-title">Detalles</h5>
                         <form>
                             <h5>NIT</h5>
-                            <input type="number" class="form-control" value="<?php /*echo $row['idSupplier']*/ ?>"
+                            <input type="number" class="form-control" value="<?php echo $row['idSupplier'] ?>"
                                 disabled>
                             <hr>
                             <div class="form-group">
                                 <label for="validationCustom01">Nombre</label>
                                 <input type="text" class="form-control" id="validationCustom01"
-                                    value="<?php /*echo $row['nameSU']*/?>" disabled>
+                                    value="<?php echo $row['nameSU']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom02">Direccion</label>
                                 <input type="text" class="form-control" id="validationCustom02"
-                                    value="<?php /*echo $row['addressSU']*/?>" disabled>
+                                    value="<?php echo $row['addressSU']?>" disabled>
                             </div>
                             <hr>
                             <h5>Contacto</h5>
                             <div class="form-group">
                                 <label for="validationCustom03">Email</label>
                                 <input type="text" class="form-control" id="validationCustom03"
-                                    value="<?php /*echo $row['email']*/?>" disabled>
+                                    value="<?php echo $row['email']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom04">Numero Telefonico</label>
                                 <input type="text" class="form-control" id="validationCustom04"
-                                    value="<?php /*echo $row['phoneNumber']*/?>" disabled>
+                                    value="<?php echo $row['phoneNumber']?>" disabled>
                             </div>
                             <hr>
                             <a href="../InventorProveedores.php" type="button" class="btn btn-secondary">Regresar</a>

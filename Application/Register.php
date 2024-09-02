@@ -256,7 +256,7 @@
                                 });
                                 </script>
                                 <div class="col-md-6 position-relative">
-                                    <label for="form-label">Rol</label>
+                                    <label for="form-label">Registrarme como:</label>
                                     <select class="form-select" name="Rol" required>
                                         <option value="">Elegir...</option>
                                         <option value="1">Paciente</option>

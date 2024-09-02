@@ -1,18 +1,28 @@
 <?php
-/*
-    session_start();
-    error_reporting(0);
+session_start();
+error_reporting(0);
 
-    $validar = $_SESSION['correo'];
+// Verificar si el usuario está autenticado
+$validar = $_SESSION['correo'];
 
-    if( $validar == null || $validar = ''){
-
-    header("Location: ../../../LogIn.php");
+if ($validar == null || $validar == '') {
+    header("Location: ../../../../LogIn.php");
     die();
-    
-    }
+} 
 
-*/
+// Obtener el nombre del usuario desde la base de datos
+require("../../../../Configuration/Connection.php");
+
+// Obtener el idUser del usuario actual
+$sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+$user_data = $sql_user->fetch_assoc();
+$user_id = $user_data['idUser'];
+
+// Obtener el nombre del usuario
+$sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
+$user_info = $sql_name->fetch_assoc();
+$user_name = htmlspecialchars($user_info['nameU']);
+$user_lastname = htmlspecialchars($user_info['lastname']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +49,12 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li>
+                            <a href="../InventorIndex.php" class="nav-link px-0 text-white align-middle">
+                                <i class="fs-4 bi-house-door-fill"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Inicio</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="../InventorMedicinas.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-capsule"></i> <span class="ms-1 d-none d-sm-inline">Medicinas</span>
                             </a>
@@ -58,14 +74,15 @@
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1">Inventarista</span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -75,119 +92,96 @@
                 <div class="card">
                     <h5 class="card-header">Informacion de Receta</h5>
                     <div class="card-body">
-                        <?php /*
+                        <?php 
                         
                         include ('../../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM recipes WHERE idRecipe=".$_GET['idRecipe'];
                         $resultado = $conexion->query($sql);
-                        $row = $resultado->fetch_assoc(); */
+                        $row = $resultado->fetch_assoc(); 
                         
                         ?>
 
                         <h5 class="card-title">Detalles</h5>
                         <form class="needs-validation" method="post" action="../Forms/RecetaUpdate.php">
                             <h5>ID Receta</h5>
-                            <input type="number" class="form-control" value="<?php /*echo $row['idRecipe'] */ ?>"
-                                disabled>
+                            <input type="number" class="form-control" value="<?php echo $row['idRecipe']  ?>" disabled>
                             <hr>
                             <div class="form-group">
                                 <label for="dateHour">Fecha de emision</label>
                                 <input type="text" class="form-control" id="dateHour"
-                                    value="<?php /*echo $row['dateHour']*/?>" disabled>
+                                    value="<?php echo $row['dateHour']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="routeAdministration">Via de Administracion</label>
                                 <input type="text" class="form-control" id="routeAdministration"
-                                    value="<?php /*echo $row['routeAdministration']*/?>" disabled>
+                                    value="<?php echo $row['routeAdministration']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="durationDay">Duracion en dias</label>
                                 <input type="text" class="form-control" id="durationDay"
-                                    value="<?php /*echo $row['durationDay']*/?>" disabled>
+                                    value="<?php echo $row['durationDays']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="durationMonth">Duracion en meses</label>
                                 <input type="text" class="form-control" id="durationMonth"
-                                    value="<?php /*echo $row['durationMonth']*/?>" disabled>
+                                    value="<?php echo $row['durationMonths']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="frequency">Frecuencia en horas</label>
                                 <input type="text" class="form-control" id="frequency"
-                                    value="<?php /*echo $row['frequency']*/?>" disabled>
+                                    value="<?php echo $row['frequency']?>" disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="amount">Cantidad de empaque(s)</label>
-                                <input type="text" class="form-control" id="amount"
-                                    value="<?php /*echo $row['amount']*/?>" disabled>
+                                <input type="text" class="form-control" id="amount" value="<?php echo $row['amount']?>"
+                                    disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="state">Estado</label>
-                                <input type="text" class="form-control" id="state"
-                                    value="<?php /*echo $row['stateR']*/?>" disabled>
+                                <input type="text" class="form-control" id="state" value="<?php echo $row['stateR']?>"
+                                    disabled>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="specialInstructions">Instrucciones Especiales</label>
                                 <input type="text" class="form-control" id="specialInstructions"
-                                    value="<?php /*echo $row['specialInstructions']*/?>" disabled>
+                                    value="<?php echo $row['specialInstructions']?>" disabled>
                             </div>
                             <br>
-                            <?php  /*
-                            require("../../../../Configuration/Connection.php");
+                            <?php  
+                                require("../../../../Configuration/Connection.php");
 
-                            $idRecipe = $_GET['idRecipe'];
+                                $idRecipe = $_GET['idRecipe'];
 
-                            $sql = "SELECT m.idMedicine
-                            FROM medicines m
-                            INNER JOIN recipes r ON m.idMedicine = r.fkIdMedicine
-                            WHERE r.idRecipe = $idRecipe";
+                                // Obtener el medicamento asociado a la receta
+                                $sql_medicine = "SELECT m.nameM 
+                                                FROM medicines m
+                                                INNER JOIN recipes r ON m.idMedicine = r.fkIdMedicine
+                                                WHERE r.idRecipe = $idRecipe";
 
-                            $resultado = $conexion->query($sql);
+                                $resultado_medicine = $conexion->query($sql_medicine);
 
-                            if ($resultado->num_rows > 0) {
-                            $row = $resultado->fetch_assoc();
-                            $nameM = $row['nameM'];
-                            }
-                             */
-                            ?>
+                                if ($resultado_medicine->num_rows > 0) {
+                                    $row_medicine = $resultado_medicine->fetch_assoc();
+                                    $nameM = $row_medicine['nameM'];
+                                } else {
+                                    $nameM = "Medicamento no encontrado";
+                                }
+                                ?>
                             <div class="form-group">
                                 <label for="medicine">Medicamento</label>
-                                <input type="text" class="form-control" id="medicine"
-                                    value="<?php /*echo $row['nameM']*/?>" disabled>
-                            </div>
-                            <br>
-                            <?php  /*
-                            require("../../../../Configuration/Connection.php");
-
-                            $idRecipe = $_GET['idRecipe'];
-
-                            $sql = "SELECT d.idDiagnosis
-                            FROM diagnosis d
-                            INNER JOIN recipes r ON d.idDiagnosis = r.fkIdDiagnosis
-                            WHERE r.idRecipe = $idRecipe";
-
-                            $resultado = $conexion->query($sql);
-
-                            if ($resultado->num_rows > 0) {
-                            $row = $resultado->fetch_assoc();
-                            $idDiagnosis = $row['idDiagnosis'];
-                            }
-                             */
-                            ?>
-                            <div class="form-group">
-                                <label for="diagnosis">ID Diagnostico</label>
-                                <input type="number" class="form-control" id="diagnosis"
-                                    value="<?php /*echo $row['idDiagnosis']*/?>" disabled>
+                                <input type="text" class="form-control" id="medicine" value="<?php echo $nameM; ?>"
+                                    disabled>
                             </div>
                             <hr>
-                            <a href="../PatientRecetas.php" type="button" class="btn btn-secondary">Regresar</a>
+                            <a href="../InventorRecetas.php" type="button" class="btn btn-secondary">Regresar</a>
                         </form>
                     </div>
                 </div>
