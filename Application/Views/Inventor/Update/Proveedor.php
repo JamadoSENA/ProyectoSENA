@@ -40,7 +40,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <hr>
                     <img src="../../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto"
                         height="75" />
@@ -78,11 +78,11 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -104,8 +104,8 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                         <h5 class="card-title">Detalles</h5>
                         <form class="needs-validation" method="post" action="../Forms/ProveedorUpdate.php">
                             <h5>NIT</h5>
-                            <input type="number" class="form-control" name="NIT" value="<?php echo $row['idSupplier'] ?>"
-                                readonly>
+                            <input type="number" class="form-control" name="NIT"
+                                value="<?php echo $row['idSupplier'] ?>" readonly>
                             <hr>
                             <div class="form-group">
                                 <label for="validationCustom01">Nombre</label>
@@ -137,12 +137,29 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom04">Numero Telefonico</label>
-                                <input type="text" class="form-control" id="validationCustom03"
-                                    value="<?php echo $row['phoneNumber']?>" name="Telefono" required>
-                                <div class="invalid-feedback">
-                                    Por favor digite el nombre del proveedor.
+                                <input type="number" class="form-control" id="validationCustom03"
+                                 min="0" max="3999999999" value="<?php echo $row['phoneNumber']?>" name="Telefono" id="phoneNumber" required>
+                                <div class="invalid-feedback" id="phone_feedback">
+                                    Por favor, ingrese correctamente un número telefónico, que comience con 3.
                                 </div>
                             </div>
+
+                            <script>
+                            document.getElementById('validationCustom03').addEventListener('input', function() {
+                                const phoneNumber = this.value;
+                                const feedback = document.getElementById('phone_feedback');
+
+                                if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '3') {
+                                    this.setCustomValidity('Número telefónico inválido. Debe comenzar con 3.');
+                                    feedback.style.display = 'block';
+                                } else {
+                                    this.setCustomValidity('');
+                                    feedback.style.display = 'none';
+                                }
+                            });
+                            </script>
+
+
                             <hr>
                             <button type="submit" class="btn btn-primary">Actualizar</button>
                             <a href="../InventorProveedores.php" class="btn btn-secondary">Cancelar</a>

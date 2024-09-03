@@ -151,11 +151,25 @@
                                 <div class="col-md-4">
                                     <label for="validationCustom05" class="form-label">No. Telefonico</label>
                                     <input type="number" name="Telefono" id="phone_number" class="form-control"
-                                        required />
+                                       min="0" max="10" required />
                                     <div class="invalid-feedback">
                                         Por favor, digite su numero telefónico.
                                     </div>
                                 </div>
+                                <script>
+                                document.getElementById('phone_number').addEventListener('input', function () {
+                                    const phoneNumber = this.value;
+                                    const feedback = document.getElementById('phone_feedback');
+                            
+                                    if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '3') {
+                                        this.setCustomValidity('Número telefónico inválido. Debe comenzar con 3.');
+                                        feedback.style.display = 'block';
+                                    } else {
+                                        this.setCustomValidity('');
+                                        feedback.style.display = 'none';
+                                    }
+                                });
+                                </script>
                                 <div class="col-md-4">
                                     <label for="validationCustom05" class="form-label">Profesion</label>
                                     <input type="text" name="Profesion" id="profession" class="form-control" required />
@@ -260,8 +274,8 @@
                                     <select class="form-select" name="Rol" required>
                                         <option value="">Elegir...</option>
                                         <option value="1">Paciente</option>
-                                        <option value="2">Inventarista</option>
-                                        <option value="3">Doctor</option>
+                                        <option value="2">Doctor</option>
+                                        <option value="3">Inventarista</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Por favor, digite la confirmación de su contraseña.

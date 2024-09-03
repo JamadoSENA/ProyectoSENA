@@ -78,11 +78,11 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -129,12 +129,26 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom05">Numero de Telefono</label>
-                                <input type="number" class="form-control" id="validationCustom05" name="Telefono"
+                                <input type="number" class="form-control" id="validationCustom05" name="Telefono" id="phone_number"
                                     required>
                                 <div class="invalid-feedback">
                                     Por favor digite el numero telefonico.
                                 </div>
                             </div>
+                            <script>
+                            document.getElementById('phone_number').addEventListener('input', function () {
+                                  const phoneNumber = this.value;
+                                  const feedback = document.getElementById('phone_feedback');
+
+                                  if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '3') {
+                                      this.setCustomValidity('Número telefónico inválido. Debe comenzar con 3.');
+            feedback.style.display = 'block';
+                                  } else {
+                                      this.setCustomValidity('');
+                                      feedback.style.display = 'none';
+                                  }
+                              });
+                            </script>
                             <hr>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
