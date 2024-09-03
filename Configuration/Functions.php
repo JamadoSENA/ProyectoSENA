@@ -106,11 +106,33 @@ function acceso_user() {
             </body>
             </html>";
         } else {
-            header('Location: ../Application/LogIn.php');
+            header('Location: ../App/LogIn.php');
             session_destroy();
         }
     } else {
-        header('Location: ../Application/LogIn.php');
+        header("Content-Type: text/html; charset=UTF-8");
+            echo "<!DOCTYPE html>
+            <html lang='es'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Inicio de Sesion Fallido</title>
+                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
+            </head>
+            <body>
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+                <script>
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: 'El correo o la contraseña son incorrectos.',
+                        icon: 'error'
+                    }).then(function() {
+                        window.location = '../Application/LogIn.php'; // Redirige después de cerrar el Swal
+                    });
+                </script>
+            </body>
+            </html>";
         session_destroy();
     }
 

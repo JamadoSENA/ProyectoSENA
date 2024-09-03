@@ -25,7 +25,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Información de Usuario</h5>
                             <hr>
-                            <form class="row g-3 needs-validation" method="post" action="../Configuration/RegisterUser.php" novalidate>
+                            <form class="row g-3 needs-validation" method="post"
+                                action="../Configuration/RegisterUser.php" novalidate>
                                 <div class="col-md-4">
                                     <label for="validationCustom01" class="form-label">No. Documento</label>
                                     <input type="number" name="Cedula" id="document" class="form-control input-lg"
@@ -51,14 +52,16 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="validationCustom01" class="form-label">Primer Nombre</label>
-                                    <input type="text" class="form-control" id="validationCustom01" name="Nombre" required>
+                                    <input type="text" class="form-control" id="validationCustom01" name="Nombre"
+                                        required>
                                     <div class="invalid-feedback">
                                         Por favor, digite su primer nombre.
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="validationCustom02" class="form-label">Primer Apellido</label>
-                                    <input type="text" class="form-control" id="validationCustom02" name="Apellido" required>
+                                    <input type="text" class="form-control" id="validationCustom02" name="Apellido"
+                                        required>
                                     <div class="invalid-feedback">
                                         Por favor, digite su primer apellido.
                                     </div>
@@ -150,19 +153,20 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="validationCustom05" class="form-label">No. Telefonico</label>
-                                    <input type="number" name="Telefono" id="phone_number" class="form-control"
-                                       min="0" max="10" required />
+                                    <input type="number" name="Telefono" id="phone_number" class="form-control" min="0"
+                                        max="3999999999" required />
                                     <div class="invalid-feedback">
                                         Por favor, digite su numero telefónico.
                                     </div>
                                 </div>
                                 <script>
-                                document.getElementById('phone_number').addEventListener('input', function () {
+                                document.getElementById('phone_number').addEventListener('input', function() {
                                     const phoneNumber = this.value;
                                     const feedback = document.getElementById('phone_feedback');
-                            
+
                                     if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '3') {
-                                        this.setCustomValidity('Número telefónico inválido. Debe comenzar con 3.');
+                                        this.setCustomValidity(
+                                            'Número telefónico inválido. Debe comenzar con 3.');
                                         feedback.style.display = 'block';
                                     } else {
                                         this.setCustomValidity('');
@@ -188,9 +192,9 @@
                                     <label for="validationCustomUsername" class="form-label">Correo Electrónico</label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                        <input type="email" name="Correo" class="form-control" id="validationCustomUsername"
-                                            aria-describedby="inputGroupPrepend" placeholder="name@example.com"
-                                            required>
+                                        <input type="email" name="Correo" class="form-control"
+                                            id="validationCustomUsername" aria-describedby="inputGroupPrepend"
+                                            placeholder="name@example.com" required>
                                         <div class="invalid-feedback">
                                             Por favor, digite su correo electronico.
                                         </div>
@@ -209,7 +213,8 @@
                                 </div>
                                 <div class="col-md-6 position-relative">
                                     <label for="confirm-password" class="form-label">Confirmar Contraseña</label>
-                                    <input type="password" name="Contrasenia" id="confirm-password" class="form-control" required />
+                                    <input type="password" name="Contrasenia" id="confirm-password" class="form-control"
+                                        required />
                                     <span id="toggle-confirm-password" class="position-absolute toggle-password"
                                         style="top: 38px; right: 20px; cursor: pointer;">
                                         <i class="bi bi-eye-slash" id="icono-ojito2"></i>
@@ -299,11 +304,13 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer">
-                            <small class="text-body-secondary">MediStock © 2024. Todos los derechos reservados.</small>
-                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body">MediStock © 2024. Todos los derechos reservados.</small>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -26,16 +26,14 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Diagnostico</title>
+    <title>Diagnóstico</title>
 </head>
-
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap">
@@ -82,7 +80,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesión</a>
                             </li>
                         </ul>
                     </div>
@@ -90,54 +88,47 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
             </div>
             <div class="col py-3">
                 <div class="card">
-                    <h5 class="card-header">Asignacion de Diagnostico</h5>
+                    <h5 class="card-header">Asignación de Diagnóstico</h5>
                     <div class="card-body">
                         <h5 class="card-title">Formulario</h5>
-                        <?php 
-                        
+                        <?php
                         include ('../../../../Configuration/Connection.php');
-                        
+
                         $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
                         $resultado = $conexion->query($sql);
                         $row = $resultado->fetch_assoc();
-                        
                         ?>
                         <form class="needs-validation" method="post" action="../Forms/CitaDiagnostico.php" novalidate>
-                            <input type="hidden" class="form-control" name="Cita"
-                                value="<?php  echo $row['idScheduling']  ?>">
+                            <input class="form-control" hidden name="Cita" value="<?php echo $row['idScheduling'] ?>">
                             <div class="form-group">
                                 <label for="validationCustom01">Queja Principal</label>
                                 <input type="text" class="form-control" name="queja" id="validationCustom01" required>
                                 <div class="invalid-feedback">
-                                    Por favor digita la descripcion general sobre la queja principal del paciente.
+                                    Por favor digita la descripción general sobre la queja principal del paciente.
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="validationCustom02">Sintomas Principales</label>
-                                <input type="text" class="form-control" name="sintomas" id="validationCustom02"
-                                    required>
+                                <label for="validationCustom02">Síntomas Principales</label>
+                                <input type="text" class="form-control" name="sintomas" id="validationCustom02" required>
                                 <div class="invalid-feedback">
-                                    Por favor digita la descripcion general sobre los sintomas principales.
+                                    Por favor digita la descripción general sobre los síntomas principales.
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom03">Antecedentes Personales</label>
-                                <input type="text" class="form-control" name="antecedentesPersonales"
-                                    id="validationCustom03" required>
+                                <input type="text" class="form-control" name="antecedentesPersonales" id="validationCustom03" required>
                                 <div class="invalid-feedback">
-                                    Por favor digita la descripcion general sobre los antecedentes personales.
+                                    Por favor digita la descripción general sobre los antecedentes personales.
                                 </div>
                             </div>
-
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom04">Antecedentes Familiares</label>
-                                <input type="text" class="form-control" name="antecedentesFamiliares"
-                                    id="validationCustom04" required>
+                                <input type="text" class="form-control" name="antecedentesFamiliares" id="validationCustom04" required>
                                 <div class="invalid-feedback">
-                                    Por favor digita la descripcion general sobre los antecedentes familiares.
+                                    Por favor digita la descripción general sobre los antecedentes familiares.
                                 </div>
                             </div>
                             <br>
@@ -145,23 +136,21 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 <label for="validationCustom05">Signos Vitales</label>
                                 <input type="text" class="form-control" name="signos" id="validationCustom05" required>
                                 <div class="invalid-feedback">
-                                    Por favor digita la descripcion general sobre los signos vitales.
+                                    Por favor digita la descripción general sobre los signos vitales.
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="validationCustom06">Examinacion Fisica</label>
-                                <input type="text" class="form-control" name="examinacion" id="validationCustom06"
-                                    required>
+                                <label for="validationCustom06">Examinación Física</label>
+                                <input type="text" class="form-control" name="examinacion" id="validationCustom06" required>
                                 <div class="invalid-feedback">
-                                    Por favor digita la descripcion sobre la examinacion fisica.
+                                    Por favor digita la descripción sobre la examinación física.
                                 </div>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom07">Observaciones Adicionales</label>
-                                <input type="text" class="form-control" name="observaciones" id="validationCustom07"
-                                    required>
+                                <input type="text" class="form-control" name="observaciones" id="validationCustom07" required>
                                 <div class="invalid-feedback">
                                     Por favor digita las observaciones necesarias.
                                 </div>
@@ -201,6 +190,5 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
         </script>
-</body>
-
+    </body>
 </html>

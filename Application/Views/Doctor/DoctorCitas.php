@@ -23,8 +23,8 @@ $sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
 $user_info = $sql_name->fetch_assoc();
 $user_name = $user_info['nameU'];
 $user_lastname = $user_info['lastname'];
-
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,9 +35,10 @@ $user_lastname = $user_info['lastname'];
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Agenda</title>
     <style>
-        .dropdown-menu {
-            z-index: 1050; /* Ensure it is above other elements */
-        }
+    .dropdown-menu {
+        z-index: 1050;
+        /* Ensure it is above other elements */
+    }
     </style>
 </head>
 
@@ -53,8 +54,9 @@ $user_lastname = $user_info['lastname'];
                         id="menu">
                         <li>
                             <a href="DoctorIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-house-door-fill"></i> <span class="ms-1 d-none d-sm-inline">
-                                    Inicio</span> </a>
+                                <i class="fs-4 bi-house-door-fill"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Inicio</span>
+                            </a>
                         </li>
                         <li>
                             <a href="DoctorCitas.php" class="nav-link px-0 text-white align-middle">
@@ -64,7 +66,8 @@ $user_lastname = $user_info['lastname'];
                         <li>
                             <a href="DoctorDiagnosticos.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-prescription"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Diagnosticos</span> </a>
+                                    class="ms-1 d-none d-sm-inline">Diagnósticos</span>
+                            </a>
                         </li>
                         <li>
                             <a href="DoctorRecetas.php" class="nav-link px-0 text-white align-middle">
@@ -74,7 +77,7 @@ $user_lastname = $user_info['lastname'];
                     </ul>
                     <hr>
                     <div class="dropdown pb-4">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
                             <span
@@ -85,7 +88,7 @@ $user_lastname = $user_info['lastname'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesión</a>
                             </li>
                         </ul>
                     </div>
@@ -94,7 +97,7 @@ $user_lastname = $user_info['lastname'];
             <div class="col py-5">
                 <div class="card">
                     <div class="card-header">
-                        Gestion de Citas
+                        Gestión de Citas
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -122,20 +125,20 @@ $user_lastname = $user_info['lastname'];
                                 </thead>
                                 <tbody>
                                     <?php
-                                    require("../../../Configuration/Connection.php");
+    require("../../../Configuration/Connection.php");
 
-                                    // Consulta para obtener las citas del paciente, incluyendo el nombre del doctor
-                                    $sql = $conexion->query("
-                                        SELECT s.idScheduling, s.stateS, s.dateHourStart, 
-                                        CONCAT(d.nameU, ' ', d.lastname) AS patientName
-                                        FROM schedulings s
-                                        JOIN users d ON s.fkIdPatient = d.idUser
-                                        WHERE s.fkIdDoctor = $user_id
-                                        AND s.dateHourStart > NOW()
-                                    ");
+    // Consulta para obtener las citas del paciente, incluyendo el nombre del doctor
+    $sql = $conexion->query("
+        SELECT s.idScheduling, s.stateS, s.dateHourStart, 
+        CONCAT(u.nameU, ' ', u.lastname) AS patientName
+        FROM schedulings s
+        LEFT JOIN users u ON s.fkIdPatient = u.idUser
+        WHERE s.fkIdDoctor = $user_id
+        AND s.dateHourStart >= NOW()
+    ");
 
-                                    while ($resultado = $sql->fetch_assoc()){
-                                    ?>
+    while ($resultado = $sql->fetch_assoc()){
+    ?>
                                     <tr>
                                         <td scope="row" style="text-align: center;">
                                             <?php echo $resultado['idScheduling'] ?></td>
@@ -144,26 +147,39 @@ $user_lastname = $user_info['lastname'];
                                         <td scope="row" style="text-align: center;">
                                             <?php echo $resultado['dateHourStart'] ?></td>
                                         <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado['patientName'] ?></td>
+                                            <?php echo $resultado['patientName'] ? $resultado['patientName'] : 'Sin Paciente' ?>
+                                        </td>
                                         <td scope="row">
                                             <div class="dropdown" style="text-align: center;">
-                                                <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                <button class="btn" type="button" id="dropdownMenuButton"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-three-dots-vertical"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                                                     </svg>
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <li><a class="dropdown-item cancel-button" href="#" data-scheduling-id="<?php echo $resultado['idScheduling'] ?>" data-date-start="<?php echo $resultado['dateHourStart'] ?>">Actualizar</a></li>
-                                                    <li><a class="dropdown-item" href="Details/Cita.php?idScheduling=<?php echo $resultado['idScheduling'] ?>">Detalles</a></li>
-                                                    <li><a class="dropdown-item" href="Create/CitaDiagnostico.php?idScheduling=<?php echo $resultado['idScheduling'] ?>">Generar Diagnostico</a></li>
+                                                    <li><a class="dropdown-item cancel-button" href="#"
+                                                            data-scheduling-id="<?php echo $resultado['idScheduling'] ?>"
+                                                            data-date-hour-start="<?php echo $resultado['dateHourStart'] ?>">Actualizar</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="Details/Cita.php?idScheduling=<?php echo $resultado['idScheduling'] ?>">Detalles</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="Create/CitaDiagnostico.php?idScheduling=<?php echo $resultado['idScheduling'] ?>">Generar
+                                                            Diagnóstico</a></li>
                                                 </ul>
                                             </div>
                                         </td>
                                     </tr>
                                     <?php 
-                                    }
-                                    ?>
+    }
+    ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -210,25 +226,19 @@ $user_lastname = $user_info['lastname'];
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.1/js/buttons.colVis.min.js"></script>
-    <script type="text/javascript">
-    new DataTable('#tablaCitas', {
-        layout: {
-            topStart: {
-                buttons: ['excel', 'pdf']
-            }
-        }
-    });
-    </script>
+
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
+
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
         const cancelButtons = document.querySelectorAll('.cancel-button');
 
         cancelButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
+            button.addEventListener('click', function(event) {
                 event.preventDefault();
                 const schedulingId = this.dataset.schedulingId;
-                const dateHourStart = new Date(this.dataset.dateStart);
+                const dateHourStart = new Date(this.dataset.dateHourStart);
                 const currentDate = new Date();
                 const differenceInHours = (dateHourStart - currentDate) / 1000 / 60 / 60;
 
@@ -250,14 +260,24 @@ $user_lastname = $user_info['lastname'];
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Acción de cancelar cita
-                            window.location.href = 'Update/Cita.php?idScheduling=' + schedulingId;
+                            window.location.href = 'Update/Cita.php?idScheduling=' +
+                                schedulingId;
                         }
                     });
                 }
             });
         });
+
+        new DataTable('#tablaCitas', {
+            layout: {
+                topStart: {
+                    buttons: ['excel', 'pdf']
+                }
+            }
+        });
     });
     </script>
+
 </body>
 
 </html>
