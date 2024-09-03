@@ -79,11 +79,11 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href="Index.php">Perfil</a></li>
+                            <li><a class="dropdown-item" href="../Profile/Index.php">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesión</a>
+                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
