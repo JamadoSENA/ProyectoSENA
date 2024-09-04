@@ -2,16 +2,16 @@
 <html lang="en" class="h-100" data-bs-theme="auto">
 
 <head>
-    <script src="Resources/JS/ColorModes.js"></script>
+    <script src="Public/Resources/JS/ColorModes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Medistock</title>
-    <link rel="shortcut icon" href="Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
+    <link rel="shortcut icon" href="Public/Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="Resources/CSS/Index.css" rel="stylesheet">
+    <link href="Public/Resources/CSS/Index.css" rel="stylesheet">
     <style>
     .bd-placeholder-img {
         font-size: 1.125rem;
@@ -93,7 +93,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="Resources/CSS/Cover.css" rel="stylesheet">
+    <link href="Public/Resources/CSS/Cover.css" rel="stylesheet">
 </head>
 
 <body class="d-flex h-100 text-center text-bg-dark">
@@ -104,9 +104,9 @@
             <div>
                 <h3 class="float-md-start mb-0">Medistock</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-end">
-                    <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="../Application/LogIn.php">Iniciar
+                    <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="Application/LogIn.php">Iniciar
                         Sesion</a>
-                    <a class="nav-link fw-bold py-1 px-0" href="../Application/Register.php">Registrarse</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="Application/Register.php">Registrarse</a>
                 </nav>
             </div>
         </header>
@@ -121,7 +121,7 @@
             <p>Proyecto SENA <a href="#" class="text-white">2024</a>, por <a href="#" class="text-white">GAES 8</a>.</p>
         </footer>
     </div>
-    <script src="Resources/JS/Index.js"></script>
+    <script src="Public/Resources/JS/Index.js"></script>
 
 </body>
 
