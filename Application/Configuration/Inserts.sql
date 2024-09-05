@@ -213,7 +213,7 @@ CALL INSERTARCITA(
     55667788
 );
 
-CALL INSERTARDIASNOSTICO(
+CALL INSERTARDIAGNOSTICO(
     'Dolor en el pecho', 
     'Fiebre alta, tos persistente', 
     'Sin antecedentes importantes', 
@@ -224,7 +224,7 @@ CALL INSERTARDIASNOSTICO(
     1
 );
 
-CALL INSERTARDIASNOSTICO(
+CALL INSERTARDIAGNOSTICO(
     'Dolor de cabeza', 
     'Náuseas, mareos', 
     'Migrañas frecuentes', 
@@ -235,7 +235,7 @@ CALL INSERTARDIASNOSTICO(
     2
 );
 
-CALL INSERTARDIASNOSTICO(
+CALL INSERTARDIAGNOSTICO(
     'Problemas respiratorios', 
     'Dificultad para respirar', 
     'Alergias estacionales', 
@@ -246,7 +246,7 @@ CALL INSERTARDIASNOSTICO(
     3
 );
 
-CALL INSERTARDIASNOSTICO(
+CALL INSERTARDIAGNOSTICO(
     'Cansancio extremo', 
     'Fatiga crónica, pérdida de peso', 
     'Historial de anemia', 
@@ -257,7 +257,7 @@ CALL INSERTARDIASNOSTICO(
     4
 );
 
-CALL INSERTARDIASNOSTICO(
+CALL INSERTARDIAGNOSTICO(
     'Dolor abdominal', 
     'Dolor en el abdomen inferior', 
     'Historial de úlceras', 
