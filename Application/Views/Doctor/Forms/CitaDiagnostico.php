@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $examinacion = $_POST["examinacion"];
     $observaciones = $_POST["observaciones"];
 
-    $insert_diagnosis = $conexion->prepare("CALL INSERTARDIASNOSTICO(?, ?, ?, ?, ?, ?, ?, ?)");
+    $insert_diagnosis = $conexion->prepare("CALL INSERTARDIAGNOSTICO(?, ?, ?, ?, ?, ?, ?, ?)");
     $insert_diagnosis->bind_param("sssssssi", $queja, $sintomas, $antecedentesP, $antecedentesF,
     $signos, $examinacion, $observaciones, $cita);
 
