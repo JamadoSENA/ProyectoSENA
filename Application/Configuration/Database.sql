@@ -78,7 +78,6 @@ CREATE TABLE medicines (
 -- Creación de la tabla recipe
 CREATE TABLE recipes (
     idRecipe INT PRIMARY KEY AUTO_INCREMENT,
-    dateHour TIMESTAMP NOT NULL,
     routeAdministration VARCHAR(500) NOT NULL,
     durationDays VARCHAR(50) NOT NULL,
     durationMonths VARCHAR(50) NOT NULL,

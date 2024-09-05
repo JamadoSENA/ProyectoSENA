@@ -1,5 +1,5 @@
 <?php
-require '../../../../Configuration/Connection.php';
+require '../../../Configuration/Connection.php';
 
 // Verificar si se ha enviado una solicitud POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -18,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // Si el paciente está presente, verificar si ya tiene una cita en la misma fecha
-        if ($paciente) {
-            $query_check = $conexion->prepare("SELECT COUNT(*) FROM schedulings WHERE fkIdPatient = ? AND DATE(dateHourStart) = DATE(?)");
-            $query_check->bind_param("is", $paciente, $inicio);
+        if ($doctor) {
+            $query_check = $conexion->prepare("SELECT COUNT(*) FROM schedulings WHERE fkIdDoctor = ? AND DATE(dateHourStart) = DATE(?)");
+            $query_check->bind_param("is", $doctor, $inicio);
             $query_check->execute();
             $query_check->bind_result($count);
             $query_check->fetch();
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <script>
                         Swal.fire({
                             title: '¡Error!',
-                            text: 'El paciente seleccionado ya tiene una cita programada para la fecha digitada.',
+                            text: 'Ya tienes una cita programada para la fecha digitada.',
                             icon: 'error'
                         }).then(function() {
                             window.location = '../DoctorCitas.php'; // Redirige después de cerrar el Swal

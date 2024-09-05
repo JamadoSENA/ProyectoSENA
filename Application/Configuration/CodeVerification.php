@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>Cambio Exitoso</title>
-                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link rel='shortcut icon' href='../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
             </head>
             <body>
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: 'Se ha cambiado la contraseña correctamente.',
                         icon: 'success'
                     }).then(function() {
-                        window.location = '../Application/LogIn.php'; // Redirige después de cerrar el Swal
+                        window.location = '../LogIn.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>Cambio Fallido</title>
-                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link rel='shortcut icon' href='../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
             </head>
             <body>
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: 'No se ha cambiado la contraseña correctamente.',
                         icon: 'error'
                     }).then(function() {
-                        window.location = '../Application/LogIn.php'; // Redirige después de cerrar el Swal
+                        window.location = '../LogIn.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <meta charset='UTF-8'>
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <title>Código Incorrecto</title>
-            <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+            <link rel='shortcut icon' href='../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
             <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
         </head>
         <body>
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     text: 'El código de verificación es incorrecto.',
                     icon: 'error'
                 }).then(function() {
-                    window.location = '../Application/LogIn.php'; // Redirige después de cerrar el Swal
+                    window.location = '../LogIn.php'; // Redirige después de cerrar el Swal
                 });
             </script>
         </body>

@@ -11,7 +11,7 @@ if ($validar == null || $validar == '') {
 } 
 
 // Obtener el nombre del usuario desde la base de datos
-require("../../../../Configuration/Connection.php");
+require("../../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
 $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
@@ -92,7 +92,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                     <h5 class="card-header">Información de Cita</h5>
                     <div class="card-body">
                         <?php 
-                        include ('../../../../Configuration/Connection.php');
+                        include ('../../../Configuration/Connection');
                         
                         // Asegúrate de que idScheduling esté siendo pasado como parámetro
                         $idScheduling = isset($_GET['idScheduling']) ? intval($_GET['idScheduling']) : 0;

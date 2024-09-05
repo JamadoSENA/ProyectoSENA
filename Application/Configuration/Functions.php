@@ -12,7 +12,7 @@ if (isset($_POST['accion'])) {
 }
 
 function acceso_user() {
-    global $conexion; // Utiliza la conexión global establecida en Connection.php
+    $conexion; // Utiliza la conexión global establecida en Connection.php
 
     $correo = $_POST['correo'];
     $contrasenia = $_POST['contrasenia'];
@@ -41,7 +41,7 @@ function acceso_user() {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>Inicio de Sesión</title>
-                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link rel='shortcut icon' Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
             </head>
             <body>
@@ -52,7 +52,7 @@ function acceso_user() {
                         text: 'Has iniciado sesión correctamente.',
                         icon: 'success'
                     }).then(function() {
-                        window.location = '../Application/Views/Patient/PatientIndex.php'; // Redirige después de cerrar el Swal
+                        window.location = '../Views/Patient/PatientIndex.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
@@ -65,7 +65,7 @@ function acceso_user() {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>Inicio de Sesión</title>
-                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link rel='shortcut icon' href='../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
             </head>
             <body>
@@ -76,7 +76,7 @@ function acceso_user() {
                         text: 'Has iniciado sesión correctamente.',
                         icon: 'success'
                     }).then(function() {
-                        window.location = '../Application/Views/Doctor/DoctorIndex.php'; // Redirige después de cerrar el Swal
+                        window.location = '../Views/Doctor/DoctorIndex.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
@@ -89,7 +89,7 @@ function acceso_user() {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>Inicio de Sesión</title>
-                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link rel='shortcut icon' href='../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
             </head>
             <body>
@@ -100,13 +100,13 @@ function acceso_user() {
                         text: 'Has iniciado sesión correctamente.',
                         icon: 'success'
                     }).then(function() {
-                        window.location = '../Application/Views/Inventor/InventorIndex.php'; // Redirige después de cerrar el Swal
+                        window.location = '../Views/Inventor/InventorIndex.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>
             </html>";
         } else {
-            header('Location: ../App/LogIn.php');
+            header('Location: ../LogIn.php');
             session_destroy();
         }
     } else {
@@ -117,7 +117,7 @@ function acceso_user() {
                 <meta charset='UTF-8'>
                 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                 <title>Inicio de Sesion Fallido</title>
-                <link rel='shortcut icon' href='../Application/Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link rel='shortcut icon' href='../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
                 <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
             </head>
             <body>
@@ -128,7 +128,7 @@ function acceso_user() {
                         text: 'El correo o la contraseña son incorrectos.',
                         icon: 'error'
                     }).then(function() {
-                        window.location = '../Application/LogIn.php'; // Redirige después de cerrar el Swal
+                        window.location = '../LogIn.php'; // Redirige después de cerrar el Swal
                     });
                 </script>
             </body>

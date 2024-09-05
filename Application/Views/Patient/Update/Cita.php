@@ -11,7 +11,7 @@ if ($validar == null || $validar == '') {
 } 
 
 // Obtener el nombre del usuario desde la base de datos
-require_once("../../../../Configuration/Connection.php");
+require_once("../../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
 $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
@@ -94,7 +94,7 @@ $user_lastname = $user_info['lastname'];
                     <div class="card-body">
                         <?php
                         
-                        include ('../../../../Configuration/Connection.php');
+                        include ('../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
                         $resultado = $conexion->query($sql);
@@ -124,7 +124,7 @@ $user_lastname = $user_info['lastname'];
                             <br>
                             <br>
                             <?php 
-                                require("../../../../Configuration/Connection.php");
+                                require("../../../Configuration/Connection.php");
 
                                 $idScheduling = $_GET['idScheduling'];
 

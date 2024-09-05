@@ -11,7 +11,7 @@ if ($validar == null || $validar == '') {
 } 
 
 // Obtener el nombre del usuario desde la base de datos
-require("../../../Configuration/Connection.php");
+require("../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
 $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
@@ -83,7 +83,7 @@ $user_lastname = $user_info['lastname'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -109,7 +109,7 @@ $user_lastname = $user_info['lastname'];
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    require("../../../Configuration/Connection.php");
+                                    require("../../Configuration/Connection");
 
                                     // Consulta para obtener las citas del paciente, incluyendo el nombre del doctor
                                     $sql = $conexion->query("

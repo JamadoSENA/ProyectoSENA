@@ -1,6 +1,6 @@
 <?php 
 
-require '../../../../Configuration/Connection.php';
+require '../../../Configuration/Connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener los datos del formulario

@@ -1,6 +1,6 @@
 <?php 
 
-require '../../../../Configuration/Connection.php';
+require '../../../Configuration/Connection.php';
 
     $id = $_POST["idRecipe"];
     $estado = $_POST["Estado"];

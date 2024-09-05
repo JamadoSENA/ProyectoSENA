@@ -1,6 +1,6 @@
 <?php
 // Requerir el archivo de conexión
-require '../../../../Configuration/Connection.php';
+require '../../../Configuration/Connection.php';
 
 // Verificar si se ha enviado una solicitud POST (para AJAX)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

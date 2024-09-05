@@ -11,7 +11,7 @@ if ($validar == null || $validar == '') {
 } 
 
 // Obtener el nombre del usuario desde la base de datos
-require("../../../../Configuration/Connection.php");
+require("../../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
 $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
@@ -82,7 +82,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -93,7 +93,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                     <h5 class="card-header">Actualización de Cita</h5>
                     <div class="card-body">
                         <?php 
-            include ('../../../../Configuration/Connection.php');
+            include ('../../../Configuration/Connection.php');
 
             $sql = "SELECT * FROM schedulings WHERE idScheduling=".$_GET['idScheduling'];
             $resultado = $conexion->query($sql);
@@ -142,7 +142,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
 
                             <!-- Paciente -->
                             <?php 
-                require("../../../../Configuration/Connection.php");
+                require("../../../Configuration/Connection.php");
 
                 $idScheduling = $_GET['idScheduling'];
 

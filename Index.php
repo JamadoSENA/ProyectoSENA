@@ -102,9 +102,10 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
-                <img src="Application/Resources/IMG/LogoSidebarMediStock.png" class="float-md-start mb-0" alt="MediStock"
-                    width="auto" height="75" />
-                <nav class="nav nav-masthead justify-content-center float-md-end">
+                <img src="Application/Resources/IMG/LogoSidebarMediStock.png" class="float-md-start mb-0"
+                    alt="MediStock" width="auto" height="75" />
+                <nav class="nav nav-masthead justify-content-center float-md-end" style="margin-top: 20px;">
+
                     <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="Application/LogIn.php">Iniciar
                         Sesion</a>
                     <a class="nav-link fw-bold py-1 px-0" href="Application/Register.php">Registrarse</a>

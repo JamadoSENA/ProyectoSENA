@@ -39,7 +39,7 @@
                     <img src="Resources/IMG/LogoColorVerde.png" class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form action="../Configuration/ResetPassword.php" method="POST">
+                    <form action="Configuration/ResetPassword.php" method="POST">
                         <h1>Recuperar Contraseña</h1>
                         <div class="divider d-flex align-items-center my-4">
                         </div>

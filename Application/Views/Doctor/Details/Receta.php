@@ -11,7 +11,7 @@ if ($validar == null || $validar == '') {
 } 
 
 // Obtener el nombre del usuario desde la base de datos
-require("../../../../Configuration/Connection.php");
+require("../../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
 $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
@@ -83,7 +83,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -95,7 +95,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                     <div class="card-body">
                         <?php 
                         
-                        include ('../../../../Configuration/Connection.php');
+                        include ('../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM recipes WHERE idRecipe=".$_GET['idRecipe'];
                         $resultado = $conexion->query($sql);
@@ -107,12 +107,6 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <h5>ID Receta</h5>
                             <input type="number" class="form-control" value="<?php echo $row['idRecipe'] ?>" disabled>
                             <hr>
-                            <div class="form-group">
-                                <label for="dateHour">Fecha de emision</label>
-                                <input type="text" class="form-control" id="dateHour"
-                                    value="<?php echo $row['dateHour'] ?>" disabled>
-                            </div>
-                            <br>
                             <div class="form-group">
                                 <label for="routeAdministration">Via de Administracion</label>
                                 <input type="text" class="form-control" id="routeAdministration"
@@ -156,7 +150,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             </div>
                             <br>
                             <?php 
-                            require("../../../../Configuration/Connection.php");
+                            require("../../../Configuration/Connection.php");
 
                             $idRecipe = $_GET['idRecipe'];
 

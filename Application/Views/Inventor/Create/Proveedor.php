@@ -11,7 +11,7 @@ if ($validar == null || $validar == '') {
 } 
 
 // Obtener el nombre del usuario desde la base de datos
-require("../../../../Configuration/Connection.php");
+require("../../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
 $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
@@ -82,7 +82,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -136,18 +136,18 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 </div>
                             </div>
                             <script>
-                            document.getElementById('phone_number').addEventListener('input', function () {
-                                  const phoneNumber = this.value;
-                                  const feedback = document.getElementById('phone_feedback');
+                                document.getElementById('phone_number').addEventListener('input', function () {
+                                    const phoneNumber = this.value;
+                                    const feedback = document.getElementById('phone_feedback');
 
-                                  if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '3') {
-                                      this.setCustomValidity('Número telefónico inválido. Debe comenzar con 3.');
-            feedback.style.display = 'block';
-                                  } else {
-                                      this.setCustomValidity('');
-                                      feedback.style.display = 'none';
-                                  }
-                              });
+                                    if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '3') {
+                                        this.setCustomValidity('Número telefónico inválido. Debe comenzar con 3.');
+                feedback.style.display = 'block';
+                                    } else {
+                                        this.setCustomValidity('');
+                                        feedback.style.display = 'none';
+                                    }
+                                });
                             </script>
                             <hr>
                             <button type="submit" class="btn btn-primary">Guardar</button>

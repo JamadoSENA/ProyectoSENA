@@ -1,6 +1,6 @@
 <?php 
 
-require '../../../../Configuration/Connection.php';
+require '../../../Configuration/Connection.php';
 
     $nit = $_POST["NIT"];
     $nombre = $_POST["Nombre"];

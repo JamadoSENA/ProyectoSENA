@@ -11,7 +11,7 @@ if ($validar == null || $validar == '') {
 } 
 
 // Obtener el nombre del usuario desde la base de datos
-require("../../../Configuration/Connection.php");
+require("../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
 $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
@@ -81,7 +81,7 @@ $user_lastname = $user_info['lastname'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -106,7 +106,7 @@ $user_lastname = $user_info['lastname'];
                                         <th scope="col" style="text-align: center;">ID</th>
                                         <th scope="col" style="text-align: center;">Medicamento</th>
                                         <th scope="col" style="text-align: center;">Cantidad</th>
-                                        <th scope="col" style="text-align: center;">Fecha de Emision</th>
+                                        <th scope="col" style="text-align: center;">Estado</th>
                                         <th scope="col" style="text-align: center;">Paciente</th>
                                         <th scope="col" style="text-align: center;">ID Diagnostico</th>
                                         <th scope="col"></th>
@@ -114,7 +114,7 @@ $user_lastname = $user_info['lastname'];
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    require("../../../Configuration/Connection.php");
+                                    require("../../Configuration/Connection.php");
 
                                     // Realiza una consulta más compleja uniendo múltiples tablas, filtrando por el id del doctor autenticado
                                     $sql = $conexion->query("
@@ -122,7 +122,7 @@ $user_lastname = $user_info['lastname'];
                                             recipes.idRecipe, 
                                             medicines.nameM, 
                                             recipes.amount, 
-                                            recipes.dateHour AS fechaEmision, 
+                                            recipes.stateR AS estado, 
                                             CONCAT(users.nameU, ' ', users.lastname) AS nombrePaciente, 
                                             diagnoses.idDiagnosis 
                                         FROM 
@@ -145,7 +145,7 @@ $user_lastname = $user_info['lastname'];
                                         <td scope="row" style="text-align: center;">
                                             <?php echo $resultado['amount']?></td>
                                         <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado['fechaEmision']?></td>
+                                            <?php echo $resultado['estado']?></td>
                                         <td scope="row" style="text-align: center;">
                                             <?php echo $resultado['nombrePaciente']?></td>
                                         <td scope="row" style="text-align: center;">

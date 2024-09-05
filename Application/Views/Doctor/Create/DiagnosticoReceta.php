@@ -11,7 +11,7 @@ if ($validar == null || $validar == '') {
 } 
 
 // Obtener el nombre del usuario desde la base de datos
-require("../../../../Configuration/Connection.php");
+require("../../../Configuration/Connection.php");
 
 // Obtener el idUser del usuario actual
 $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
@@ -82,7 +82,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesion</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesion</a>
                             </li>
                         </ul>
                     </div>
@@ -95,7 +95,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                         <h5 class="card-title">Formulario</h5>
                         <?php 
                         
-                        include ('../../../../Configuration/Connection.php');
+                        include ('../../../Configuration/Connection.php');
                         
                         $sql = "SELECT * FROM diagnoses WHERE idDiagnosis=".$_GET['idDiagnosis'];
                         $resultado = $conexion->query($sql);
@@ -184,7 +184,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 <select name="fkIdMedicine" class="form-control" id="patient" required>
                                     <option value="">Seleccionar</option>
                                     <?php 
-        include ("../../../../Configuration/Connection.php");
+        include ("../../../Configuration/Connection.php");
 
         // Consulta que filtra los medicamentos con stock mayor o igual a 1
         $sql = $conexion->query("SELECT idMedicine, nameM, stock FROM medicines WHERE stock >= 1 ORDER BY nameM ASC");
