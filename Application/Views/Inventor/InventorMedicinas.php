@@ -41,7 +41,7 @@ $user_lastname = $user_info['lastname'];
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <hr>
                     <img src="../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto" height="75" />
                     </a>
@@ -110,13 +110,13 @@ $user_lastname = $user_info['lastname'];
                             <table id="tablaMedicinas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="text-align: center;">ID</th>
                                         <th scope="col" style="text-align: center;">Nombre</th>
                                         <th scope="col" style="text-align: center;">Fecha Vencimiento</th>
                                         <th scope="col" style="text-align: center;">Categoria</th>
                                         <th scope="col" style="text-align: center;">Formato</th>
                                         <th scope="col" style="text-align: center;">Estado</th>
                                         <th scope="col" style="text-align: center;">Proveedor</th>
+                                        <th scope="col" style="text-align: center;">Cantidad</th>
                                         <th scope="col" style="text-align: center;"></th>
                                     </tr>
                                 </thead>
@@ -135,13 +135,20 @@ $user_lastname = $user_info['lastname'];
                                     
                                     ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idMedicine'] ?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameM'] ?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['expirationDate'] ?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['category'] ?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['formatM'] ?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateM'] ?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameSU'] ?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameM'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['expirationDate'] ?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['category'] ?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['formatM'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateM'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['nameSU'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stock'] ?>
+                                        </td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">

@@ -140,9 +140,29 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 <input type="date" class="form-control" id="validationCustom05" name="FechaVencimiento"
                                     required>
                                 <div class="invalid-feedback">
-                                    Por favor digite la fecha de vencimiento.
+                                    Por favor digite una fecha de vencimiento válida. No puede ser menor o igual a la
+                                    fecha actual.
                                 </div>
                             </div>
+
+                            <script>
+                            document.getElementById('validationCustom05').addEventListener('input', function() {
+                                var inputDate = new Date(this.value);
+                                var currentDate = new Date();
+
+                                // Set time to 00:00:00 for both dates to compare only the date part
+                                currentDate.setHours(0, 0, 0, 0);
+                                inputDate.setHours(0, 0, 0, 0);
+
+                                if (inputDate <= currentDate) {
+                                    this.setCustomValidity(
+                                        'Fecha inválida. La fecha de vencimiento debe ser mayor a la fecha actual.'
+                                        );
+                                } else {
+                                    this.setCustomValidity('');
+                                }
+                            });
+                            </script>
                             <br>
                             <div class="form-group">
                                 <label for="validationCustom02">Categoria</label>
