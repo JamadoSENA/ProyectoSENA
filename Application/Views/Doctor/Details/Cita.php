@@ -118,7 +118,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                     value="<?php echo $row['dateHourStart'] ?>" disabled>
                             </div>
                             <?php 
-                            require("../../../../Configuration/Connection.php");
+                            require("../../../Configuration/Connection.php");
 
                             $idScheduling = $_GET['idScheduling'];
 

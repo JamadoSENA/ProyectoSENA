@@ -101,55 +101,37 @@ $user_lastname = $user_info['lastname'];
                         <hr>
                         <div class="table-responsive">
                             <table id="tablaRecetas" class="table table-striped" style="width:100%">
-                                <thead>
+                            <thead>
                                     <tr>
                                         <th scope="col" style="text-align: center;">ID</th>
-                                        <th scope="col" style="text-align: center;">Medicamento</th>
-                                        <th scope="col" style="text-align: center;">Cantidad</th>
                                         <th scope="col" style="text-align: center;">Estado</th>
-                                        <th scope="col" style="text-align: center;">Paciente</th>
-                                        <th scope="col" style="text-align: center;">ID Diagnostico</th>
-                                        <th scope="col"></th>
+                                        <th scope="col" style="text-align: center;">Cantidad</th>
+                                        <th scope="col" style="text-align: center;">Medicamento</th>
+                                        <th scope="col" style="text-align: center;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    require("../../Configuration/Connection.php");
+                                require("../../Configuration/Connection.php");
 
-                                    // Realiza una consulta más compleja uniendo múltiples tablas, filtrando por el id del doctor autenticado
-                                    $sql = $conexion->query("
-                                        SELECT 
-                                            recipes.idRecipe, 
-                                            medicines.nameM, 
-                                            recipes.amount, 
-                                            recipes.stateR AS estado, 
-                                            CONCAT(users.nameU, ' ', users.lastname) AS nombrePaciente, 
-                                            diagnoses.idDiagnosis 
-                                        FROM 
-                                            recipes 
-                                        JOIN medicines ON recipes.fkIdMedicine = medicines.idMedicine
-                                        JOIN schedulings ON recipes.fkIdDiagnosis = schedulings.idScheduling
-                                        JOIN users ON schedulings.fkIdPatient = users.idUser
-                                        JOIN diagnoses ON schedulings.idScheduling = diagnoses.fkIdScheduling
-                                        WHERE 
-                                            schedulings.fkIdDoctor = $user_id
-                                    ");
-                                    
-                                    while ($resultado = $sql->fetch_assoc()) { 
-                                    ?>
+                                // Modificación de la consulta para filtrar por stateR = 'No Retirado'
+                                $sql = $conexion->query("SELECT recipes.*, medicines.nameM 
+                                                        FROM recipes 
+                                                        JOIN medicines ON recipes.fkIdMedicine = medicines.idMedicine
+                                                        WHERE recipes.stateR = 'No Retirado'");
+
+                                while ($resultado = $sql->fetch_assoc()){ 
+                                ?>
+
                                     <tr>
-                                        <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado['idRecipe']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nameM']?>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idRecipe'] ?>
                                         </td>
-                                        <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado['amount']?></td>
-                                        <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado['estado']?></td>
-                                        <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado['nombrePaciente']?></td>
-                                        <td scope="row" style="text-align: center;">
-                                            <?php echo $resultado['idDiagnosis']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['stateR'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['amount'] ?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['nameM'] ?>
+                                        </td>
                                         <td scope="row" style="text-align: center;">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">

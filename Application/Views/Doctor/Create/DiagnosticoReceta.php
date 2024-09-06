@@ -173,7 +173,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <div class="form-group">
                                 <label for="validationCustom07">Instrucciones Especiales</label>
                                 <input type="text" class="form-control" name="instrucciones" id="validationCustom07"
-                                    value="165f56e">
+                                    >
                                 <div class="invalid-feedback">
                                     Por favor digita las instrucciones especiales para el consumo del medicamento.
                                 </div>
