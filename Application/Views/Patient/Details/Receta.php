@@ -100,11 +100,6 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <input type="number" class="form-control" value="<?php echo $row['idRecipe'] ?>" disabled>
                             <hr>
                             <div class="form-group">
-                                <label for="dateHour">Fecha de emisión</label>
-                                <input type="text" class="form-control" id="dateHour" value="<?php echo $row['dateHour']?>" disabled>
-                            </div>
-                            <br>
-                            <div class="form-group">
                                 <label for="routeAdministration">Vía de Administración</label>
                                 <input type="text" class="form-control" id="routeAdministration" value="<?php echo $row['routeAdministration']?>" disabled>
                             </div>

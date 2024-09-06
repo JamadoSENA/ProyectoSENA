@@ -105,12 +105,6 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                         <form class="needs-validation" method="post" action="../Forms/RecetaUpdate.php">
                             <input type="number" class="form-control" name="idRecipe"
                                 value="<?php echo $row['idRecipe'] ?>" hidden>
-                            <hr>
-                            <div class="form-group">
-                                <label for="dateHour">Fecha de emision</label>
-                                <input type="text" class="form-control" id="dateHour"
-                                    value="<?php echo $row['dateHour']?>" disabled>
-                            </div>
                             <br>
                             <div class="form-group">
                                 <label for="routeAdministration">Via de Administracion</label>
@@ -138,8 +132,8 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <br>
                             <div class="form-group">
                                 <label for="amount">Cantidad de empaque(s)</label>
-                                <input type="text" class="form-control" id="amount" value="<?php echo $row['amount']?>"
-                                    disabled>
+                                <input type="text" class="form-control" id="amount" name="Cantidad" value="<?php echo $row['amount']?>"
+                                    readonly>
                             </div>
                             <br>
                             <div class="form-group">
@@ -166,7 +160,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 $idRecipe = $_GET['idRecipe'];
 
                                 // Consulta para obtener el nombre del medicamento asociado a la receta
-                                $sql = "SELECT m.nameM
+                                $sql = "SELECT m.nameM, m.idMedicine
                                         FROM medicines m
                                         INNER JOIN recipes r ON m.idMedicine = r.fkIdMedicine
                                         WHERE r.idRecipe = $idRecipe";
@@ -176,14 +170,14 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 if ($resultado->num_rows > 0) {
                                     $row = $resultado->fetch_assoc();
                                     $nameM = $row['nameM'];
+                                    $idMedicamento = $row['idMedicine'];
                                 } else {
                                     $nameM = "Medicamento no encontrado";
                                 }
                                 ?>
                             <div class="form-group">
-                                <label for="medicine">Medicamento</label>
-                                <input type="text" class="form-control" id="medicine"
-                                    value="<?php echo htmlspecialchars($nameM); ?>" disabled>
+                                <input type="text" name="Medicamento" class="form-control" id="medicine"
+                                    value="<?php echo htmlspecialchars($idMedicamento); ?>" hidden>
                             </div>
 
                             <hr>

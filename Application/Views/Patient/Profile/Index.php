@@ -95,7 +95,7 @@ $user_password = htmlspecialchars($user_info['passwordU']);
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../../../Configuration/SignOut.php">Cerrar Sesión</a>
+                            <li><a class="dropdown-item" href="../../../Configuration/SignOut.php">Cerrar Sesión</a>
                             </li>
                         </ul>
                     </div>
