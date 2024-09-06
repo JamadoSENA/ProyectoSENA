@@ -12,7 +12,7 @@ if (isset($_POST['accion'])) {
 }
 
 function acceso_user() {
-    $conexion; // Utiliza la conexión global establecida en Connection.php
+    global $conexion; // Utiliza la conexión global establecida en Connection.php
 
     $correo = $_POST['correo'];
     $contrasenia = $_POST['contrasenia'];

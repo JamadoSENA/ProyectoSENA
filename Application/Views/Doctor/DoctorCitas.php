@@ -125,7 +125,7 @@ $user_lastname = $user_info['lastname'];
                                 </thead>
                                 <tbody>
                                     <?php
-    require("../../../Configuration/Connection.php");
+    require("../../Configuration/Connection.php");
 
     // Consulta para obtener las citas del paciente, incluyendo el nombre del doctor
     $sql = $conexion->query("

@@ -111,7 +111,7 @@ $user_lastname = $user_info['lastname'];
                                 </thead>
                                 <tbody>
                                 <?php
-                                    require("../../Configuration/Connection");
+                                    require("../../Configuration/Connection.php");
 
                                     // Consulta SQL con JOINs y filtro por paciente
                                     $sql = $conexion->query("

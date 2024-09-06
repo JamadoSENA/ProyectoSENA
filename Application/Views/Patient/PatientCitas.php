@@ -108,7 +108,7 @@ $user_lastname = $user_info['lastname'];
                                 <tbody>
                                     <?php 
             
-                                    require("../../Configuration/Connection");
+                                    require("../../Configuration/Connection.php");
 
                                     // Consulta modificada para incluir el nombre del doctor
                                     $sql = $conexion->query("
