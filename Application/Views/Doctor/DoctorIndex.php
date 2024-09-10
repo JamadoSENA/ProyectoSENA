@@ -94,65 +94,106 @@ $user_lastname = $user_info['lastname'];
                         ¡Bienvenido!
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Estimado/a <?php echo $user_name . ' ' . $user_lastname; ?>:</h5>
-                        <p class="card-text">
-                            Tienes la oportunidad de gestionar tus propias citas y tratamientos diagnosticados de manera
-                            sencilla y rápida.
-                            Aprovecha esta plataforma para organizar tu agenda, seguir el progreso de tus pacientes y
-                            coordinar
-                            tratamientos de manera eficiente.
-                        </p>
                         <div class="container text-space-center">
                             <div class="row align-items-center">
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-                                        <div class="card-header">Gestión de Citas</div>
+                                <div class="col-12 d-flex justify-content-center align-items-center" style="width: 100%;">
+                                    <div class="card text-bg w-75 mb-3"
+                                        style="max-width: 18rem; background-color: rgba(33, 37, 41, 1.00);" >
+                                        <div class="card-header"  style="color: white;">Citas pendientes</div>
                                         <div class="card-body">
-                                            <h5 class="card-title">Agenda Cita</h5>
-                                            <p class="card-text" style="text-align: justify;">
-                                                Organiza tus citas de manera rápida y sencilla.
-                                                Selecciona la fecha y hora que más te convenga y asegura tu espacio.
-                                                Recibe recordatorios automáticos para que no te pierdas ninguna
-                                                consulta.
-                                            </p>
-                                            <a href="DoctorCitas.php" class="btn btn-secondary">¡Agendar!</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-                                        <div class="card-header">Registro de Diagnósticos</div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">Diagnóstico Médico</h5>
-                                            <p class="card-text" style="text-align: justify;">
-                                                Genera diagnósticos y recomendaciones médicas en un solo lugar.
-                                                Mantén un registro detallado de cada consulta y organiza tu tiempo de
-                                                manera efectiva.
-                                                Puedes revisar los tratamientos recomendados en cualquier momento.
-                                            </p>
-                                            <a href="DoctorDiagnosticos.php" class="btn btn-secondary">¡Empezar!</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-                                        <div class="card-header">Creación de Recetas</div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">Recetario</h5>
-                                            <p class="card-text" style="text-align: justify;">
-                                                Accede a las recetas y sigue el plan de medicación al pie de la letra.
-                                                Consulta tus diagnosticos actuales y anteriores, y mantente al tanto
-                                                de tus necesidades profesionales.
-                                                Todo lo que necesitas para mejorar tu entorno laboral, en un solo lugar.
-                                            </p>
-                                            <a href="DoctorRecetas.php" class="btn btn-secondary">¡Recetar!</a>
+                                            <nav class="navbar navbar-expand-lg navbar-dark"
+                                                style="background-color: rgba(33, 37, 41, 1.00);">
+                                                <div class="container-fluid">
+                                                    <a class="navbar-brand">Filtrar por:</a>
+                                                    <button class="navbar-toggler" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#navbarNavDarkDropdown"
+                                                        aria-controls="navbarNavDarkDropdown" aria-expanded="false"
+                                                        aria-label="Toggle navigation">
+                                                        <span class="navbar-toggler-icon"></span>
+                                                    </button>
+                                                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                                        <ul class="navbar-nav">
+                                                            <li class="nav-item dropdown">
+                                                                <button class="btn btn-secondary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    Seleccionar...
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-dark">
+                                                                    <li><a class="dropdown-item" href="#">Dia</a>
+                                                                    </li>
+                                                                    <li><a class="dropdown-item" href="#">Semana
+                                                                        </a></li>
+                                                                    <li><a class="dropdown-item" href="#">Mes
+                                                                        </a></li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </nav>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="container text-space-center">
+                            <div class="row align-items-stretch">
+                                <!-- Cambiar align-items-center por align-items-stretch -->
+                                <div class="col-4 d-flex justify-content-center align-items-stretch">
+                                    <div class="card text-bg-light mb-3" style="max-width: 30rem; width: 100%;">
+                                        <div class="card-header">Gestión de Citas</div>
+                                        <div class="card-body d-flex flex-column">
+                                            <h5 class="card-title">Agenda Cita</h5>
+                                            <p class="card-text" style="text-align: justify;">
+                                                Organiza tus citas de manera rápida y sencilla. Selecciona la fecha y
+                                                hora que más te convenga y asegura tu espacio. Recibe recordatorios
+                                                automáticos para que no te pierdas ninguna consulta.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <a href="DoctorCitas.php" class="btn btn-secondary">¡Agendar!</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-stretch">
+                                    <div class="card text-bg-light mb-3" style="max-width: 30rem; width: 100%;">
+                                        <div class="card-header">Registro de Diagnósticos</div>
+                                        <div class="card-body d-flex flex-column">
+                                            <h5 class="card-title">Diagnóstico Médico</h5>
+                                            <p class="card-text" style="text-align: justify;">
+                                                Genera diagnósticos y recomendaciones médicas en un solo lugar. Mantén
+                                                un registro detallado de cada consulta y organiza tu tiempo de manera
+                                                efectiva. Puedes revisar los tratamientos recomendados en cualquier
+                                                momento.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <a href="DoctorDiagnosticos.php" class="btn btn-secondary">¡Empezar!</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 d-flex justify-content-center align-items-stretch">
+                                    <div class="card text-bg-light mb-3" style="max-width: 30rem; width: 100%;">
+                                        <div class="card-header">Creación de Recetas</div>
+                                        <div class="card-body d-flex flex-column">
+                                            <h5 class="card-title">Recetario</h5>
+                                            <p class="card-text" style="text-align: justify;">
+                                                Accede a las recetas y sigue el plan de medicación al pie de la letra.
+                                                Consulta tus diagnósticos actuales y anteriores, y mantente al tanto de
+                                                tus necesidades profesionales. Todo lo que necesitas para mejorar tu
+                                                entorno laboral, en un solo lugar.
+                                            </p>
+                                            <div class="mt-auto">
+                                                <a href="DoctorRecetas.php" class="btn btn-secondary">¡Recetar!</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
                     <div class="card-footer text-body-secondary">
                         MediStock © 2024. Todos los derechos reservados.
                     </div>
