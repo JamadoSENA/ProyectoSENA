@@ -1,4 +1,4 @@
-<?php
+<?php /*
 session_start();
 error_reporting(0);
 
@@ -23,7 +23,7 @@ $sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
 $user_info = $sql_name->fetch_assoc();
 $user_name = $user_info['nameU'];
 $user_lastname = $user_info['lastname'];
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@ $user_lastname = $user_info['lastname'];
     <link rel="shortcut icon" href="../../Resources/IMG/LogoHeadMediStock.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Paciente</title>
+    <title>Inicio</title>
 </head>
 
 <body>
@@ -50,7 +50,8 @@ $user_lastname = $user_info['lastname'];
                         id="menu">
                         <li alt="Inicio">
                             <a href="PatientIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span class="ms-1 d-none d-sm-inline">
+                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span
+                                    class="ms-1 d-none d-sm-inline">
                                     Inicio</span> </a>
                         </li>
                         <li alt="Citas Disponibles">
@@ -71,11 +72,12 @@ $user_lastname = $user_info['lastname'];
                         </li>
                     </ul>
                     <hr>
-                    <div class="dropdown pb-4">
+                    <div class="mt-auto dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -91,24 +93,13 @@ $user_lastname = $user_info['lastname'];
             <div class="col py-3">
                 <div class="card text-center">
                     <div class="card-header">
-                        ¡Bienvenido!
+                        ¡Bienvenido/a <?php echo $user_name . ' ' . $user_lastname; ?>!
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Estimado/a <?php echo $user_name . ' ' . $user_lastname; ?>: </h5>
-                        <p class="card-text" style="text-align:justify;">Tenes la oportunidad de gestionar tus citas
-                            médicas de manera sencilla y
-                            rápida. Para comenzar, dirígete a la sección "Citas Disponibles", donde podrás consultar la
-                            disponibilidad de nuestros profesionales médicos, seleccionar el horario que mejor se adapte
-                            a tus necesidades y programar tus consultas de forma directa desde nuestra plataforma.
-                            Además, en esta área podrás revisar tus citas agendadas, modificar o cancelar cualquier cita
-                            si es necesario, y acceder a información detallada sobre cada profesional. Si tienes alguna
-                            pregunta o necesitas asistencia adicional, no dudes en ponerte en contacto con nuestro
-                            equipo de soporte que está disponible para ayudarte en todo momento. Tu bienestar es nuestra
-                            prioridad, y estamos aquí para ofrecerte una experiencia cómoda y eficiente en la gestión de
-                            tus consultas médicas.</p>
+
                         <div class="container text-space-center">
-                            <div class="row align-items-center">
-                                <div class="col-4 d-flex justify-content-center align-items-center">
+                            <div class="row align-items-stretch">
+                            <div class="col-4 d-flex justify-content-center align-items-stretch">
                                     <div class="card text-bg-light mb-3" style="max-width: 18rem;">
                                         <div class="card-header">Citas Disponibles</div>
                                         <div class="card-body">
@@ -118,7 +109,7 @@ $user_lastname = $user_info['lastname'];
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                <div class="col-4 d-flex justify-content-center align-items-stretch">
                                     <div class="card text-bg-light mb-3" style="max-width: 18rem;">
                                         <div class="card-header">Mis Citas</div>
                                         <div class="card-body">
@@ -128,7 +119,7 @@ $user_lastname = $user_info['lastname'];
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                <div class="col-4 d-flex justify-content-center align-items-stretch">
                                     <div class="card text-bg-light mb-3" style="max-width: 18rem;">
                                         <div class="card-header">Mis Recetas</div>
                                         <div class="card-body">
@@ -140,7 +131,12 @@ $user_lastname = $user_info['lastname'];
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row justify-content-center mb-4">
+                            <!-- Canvas con un tamaño máximo -->
+                            <div class="col-12 col-md-8 col-lg-6">
+                                <canvas id="citas" style="width: 100%; height: 200%;"></canvas>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-body-secondary">
                         MediStock © 2024. Todos los derechos reservados.
@@ -155,6 +151,30 @@ $user_lastname = $user_info['lastname'];
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    const ctx = document.getElementById('citas');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
+            datasets: [{
+                label: '# de Citas',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 3
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
     </script>
 </body>
 

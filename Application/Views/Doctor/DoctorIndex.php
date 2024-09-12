@@ -1,4 +1,4 @@
-<?php
+<?php /*
 session_start();
 error_reporting(0);
 
@@ -23,7 +23,7 @@ $sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
 $user_info = $sql_name->fetch_assoc();
 $user_name = $user_info['nameU'];
 $user_lastname = $user_info['lastname'];
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,14 +44,14 @@ $user_lastname = $user_info['lastname'];
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <hr>
                     <img src="../../Resources/IMG/LogoSidebarMediStock.png" alt="MediStock" width="auto" height="75" />
-                    </a>
                     <br>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li>
                             <a href="DoctorIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-house-door-fill"></i> <span class="ms-1 d-none d-sm-inline">
-                                    Inicio</span> </a>
+                                <i class="fs-4 bi-house-door-fill"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Inicio</span>
+                            </a>
                         </li>
                         <li>
                             <a href="DoctorCitas.php" class="nav-link px-0 text-white align-middle">
@@ -61,7 +61,8 @@ $user_lastname = $user_info['lastname'];
                         <li>
                             <a href="DoctorDiagnosticos.php" class="nav-link px-0 text-white align-middle">
                                 <i class="fs-4 bi-prescription"></i> <span
-                                    class="ms-1 d-none d-sm-inline">Diagnosticos</span> </a>
+                                    class="ms-1 d-none d-sm-inline">Diagnósticos</span>
+                            </a>
                         </li>
                         <li>
                             <a href="DoctorRecetas.php" class="nav-link px-0 text-white align-middle">
@@ -69,8 +70,7 @@ $user_lastname = $user_info['lastname'];
                             </a>
                         </li>
                     </ul>
-                    <hr>
-                    <div class="dropdown pb-4">
+                    <div class="mt-auto dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
@@ -82,64 +82,20 @@ $user_lastname = $user_info['lastname'];
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="../../Configuration/SignOut.php">Cerrar Sesion</a>
-                            </li>
+                            <li><a class="dropdown-item" href="../../Configuration/SignOut.php">Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+
             <div class="col py-5">
                 <div class="card text-center">
                     <div class="card-header">
-                        ¡Bienvenido!
+                        ¡Bienvenido/a <?php echo $user_name . ' ' . $user_lastname; ?>!
                     </div>
                     <div class="card-body">
-                        <div class="container text-space-center">
-                            <div class="row align-items-center">
-                                <div class="col-12 d-flex justify-content-center align-items-center" style="width: 100%;">
-                                    <div class="card text-bg w-75 mb-3"
-                                        style="max-width: 18rem; background-color: rgba(33, 37, 41, 1.00);" >
-                                        <div class="card-header"  style="color: white;">Citas pendientes</div>
-                                        <div class="card-body">
-                                            <nav class="navbar navbar-expand-lg navbar-dark"
-                                                style="background-color: rgba(33, 37, 41, 1.00);">
-                                                <div class="container-fluid">
-                                                    <a class="navbar-brand">Filtrar por:</a>
-                                                    <button class="navbar-toggler" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#navbarNavDarkDropdown"
-                                                        aria-controls="navbarNavDarkDropdown" aria-expanded="false"
-                                                        aria-label="Toggle navigation">
-                                                        <span class="navbar-toggler-icon"></span>
-                                                    </button>
-                                                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                                                        <ul class="navbar-nav">
-                                                            <li class="nav-item dropdown">
-                                                                <button class="btn btn-secondary dropdown-toggle"
-                                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                                    Seleccionar...
-                                                                </button>
-                                                                <ul class="dropdown-menu dropdown-menu-dark">
-                                                                    <li><a class="dropdown-item" href="#">Dia</a>
-                                                                    </li>
-                                                                    <li><a class="dropdown-item" href="#">Semana
-                                                                        </a></li>
-                                                                    <li><a class="dropdown-item" href="#">Mes
-                                                                        </a></li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </nav>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container text-space-center">
+                        <div class="container">
                             <div class="row align-items-stretch">
-                                <!-- Cambiar align-items-center por align-items-stretch -->
                                 <div class="col-4 d-flex justify-content-center align-items-stretch">
                                     <div class="card text-bg-light mb-3" style="max-width: 30rem; width: 100%;">
                                         <div class="card-header">Gestión de Citas</div>
@@ -191,14 +147,19 @@ $user_lastname = $user_info['lastname'];
                                     </div>
                                 </div>
                             </div>
+                            <div class="row justify-content-center mb-4">
+                                <div class="col-12 col-md-8 col-lg-6">
+                                    <canvas id="citas" style="width: 100%; height: 200%;"></canvas>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                     <div class="card-footer text-body-secondary">
                         MediStock © 2024. Todos los derechos reservados.
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -207,6 +168,30 @@ $user_lastname = $user_info['lastname'];
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    const ctx = document.getElementById('citas');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
+            datasets: [{
+                label: '# de Citas',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 3
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
     </script>
 </body>
 
