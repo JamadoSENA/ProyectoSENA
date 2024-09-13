@@ -136,17 +136,18 @@ $user_lastname = $user_info['lastname'];
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row justify-content-center mb-4">
-                                    <!-- Canvas con un tamaño máximo -->
-                                    <div class="col-12 col-md-8 col-lg-6">
-                                        <canvas id="citas" style="width: 100%; height: 200%;"></canvas>
+                                <div class="row justify-content-center mb-2">
+                                    <p>Medicamentos próximos a vencer</p>
+                                    <div class="col-12 col-md-6">
+                                        <canvas id="medicamentosVencimiento"
+                                            style="width: 100%; height: 200%;"></canvas>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <canvas id="medicamentosCantidad" style="width: 100%; height: 200%;"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        MediStock © 2024. Todos los derechos reservados.
                     </div>
                 </div>
             </div>
@@ -162,9 +163,32 @@ $user_lastname = $user_info['lastname'];
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-    const ctx = document.getElementById('citas');
+    const ctx = document.getElementById('medicamentosVencimiento');
 
     new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Menor a 6 Meses', '6 a 12 Meses', 'De 13 Meses en Adelante'],
+            datasets: [{
+                label: '# de Medicamentos por Vencer',
+                data: [6, 7, 10],
+                borderWidth: 3
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+    <script>
+    const ctxc = document.getElementById('medicamentosCantidad');
+
+    new Chart(ctxc, {
         type: 'bar',
         data: {
             labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],

@@ -6,7 +6,7 @@ error_reporting(0);
 $validar = $_SESSION['correo'];
 
 if ($validar == null || $validar == '') {
-    header("Location: ../../../LogIn.php");
+    header("Location: ../../LogIn.php");
     die();
 } 
 
@@ -50,7 +50,8 @@ $user_lastname = $user_info['lastname'];
                         id="menu">
                         <li alt="Inicio">
                             <a href="PatientIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span class="ms-1 d-none d-sm-inline">
+                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span
+                                    class="ms-1 d-none d-sm-inline">
                                     Inicio</span> </a>
                         </li>
                         <li alt="Citas Disponibles">
@@ -60,7 +61,8 @@ $user_lastname = $user_info['lastname'];
                         </li>
                         <li alt="Mis Citas">
                             <a href="PatientMyCitas.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                <i class="fs-4 bi-calendar-check" alt="Citas"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Mis
                                     citas</span> </a>
                         </li>
                         <li>
@@ -74,7 +76,8 @@ $user_lastname = $user_info['lastname'];
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fs-4 bi-person" alt="hugenerd" width="30" height="30"></i>
-                            <span class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
+                            <span
+                                class="d-none d-sm-inline mx-1"><?php echo $user_name . ' ' . $user_lastname; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href="Profile/Index.php">Perfil</a></li>
@@ -124,10 +127,14 @@ $user_lastname = $user_info['lastname'];
             
             ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['idScheduling']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['dateHourStart']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['doctorName']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['idScheduling']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado ['stateS']?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['dateHourStart']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado ['doctorName']?></td>
                                         <td scope="row">
                                             <button class="btn" type="button" data-bs-toggle="dropdown"
                                                 aria-expanded="false">

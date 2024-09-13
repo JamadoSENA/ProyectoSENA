@@ -1,4 +1,4 @@
-<?php /*
+<?php 
 session_start();
 error_reporting(0);
 
@@ -6,7 +6,7 @@ error_reporting(0);
 $validar = $_SESSION['correo'];
 
 if ($validar == null || $validar == '') {
-    header("Location: ../../../LogIn.php");
+    header("Location: ../../LogIn.php");
     die();
 } 
 
@@ -23,7 +23,7 @@ $sql_name = $conexion->query("SELECT * FROM users WHERE idUser = $user_id");
 $user_info = $sql_name->fetch_assoc();
 $user_name = $user_info['nameU'];
 $user_lastname = $user_info['lastname'];
-*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,15 +147,14 @@ $user_lastname = $user_info['lastname'];
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row justify-content-center mb-4">
+                                <p>Citas de la semana actual</p>
                                 <div class="col-12 col-md-8 col-lg-6">
                                     <canvas id="citas" style="width: 100%; height: 200%;"></canvas>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        MediStock © 2024. Todos los derechos reservados.
                     </div>
                 </div>
             </div>
@@ -169,18 +168,59 @@ $user_lastname = $user_info['lastname'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
+    <?php 
+    // Obtener el idUser del usuario actual
+    $sql_user = $conexion->query("SELECT idUser FROM users WHERE email = '$validar'");
+    $user_data = $sql_user->fetch_assoc();
+    $user_id = $user_data['idUser'];
+
+    // Consulta para obtener el número de citas por cada día de la semana, filtrando solo las citas futuras
+    $sql_citas = "
+    SELECT 
+        DAYNAME(dateHourStart) as dia, COUNT(*) as total_citas
+    FROM 
+        schedulings 
+    WHERE 
+        fkIdDoctor = $user_id
+        AND dateHourStart >= (CURDATE() - INTERVAL (WEEKDAY(CURDATE())) DAY) -- Desde el lunes de la semana actual
+        AND dateHourStart < (CURDATE() + INTERVAL (6 - WEEKDAY(CURDATE())) DAY + INTERVAL 1 DAY) -- Hasta el domingo de la semana actual
+    GROUP BY 
+        dia
+    ORDER BY 
+        FIELD(dia, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
+    ";
+
+
+
+    $result_citas = $conexion->query($sql_citas);
+
+    $citas_por_dia = [];
+    while($row = $result_citas->fetch_assoc()) {
+        $citas_por_dia[$row['dia']] = $row['total_citas'];
+    }
+
+    // Rellenar los días que no tienen citas con valor 0
+    $dias_semana = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    $data_citas = [];
+    foreach($dias_semana as $dia) {
+        $data_citas[] = isset($citas_por_dia[$dia]) ? $citas_por_dia[$dia] : 0;
+    }
+    ?>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
     const ctx = document.getElementById('citas');
 
+    const dataCitas = <?php echo json_encode($data_citas); ?>;
+
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
+            labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
             datasets: [{
                 label: '# de Citas',
-                data: [12, 19, 3, 5, 2, 3],
+                data: dataCitas,
                 borderWidth: 3
             }]
         },
@@ -193,6 +233,8 @@ $user_lastname = $user_info['lastname'];
         }
     });
     </script>
+
+
 </body>
 
 </html>
