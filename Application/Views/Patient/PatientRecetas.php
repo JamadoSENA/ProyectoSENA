@@ -197,7 +197,8 @@ $user_lastname = $user_info['lastname'];
             topStart: {
                 buttons: ['excel', 'pdf']
             }
-        }
+        },
+        pageLength: 5
     });
     </script>
 </body>

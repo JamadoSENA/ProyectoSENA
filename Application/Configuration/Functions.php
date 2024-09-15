@@ -105,7 +105,31 @@ function acceso_user() {
                 </script>
             </body>
             </html>";
-        } else {
+        }elseif ($filas['fkIdRole'] == 4) { // Inventor
+            header("Content-Type: text/html; charset=UTF-8");
+            echo "<!DOCTYPE html>
+            <html lang='es'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Inicio de Sesión</title>
+                <link rel='shortcut icon' href='../Resources/IMG/LogoHeadMediStock.png' type='image/x-icon'>
+                <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
+            </head>
+            <body>
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+                <script>
+                    Swal.fire({
+                        title: '¡Excelente!',
+                        text: 'Has iniciado sesión correctamente.',
+                        icon: 'success'
+                    }).then(function() {
+                        window.location = '../Views/Administrator/AdministratorIndex.php'; // Redirige después de cerrar el Swal
+                    });
+                </script>
+            </body>
+            </html>"; 
+        }else {
             header('Location: ../LogIn.php');
             session_destroy();
         }
