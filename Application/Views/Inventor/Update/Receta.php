@@ -6,7 +6,7 @@ error_reporting(0);
 $validar = $_SESSION['correo'];
 
 if ($validar == null || $validar == '') {
-    header("Location: ../../../../LogIn.php");
+    header("Location: ../../../LogIn.php");
     die();
 } 
 
@@ -132,7 +132,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             <br>
                             <div class="form-group">
                                 <label for="amount">Cantidad de empaque(s)</label>
-                                <input type="text" class="form-control" id="amount" name="Cantidad" value="<?php echo $row['amount']?>"
+                                <input type="number" class="form-control" id="amount" name="Cantidad" value="<?php echo $row['amount']?>"
                                     readonly>
                             </div>
                             <br>
@@ -177,7 +177,7 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 ?>
                             <div class="form-group">
                                 <input type="text" name="Medicamento" class="form-control" id="medicine"
-                                    value="<?php echo htmlspecialchars($idMedicamento); ?>" hidden>
+                                    value="<?php echo $row['idMedicine']?>" hidden>
                             </div>
 
                             <hr>

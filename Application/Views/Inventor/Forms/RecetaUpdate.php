@@ -11,12 +11,21 @@ $medicamento = $_POST["Medicamento"];
 $conexion->begin_transaction();
 
 try {
-    // Obtener la cantidad actual y el id del medicamento
+    // Obtain the current amount and the ID of the medicine
     $sqlSelectMedicine = "SELECT fkIdMedicine, amount FROM recipes WHERE idRecipe = ?";
     $stmt = $conexion->prepare($sqlSelectMedicine);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->bind_result($fkIdMedicine, $oldAmount);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Get the old amount from the medicines table
+    $sqlSelectOldAmount = "SELECT stock FROM medicines WHERE idMedicine = ?";
+    $stmt = $conexion->prepare($sqlSelectOldAmount);
+    $stmt->bind_param("i", $medicamento);
+    $stmt->execute();
+    $stmt->bind_result($oldAmount);
     $stmt->fetch();
     $stmt->close();
 
@@ -35,10 +44,10 @@ try {
 
     // Actualizar el stock del medicamento en la tabla medicines
     $sqlUpdateMedicine = "UPDATE medicines 
-                          SET stock = stock + ? - ? 
-                          WHERE idMedicine = ?";
+                      SET stock = stock - ?  
+                      WHERE idMedicine = ?";
     $stmt = $conexion->prepare($sqlUpdateMedicine);
-    $stmt->bind_param("iii", $cantidad, $oldAmount, $fkIdMedicine);
+    $stmt->bind_param("ii", $cantidad, $fkIdMedicine);
     $stmt->execute();
 
     // Confirma la transacción
