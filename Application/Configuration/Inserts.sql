@@ -1,6 +1,8 @@
+
 INSERT INTO roles VALUES (1, "Paciente");
 INSERT INTO roles VALUES (2, "Doctor");
 INSERT INTO roles VALUES (3, "Inventarista");
+INSERT INTO roles VALUES (4, "Adminitrador");
 
 CALL INSERTARPROVEEDOR(
     900123456, 
@@ -45,9 +47,9 @@ CALL INSERTARPROVEEDOR(
 CALL INSERTARMEDICINA(
     'Paracetamol', 
     'Tabletas', 
-    100, 
-    'Bueno', 
-    '2025-12-31', 
+    300, 
+    'Disponible', 
+    '2025-04-15', 
     'Analgésico', 
     900123456
 );
@@ -55,9 +57,9 @@ CALL INSERTARMEDICINA(
 CALL INSERTARMEDICINA(
     'Ibuprofeno', 
     'Cápsulas', 
-    200, 
-    'Excelente', 
-    '2026-03-15', 
+    300, 
+    'Disponible', 
+    '2024-10-28', 
     'Anti-inflamatorio', 
     900654321
 );
@@ -65,9 +67,9 @@ CALL INSERTARMEDICINA(
 CALL INSERTARMEDICINA(
     'Amoxicilina', 
     'Suspensión', 
-    150, 
+    300, 
     'Bueno', 
-    '2025-10-10', 
+    '2025-11-22', 
     'Antibiótico', 
     900987654
 );
@@ -75,8 +77,8 @@ CALL INSERTARMEDICINA(
 CALL INSERTARMEDICINA(
     'Cetirizina', 
     'Tabletas', 
-    120, 
-    'Excelente', 
+    300, 
+    'Disponible', 
     '2026-01-20', 
     'Antihistamínico', 
     900321654
@@ -85,8 +87,8 @@ CALL INSERTARMEDICINA(
 CALL INSERTARMEDICINA(
     'Omeprazol', 
     'Tabletas', 
-    80, 
-    'Bueno', 
+    300, 
+    'Disponible', 
     '2025-08-15', 
     'Antiacido', 
     900456789
@@ -103,9 +105,9 @@ CALL INSERTARUSUARIO(
     '3001234567', 
     'Ingeniero', 
     'Calle 123 #45-67', 
-    'juan.perez@example.com', 
-    'juan2024!', 
-    1
+    'admin@gmail.com', 
+    '12345admin', 
+    4
 );
 
 CALL INSERTARUSUARIO(
@@ -119,8 +121,8 @@ CALL INSERTARUSUARIO(
     '3007654321', 
     'Médico', 
     'Avenida 98 #76-54', 
-    'ana.gomez@example.com', 
-    'ana2024$', 
+    'doctor@gmail.com', 
+    '12345doctor', 
     2
 );
 
@@ -135,9 +137,9 @@ CALL INSERTARUSUARIO(
     '3001112233', 
     'Abogado', 
     'Carrera 60 #23-45', 
-    'carlos.martinez@example.com', 
-    'carlos2024#', 
-    3
+    'paciente@gmail.com', 
+    '12345paciente', 
+    1
 );
 
 CALL INSERTARUSUARIO(
@@ -151,66 +153,60 @@ CALL INSERTARUSUARIO(
     '3004455667', 
     'Arquitecta', 
     'Calle 44 #78-90', 
-    'laura.ramirez@example.com', 
-    'laura2024!', 
-    1
+    'inventarista@gmail.com', 
+    '12345inventarista', 
+    3
 );
 
-CALL INSERTARUSUARIO(
-    123098456, 
-    'Tarjeta de Identidad', 
-    'Pedro', 
-    'García', 
-    '1988-04-10', 
-    36, 
-    'Masculino', 
-    '3009876543', 
-    'Contador', 
-    'Calle 80 #12-34', 
-    'pedro.garcia@example.com', 
-    'pedro2024@', 
-    2
-);
 
 CALL INSERTARCITA(
-    'No Reservada', 
-    '2024-09-25 09:00:00', 
-    '2024-09-25 10:00:00', 
-    123456789, 
+    'Reservada', 
+    '2024-09-16 09:00:00', 
+    112233445, 
     987654321
 );
 
 CALL INSERTARCITA(
     'Reservada', 
-    '2024-08-31 14:00:00', 
-    '2024-08-31 15:00:00', 
+    '2024-09-17 14:00:00', 
     112233445, 
-    55667788
+    987654321
 );
 
 CALL INSERTARCITA(
-    'No Reservada', 
-    '2024-08-31 11:00:00', 
-    '2024-08-31 12:00:00', 
-    55667788, 
-    123456789
+    'Reservada', 
+    '2024-09-18 11:00:00', 
+    112233445, 
+    987654321
 );
 
 CALL INSERTARCITA(
-    'No Reservada', 
-    '2024-08-30 19:00:00', 
-    '2024-08-30 21:00:00', 
-    987654321,
-	55667788
+    'Reservada', 
+    '2024-09-19 19:00:00', 
+    112233445,
+	987654321
     
 );
 
 CALL INSERTARCITA(
     'Reservada', 
-    '2024-08-29 17:00:00', 
-    '2024-08-29 18:00:00', 
-    123456789, 
-    55667788
+    '2024-09-20 17:00:00', 
+    112233445, 
+    987654321
+);
+
+CALL INSERTARCITA(
+    'Reservada', 
+    '2024-09-20 20:00:00', 
+    112233445, 
+    987654321
+);
+
+CALL INSERTARCITA(
+    'Reservada', 
+    '2024-09-21 17:00:00', 
+    112233445, 
+    987654321
 );
 
 CALL INSERTARDIAGNOSTICO(
@@ -271,9 +267,10 @@ CALL INSERTARDIAGNOSTICO(
 CALL INSERTARRECETA(
     'Oral, después de las comidas', 
     '7 días', 
+    '2 meses', 
     'Cada 8 horas', 
     30, 
-    'No tomar con alcohol', 
+    'No Retirado', 
     'Tomar con suficiente agua y no exceder la dosis recomendada.', 
     1, 
     1
@@ -281,10 +278,11 @@ CALL INSERTARRECETA(
 
 CALL INSERTARRECETA(
     'Intramuscular', 
-    '5 días', 
+    '5 días',
+    '1 mes', 
     'Cada 12 horas', 
     14, 
-    'Mantener en refrigeración', 
+    'No Retirado', 
     'Aplicar lentamente para evitar irritación.', 
     2, 
     2
@@ -293,9 +291,10 @@ CALL INSERTARRECETA(
 CALL INSERTARRECETA(
     'Oral, en ayunas', 
     '10 días', 
+    '3 meses', 
     'Cada 24 horas', 
     20, 
-    'Tomar con agua', 
+    'No Retirado', 
     'No tomar con jugos cítricos.', 
     3, 
     3
@@ -304,9 +303,10 @@ CALL INSERTARRECETA(
 CALL INSERTARRECETA(
     'Intravenosa', 
     '3 días', 
+    '3 meses', 
     'Cada 24 horas', 
     10, 
-    'Administrar lentamente', 
+    'No Retirado', 
     'Supervisar la reacción del paciente durante la administración.', 
     4, 
     4
@@ -315,9 +315,10 @@ CALL INSERTARRECETA(
 CALL INSERTARRECETA(
     'Oral, con el desayuno', 
     '7 días', 
+    '1 mes', 
     'Cada 8 horas', 
     18, 
-    'No exceder la dosis recomendada', 
+    'No Retirado', 
     'Seguir las instrucciones de la etiqueta del medicamento.', 
     5, 
     5
