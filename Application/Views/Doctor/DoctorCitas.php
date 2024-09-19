@@ -97,7 +97,7 @@ $user_lastname = $user_info['lastname'];
             <div class="col py-5">
                 <div class="card">
                     <div class="card-header">
-                        Gestión de Citas
+                        Agendamiento de Citas
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -116,7 +116,7 @@ $user_lastname = $user_info['lastname'];
                             <table id="tablaCitas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;"># de Cita</th>
                                         <th scope="col" style="text-align: center;">Estado</th>
                                         <th scope="col" style="text-align: center;">Fecha</th>
                                         <th scope="col" style="text-align: center;">Paciente</th>

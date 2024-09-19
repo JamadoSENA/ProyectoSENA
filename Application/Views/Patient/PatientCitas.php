@@ -93,7 +93,7 @@ $user_lastname = $user_info['lastname'];
             <div class="col py-5">
                 <div class="card">
                     <div class="card-header">
-                        Agendacion Citas
+                        Agendamiento de Citas
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Tabla Citas</h5>
@@ -101,7 +101,7 @@ $user_lastname = $user_info['lastname'];
                             <table table id="tablaCitas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;"># de Cita</th>
                                         <th scope="col" style="text-align: center;">Estado</th>
                                         <th scope="col" style="text-align: center;">Fecha</th>
                                         <th scope="col" style="text-align: center;">Doctor</th>

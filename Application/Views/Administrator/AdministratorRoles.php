@@ -101,7 +101,7 @@ $user_lastname = $user_info['lastname'];
                             <table id="tablaRoles" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="text-align: center;">Codigo de Rol</th>
+                                        <th scope="col" style="text-align: center;"># de Rol</th>
                                         <th scope="col" style="text-align: center;">Nombre</th>
                                         <th scope="col" style="text-align: center;">Numeros de Usuarios</th>
                                         <th scope="col" style="text-align: center;"></th>

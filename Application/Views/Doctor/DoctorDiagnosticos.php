@@ -104,7 +104,7 @@ $user_lastname = $user_info['lastname'];
                             <table id="tablaDiagnosticos" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="text-center">ID</th>
+                                        <th scope="col" class="text-center"># de Diagnostico</th>
                                         <th scope="col" class="text-center">Fecha de Emisión</th>
                                         <th scope="col" class="text-center">Paciente</th>
                                         <th scope="col" class="text-center">ID Cita</th>

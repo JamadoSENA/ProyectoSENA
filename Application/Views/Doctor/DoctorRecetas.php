@@ -103,7 +103,7 @@ $user_lastname = $user_info['lastname'];
                             <table id="tablaRecetas" class="table table-striped" style="width:100%">
                             <thead>
                                     <tr>
-                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;"># de Receta</th>
                                         <th scope="col" style="text-align: center;">Estado</th>
                                         <th scope="col" style="text-align: center;">Cantidad</th>
                                         <th scope="col" style="text-align: center;">Medicamento</th>

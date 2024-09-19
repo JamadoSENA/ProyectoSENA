@@ -100,7 +100,7 @@ $user_lastname = $user_info['lastname'];
                                     <div class="card text-bg-light mb-3" style="max-width: 30rem; width: 100%;">
                                         <div class="card-header">Gestión de Citas</div>
                                         <div class="card-body d-flex flex-column">
-                                            <h5 class="card-title">Agenda Cita</h5>
+                                            <h5 class="card-title">Agendamiento de Cita</h5>
                                             <p class="card-text" style="text-align: justify;">
                                                 Organiza tus citas de manera rápida y sencilla. Selecciona la fecha y
                                                 hora que más te convenga y asegura tu espacio. Recibe recordatorios

@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Información de Usuario</h5>
                             <hr>
-                            <form class="row g-3 needs-validation" method="post"
+                            <form class="row g-3 needs-validation" id="myForm" method="post"
                                 action="Configuration/RegisterUser.php" novalidate>
                                 <div class="col-md-4">
                                     <label for="validationCustom01" class="form-label">No. Documento</label>
@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="validationCustom02" class="form-label">Tipo de Documento</label>
+                                    <label for="validationCustom02" class="form-label">Tipo Documento</label>
                                     <select class="form-select" name="TipoDocumento" required>
                                         <option value="">Elegir...</option>
                                         <option value="CC">Cedula Ciudadania</option>
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="validationCustomUsername" class="form-label">Fecha de Nacimiento</label>
+                                    <label for="validationCustomUsername" class="form-label">F. Nacimiento</label>
                                     <div class="input-group has-validation">
                                         <input type="date" name="FechaNacimiento" id="birthdate"
                                             class="form-control input-lg" placeholder="Fecha de Nacimiento" tabindex="5"
@@ -152,28 +152,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="validationCustom05" class="form-label">No. Telefonico</label>
-                                    <input type="number" name="Telefono" id="phone_number" class="form-control" min="0"
-                                        max="3999999999" required />
+                                    <label for="validationCustom05" class="form-label">No. Telefónico</label>
+                                    <input type="number" name="Telefono" id="phone_number" class="form-control"
+                                        required />
                                     <div class="invalid-feedback">
-                                        Por favor, digite su numero telefónico.
+                                        Por favor, digite su número telefónico.
                                     </div>
                                 </div>
-                                <script>
-                                document.getElementById('phone_number').addEventListener('input', function() {
-                                    const phoneNumber = this.value;
-                                    const feedback = document.getElementById('phone_feedback');
-
-                                    if (phoneNumber.length > 0 && phoneNumber.charAt(0) !== '3') {
-                                        this.setCustomValidity(
-                                            'Número telefónico inválido. Debe comenzar con 3.');
-                                        feedback.style.display = 'block';
-                                    } else {
-                                        this.setCustomValidity('');
-                                        feedback.style.display = 'none';
-                                    }
-                                });
-                                </script>
                                 <div class="col-md-4">
                                     <label for="validationCustom05" class="form-label">Profesion</label>
                                     <input type="text" name="Profesion" id="profession" class="form-control" required />
@@ -303,6 +288,23 @@
                                     <a href="LogIn.php" class="btn btn-secondary">Cancelar</a>
                                 </div>
                             </form>
+                            <script>
+                            document.getElementById('myForm').addEventListener('submit', function(event) {
+                                const phoneNumberInput = document.getElementById('phone_number');
+                                const phoneNumber = phoneNumberInput.value;
+
+                                // Verificar si el número telefónico tiene 10 dígitos y empieza con '3'
+                                if (!/^[3]\d{9}$/.test(phoneNumber)) {
+                                    event.preventDefault(); // Evita que se envíe el formulario
+                                    phoneNumberInput.classList.add('is-invalid'); // Muestra la alerta de error
+                                    phoneNumberInput.nextElementSibling.textContent =
+                                        "El número telefónico debe tener 10 dígitos y comenzar con '3'.";
+                                } else {
+                                    phoneNumberInput.classList.remove(
+                                        'is-invalid'); // Quita la alerta si es válido
+                                }
+                            });
+                            </script>
                         </div>
 
                     </div>

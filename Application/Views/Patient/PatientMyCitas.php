@@ -50,7 +50,8 @@ $user_lastname = $user_info['lastname'];
                         id="menu">
                         <li alt="Inicio">
                             <a href="PatientIndex.php" class="nav-link px-0 text-white align-middle" alt="Citas">
-                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span class="ms-1 d-none d-sm-inline">
+                                <i class="fs-4 bi-house-door-fill" alt="Inicio"></i> <span
+                                    class="ms-1 d-none d-sm-inline">
                                     Inicio</span> </a>
                         </li>
                         <li alt="Citas Disponibles">
@@ -97,10 +98,10 @@ $user_lastname = $user_info['lastname'];
                     <div class="card-body">
                         <h5 class="card-title">Tabla Citas</h5>
                         <div class="table-responsive">
-                        <table id="tablaCitas" class="table table-striped" style="width:100%">
+                            <table id="tablaCitas" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="text-align: center;">ID</th>
+                                        <th scope="col" style="text-align: center;"># de Cita</th>
                                         <th scope="col" style="text-align: center;">Estado</th>
                                         <th scope="col" style="text-align: center;">Fecha Inicio</th>
                                         <th scope="col" style="text-align: center;">Doctor</th>
@@ -109,55 +110,71 @@ $user_lastname = $user_info['lastname'];
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    require("../../Configuration/Connection.php");
+    require("../../Configuration/Connection.php");
 
-                                    // Consulta para obtener las citas del paciente, incluyendo el nombre del doctor
-                                    $sql = $conexion->query("
-                                        SELECT s.idScheduling, s.stateS, s.dateHourStart, 
-                                        CONCAT(d.nameU, ' ', d.lastname) AS doctorName
-                                        FROM schedulings s
-                                        JOIN users d ON s.fkIdDoctor = d.idUser
-                                        WHERE s.fkIdPatient = $user_id
-                                        AND s.stateS = 'Reservada'
-                                        AND s.dateHourStart > NOW()
-                                    ");
+    // Consulta para obtener las citas del paciente, incluyendo el nombre del doctor
+    $sql = $conexion->query("
+        SELECT s.idScheduling, s.stateS, s.dateHourStart, 
+        CONCAT(d.nameU, ' ', d.lastname) AS doctorName
+        FROM schedulings s
+        JOIN users d ON s.fkIdDoctor = d.idUser
+        WHERE s.fkIdPatient = $user_id
+        AND s.stateS = 'Reservada'
+        AND s.dateHourStart > NOW()
+    ");
 
-                                    while ($resultado = $sql->fetch_assoc()){
-                                    ?>
+    while ($resultado = $sql->fetch_assoc()){
+    ?>
                                     <tr>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['idScheduling']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['stateS']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['dateHourStart']?></td>
-                                        <td scope="row" style="text-align: center;"><?php echo $resultado['doctorName']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado['idScheduling']?></td>
+                                        <td scope="row" style="text-align: center;"><?php echo $resultado['stateS']?>
+                                        </td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado['dateHourStart']?></td>
+                                        <td scope="row" style="text-align: center;">
+                                            <?php echo $resultado['doctorName']?></td>
                                         <td scope="row">
-                                            <button class="btn cancel-button" type="button" data-scheduling-id="<?php echo $resultado['idScheduling']?>"
-                                                data-date-start="<?php echo $resultado['dateHourStart']?>" aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                                </svg>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#" class="dropdown-item cancel-button" data-scheduling-id="<?php echo $resultado['idScheduling']?>" data-date-start="<?php echo $resultado['dateHourStart']?>">Cancelar</a></li>
-                                                <li><a href="Details/Cita.php?idScheduling=<?php echo $resultado['idScheduling']?>" class="dropdown-item">Detalles</a></li>
-                                            </ul>
+                                            <div class="dropdown">
+                                                <button class="btn" type="button" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-three-dots-vertical"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM9.5 3a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                                    </svg>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#" class="dropdown-item cancel-button"
+                                                            data-scheduling-id="<?php echo $resultado['idScheduling']?>"
+                                                            data-date-start="<?php echo $resultado['dateHourStart']?>">Cancelar</a>
+                                                    </li>
+                                                    <li><a href="Details/Cita.php?idScheduling=<?php echo $resultado['idScheduling']?>"
+                                                            class="dropdown-item">Detalles</a></li>
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php 
-                                    } 
-                                    ?>
+    } 
+    ?>
                                 </tbody>
+
                                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                 <script>
-                                document.addEventListener('DOMContentLoaded', function () {
+                                document.addEventListener('DOMContentLoaded', function() {
                                     const cancelButtons = document.querySelectorAll('.cancel-button');
 
                                     cancelButtons.forEach(button => {
-                                        button.addEventListener('click', function (event) {
+                                        button.addEventListener('click', function(event) {
                                             event.preventDefault();
                                             const schedulingId = this.dataset.schedulingId;
-                                            const dateHourStart = new Date(this.dataset.dateStart);
+                                            const dateHourStart = new Date(this.dataset
+                                                .dateStart);
                                             const currentDate = new Date();
-                                            const differenceInHours = (dateHourStart - currentDate) / 1000 / 60 / 60;
+                                            const differenceInHours = (dateHourStart -
+                                                currentDate) / 1000 / 60 / 60;
 
                                             if (differenceInHours < 24) {
                                                 Swal.fire({
@@ -176,7 +193,9 @@ $user_lastname = $user_info['lastname'];
                                                     cancelButtonText: 'No, mantenerla'
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
-                                                        window.location.href = 'Update/Cita.php?idScheduling=' + schedulingId;
+                                                        window.location.href =
+                                                            'Update/Cita.php?idScheduling=' +
+                                                            schedulingId;
                                                     }
                                                 });
                                             }
@@ -184,6 +203,7 @@ $user_lastname = $user_info['lastname'];
                                     });
                                 });
                                 </script>
+
                             </table>
                         </div>
                     </div>

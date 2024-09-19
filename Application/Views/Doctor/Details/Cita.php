@@ -117,6 +117,12 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                                 <input type="datetime-local" class="form-control" id="startDate"
                                     value="<?php echo $row['dateHourStart'] ?>" disabled>
                             </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="startDate">Lugar y Consultorio</label>
+                                <input type="text" class="form-control" id="startDate"
+                                    value="Transversal 74F #40B-73 Sur Kennedy Central, Bogotá. Consultorio: 2." disabled>
+                            </div>
                             <?php 
                             require("../../../Configuration/Connection.php");
 

@@ -139,12 +139,18 @@ $user_lastname = htmlspecialchars($user_info['lastname']);
                             </div>
                             <br>
                             <div class="form-group">
+                                <label for="startDate">Lugar y Consultorio</label>
+                                <input type="text" class="form-control" id="startDate"
+                                    value="Transversal 74F #40B-73 Sur Kennedy Central, Bogotá. Consultorio: 2." disabled>
+                            </div>
+                            <br>
+                            <div class="form-group">
                                 <label for="doctor">Doctor</label>
                                 <input type="text" class="form-control" id="doctor"
                                     value="<?php echo htmlspecialchars($nombreDoctor); ?>" disabled>
                             </div>
                             <hr>
-                            <a href="../PatientCitas.php" type="button" class="btn btn-secondary">Regresar</a>
+                            <a href="../PatientMyCitas.php" type="button" class="btn btn-secondary">Regresar</a>
                         </form>
                         <?php 
                             } else {
